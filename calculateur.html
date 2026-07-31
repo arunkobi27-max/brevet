@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur DNB 2026 - Cyberpunk Edition</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Orbitron:wght@700;900&display=swap');
+
+  :root {
+    --bg-main: #0b0e14;
+    --card-bg: #121824;
+    --card-inner: #1a2332;
+    --neon-cyan: #00f3ff;
+    --neon-magenta: #ff0055;
+    --neon-purple: #b537f2;
+    --neon-yellow: #ffe600;
+    --neon-green: #00ff66;
+    --text-light: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border-glow: #00f3ff;
+    --shadow-cyber: 0 0 15px rgba(0, 243, 255, 0.2);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-light);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  /* --- BANNIÈRE D'EN-TÊTE --- */
+  .hero-header {
+    width: 100%;
+    max-width: 850px;
+    background: var(--card-bg);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.25);
+    padding: 30px 25px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 25px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: transparent;
+    color: var(--neon-cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1.5px solid var(--neon-cyan);
+    border-radius: 20px;
+    box-shadow: inset 0 0 8px rgba(0, 243, 255, 0.3);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+  }
+
+  .hero-title span {
+    color: var(--bg-main);
+    background: var(--neon-cyan);
+    padding: 2px 12px;
+    border-radius: 4px;
+    box-shadow: 0 0 15px var(--neon-cyan);
+    display: inline-block;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* --- CALCULATEUR --- */
+  .calc-container {
+    width: 100%;
+    max-width: 850px;
+    background: var(--card-bg);
+    border: 2px solid var(--neon-purple);
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(181, 55, 242, 0.25);
+    padding: 25px;
+    text-align: center;
+  }
+
+  .calc-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0 auto 20px auto;
+    display: inline-block;
+    color: var(--neon-yellow);
+    border-bottom: 2px solid var(--neon-yellow);
+    padding-bottom: 5px;
+    letter-spacing: 1px;
+  }
+
+  .section-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--neon-cyan);
+    background: rgba(0, 243, 255, 0.08);
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--neon-cyan);
+    margin: 20px 0 12px 0;
+    border-radius: 6px;
+    letter-spacing: 1px;
+  }
+
+  .grid-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    text-align: left;
+  }
+
+  .input-card {
+    background: var(--card-inner);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .input-card:focus-within {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+  }
+
+  .input-card label {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .input-card input {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    outline: none;
+    background: #0b0e14;
+    color: #fff;
+  }
+
+  .input-card input:focus {
+    border-color: var(--neon-cyan);
+  }
+
+  /* BOUTONS */
+  .btn-calc {
+    margin-top: 25px;
+    width: 100%;
+    padding: 16px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    background: var(--neon-cyan);
+    color: var(--bg-main);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.2s;
+  }
+
+  .actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+  }
+
+  .btn-action {
+    padding: 14px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.1s, filter 0.2s;
+    border: none;
+  }
+
+  .btn-save {
+    background: transparent;
+    color: var(--neon-green);
+    border: 1.5px solid var(--neon-green);
+    box-shadow: inset 0 0 8px rgba(0, 255, 102, 0.2);
+  }
+
+  .btn-pdf {
+    background: transparent;
+    color: var(--neon-purple);
+    border: 1.5px solid var(--neon-purple);
+    box-shadow: inset 0 0 8px rgba(181, 55, 242, 0.2);
+  }
+
+  .btn-calc:hover, .btn-action:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+  }
+
+  .btn-calc:active, .btn-action:active {
+    transform: translateY(0);
+  }
+
+  /* NOTIFICATION FEEDBACK */
+  .toast-notify {
+    display: none;
+    margin-top: 15px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  /* RESULTATS */
+  .result-box {
+    margin-top: 25px;
+    background: var(--card-inner);
+    border: 2px solid var(--neon-magenta);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 0 20px rgba(255, 0, 85, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .score-display {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin: 0;
+  }
+
+  .mention-badge {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: #0b0e14;
+    color: var(--neon-cyan);
+    padding: 8px 18px;
+    border: 1.5px solid var(--neon-cyan);
+    border-radius: 8px;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- En-tête -->
+  <header class="hero-header">
+    <div class="hero-badge">⚡ SIMULATION DNB 2026</div>
+    <h1 class="hero-title">Calculateur <span>POINTS DNB</span></h1>
+    <p class="hero-subtitle">
+      Saisis tes estimations pour calculer instantanément ton score global et débloquer ta mention.
+    </p>
+  </header>
+
+  <!-- Container Calculateur -->
+  <div class="calc-container">
+    <h2 class="calc-title">🎮 BULLETIN BREVET 2026</h2>
+
+    <!-- 1. Contrôle Continu -->
+    <div>
+      <span class="section-label">Contrôle Continu (40%)</span>
+      <div class="grid-inputs">
+        <div class="input-card">
+          <label for="moyenneAnnee">Moyenne Générale /20</label>
+          <input type="number" id="moyenneAnnee" class="dnb-input" min="0" max="20" step="0.1" placeholder="Ex: 14.5">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Épreuves Finales -->
+    <div>
+      <span class="section-label">Épreuves Finales (60%)</span>
+      <div class="grid-inputs">
+        <div class="input-card">
+          <label for="francais">Français /20 (Coeff 2)</label>
+          <input type="number" id="francais" class="dnb-input" min="0" max="20" step="0.5" placeholder="Ex: 12.0">
+        </div>
+        <div class="input-card">
+          <label for="maths">Mathématiques /20 (Coeff 2)</label>
+          <input type="number" id="maths" class="dnb-input" min="0" max="20" step="0.5" placeholder="Ex: 15.0">
+        </div>
+        <div class="input-card">
+          <label for="histoireGeo">Histoire-Géo /20 (Coeff 1.5)</label>
+          <input type="number" id="histoireGeo" class="dnb-input" min="0" max="20" step="0.5" placeholder="Ex: 13.5">
+        </div>
+        <div class="input-card">
+          <label for="emc">EMC /20 (Coeff 0.5)</label>
+          <input type="number" id="emc" class="dnb-input" min="0" max="20" step="0.5" placeholder="Ex: 16.0">
+        </div>
+        <div class="input-card">
+          <label for="sciences">Sciences /20 (Coeff 2)</label>
+          <input type="number" id="sciences" class="dnb-input" min="0" max="20" step="0.5" placeholder="Ex: 14.0">
+        </div>
+        <div class="input-card">
+          <label for="oral">Épreuve Orale /20 (Coeff 2)</label>
+          <input type="number" id="oral" class="dnb-input" min="0" max="20" step="0.5" placeholder="Ex: 18.0">
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn-calc" onclick="calculerDNB()">⚡ CALCULER LE SCORE</button>
+
+    <div class="actions-grid">
+      <button type="button" class="btn-action btn-save" onclick="sauvegarderNotes()">💾 SAUVEGARDER</button>
+      <button type="button" class="btn-action btn-pdf" onclick="genererPagePDF()">📄 EXPORTER EN PDF</button>
+    </div>
+
+    <div id="toastNotify" class="toast-notify"></div>
+
+    <!-- Zone Résultat -->
+    <div class="result-box" id="resultBox">
+      <p class="score-display" id="totalPoints">0.00 / 20</p>
+      <div class="mention-badge" id="mentionText">SAISIS TES NOTES</div>
+    </div>
+  </div>
+
+<script>
+function showToast(msg, isError = false) {
+  const toast = document.getElementById("toastNotify");
+  toast.innerText = msg;
+  toast.style.display = "block";
+  toast.style.color = isError ? "#ff0055" : "#00ff66";
+  toast.style.border = isError ? "1px solid #ff0055" : "1px solid #00ff66";
+  toast.style.background = isError ? "rgba(255, 0, 85, 0.1)" : "rgba(0, 255, 102, 0.1)";
+  
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 3500);
+}
+
+function calculerDNB() {
+  var moyAnnee = parseFloat(document.getElementById("moyenneAnnee").value) || 0;
+  var francais = parseFloat(document.getElementById("francais").value) || 0;
+  var maths = parseFloat(document.getElementById("maths").value) || 0;
+  var hg = parseFloat(document.getElementById("histoireGeo").value) || 0;
+  var emc = parseFloat(document.getElementById("emc").value) || 0;
+  var sciences = parseFloat(document.getElementById("sciences").value) || 0;
+  var oral = parseFloat(document.getElementById("oral").value) || 0;
+
+  var moyenneEpreuvesFinales = (
+    (francais * 2) + 
+    (maths * 2) + 
+    (hg * 1.5) + 
+    (emc * 0.5) + 
+    (sciences * 2) + 
+    (oral * 2)
+  ) / 10;
+
+  var noteFinaleSur20 = (moyAnnee * 0.40) + (moyenneEpreuvesFinales * 0.60);
+  var noteAffichee = noteFinaleSur20.toFixed(2);
+
+  document.getElementById("totalPoints").innerText = noteAffichee + " / 20";
+
+  var mentionBox = document.getElementById("mentionText");
+  var resText = "";
+  var resColor = "";
+  var textColor = "#0b0e14";
+
+  if (noteFinaleSur20 < 10) {
+    resText = "❌ Non Admis (Objectif : 10/20)";
+    resColor = "#ff0055";
+    textColor = "#fff";
+  } else if (noteFinaleSur20 < 12) {
+    resText = "🎮 Admis (Sans Mention)";
+    resColor = "#00ff66";
+  } else if (noteFinaleSur20 < 14) {
+    resText = "⭐ Mention Assez Bien";
+    resColor = "#00f3ff";
+  } else if (noteFinaleSur20 < 16) {
+    resText = "🌟 Mention Bien";
+    resColor = "#ffe600";
+  } else {
+    resText = "🏆 Mention Très Bien";
+    resColor = "#b537f2";
+    textColor = "#fff";
+  }
+
+  mentionBox.innerText = resText;
+  mentionBox.style.background = resColor;
+  mentionBox.style.color = textColor;
+  mentionBox.style.borderColor = resColor;
+
+  return { note: noteAffichee, mention: resText };
+}
+
+function sauvegarderNotes() {
+  try {
+    const inputs = document.querySelectorAll('.dnb-input');
+    inputs.forEach(input => {
+      localStorage.setItem('dnb_' + input.id, input.value);
+    });
+    showToast("✅ Notes sauvegardées sur ce navigateur !");
+  } catch(e) {
+    showToast("⚠️ Les cookies/localStorage sont bloqués.", true);
+  }
+}
+
+function restaurerNotes() {
+  try {
+    const inputs = document.querySelectorAll('.dnb-input');
+    let hasData = false;
+    inputs.forEach(input => {
+      const savedVal = localStorage.getItem('dnb_' + input.id);
+      if (savedVal !== null && savedVal !== "") {
+        input.value = savedVal;
+        hasData = true;
+      }
+    });
+    if (hasData) {
+      calculerDNB();
+    }
+  } catch(e) {}
+}
+
+function genererPagePDF() {
+  var res = calculerDNB();
+  
+  var printWindow = window.open('', '_blank');
+  if (!printWindow) {
+    showToast("⚠️ Autorise les pop-ups pour afficher la page PDF !", true);
+    return;
+  }
+
+  var doc = printWindow.document;
+  doc.open();
+  doc.write(`
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+      <meta charset="UTF-8">
+      <title>Bulletin DNB 2026</title>
+      <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; color: #0b0e14; background: #fff; }
+        h1 { border-bottom: 3px solid #0b0e14; padding-bottom: 10px; text-transform: uppercase; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 12px; text-align: left; }
+        th { background: #f1f5f9; }
+        .result { margin-top: 30px; padding: 20px; border: 3px solid #0b0e14; text-align: center; font-size: 1.5rem; font-weight: bold; border-radius: 8px; }
+      </style>
+    </head>
+    <body>
+      <h1>📄 Bulletin Récapitulatif DNB 2026</h1>
+      <table>
+        <tr><th>Épreuve / Matière</th><th>Note /20</th></tr>
+        <tr><td>Moyenne Générale Annuelle (Contrôle Continu 40%)</td><td>${document.getElementById('moyenneAnnee').value || '0'} / 20</td></tr>
+        <tr><td>Français (Coeff 2)</td><td>${document.getElementById('francais').value || '0'} / 20</td></tr>
+        <tr><td>Mathématiques (Coeff 2)</td><td>${document.getElementById('maths').value || '0'} / 20</td></tr>
+        <tr><td>Histoire-Géographie (Coeff 1.5)</td><td>${document.getElementById('histoireGeo').value || '0'} / 20</td></tr>
+        <tr><td>EMC (Coeff 0.5)</td><td>${document.getElementById('emc').value || '0'} / 20</td></tr>
+        <tr><td>Sciences (Coeff 2)</td><td>${document.getElementById('sciences').value || '0'} / 20</td></tr>
+        <tr><td>Épreuve Orale (Coeff 2)</td><td>${document.getElementById('oral').value || '0'} / 20</td></tr>
+      </table>
+      <div class="result">
+        Moyenne Finale : ${res.note} / 20<br>
+        <span style="margin-top: 10px; display: inline-block;">${res.mention}</span>
+      </div>
+    </body>
+    </html>
+  `);
+  doc.close();
+
+  // Déclenche l'impression de façon sécurisée après chargement du document
+  printWindow.onload = function() {
+    printWindow.focus();
+    printWindow.print();
+  };
+}
+
+window.onload = restaurerNotes;
+</script>
+
+</body>
+</html>
