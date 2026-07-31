@@ -270,12 +270,12 @@
   .btn-sujet:active {
     transform: translateY(0);
   }
-  /* --- BARRE DE NAVIGATION CYBERPUNK --- */
+/* --- BARRE DE NAVIGATION CYBERPUNK --- */
 .nav-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
   width: 100%;
   max-width: 950px;
@@ -289,18 +289,18 @@
 
 .nav-btn {
   font-family: 'Orbitron', system-ui, sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
   text-decoration: none;
   color: var(--text-muted, #94a3b8);
   background: var(--card-inner, #1a2332);
-  padding: 10px 16px;
+  padding: 10px 14px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   letter-spacing: 0.5px;
 }
 
@@ -313,17 +313,17 @@
   transform: translateY(-2px);
 }
 
-/* Bouton actif / Mis en valeur */
-.nav-btn.primary,
-.nav-btn.active {
+/* Page active */
+.nav-btn.active,
+.nav-btn.primary {
   color: #0b0e14;
   background: var(--neon-cyan, #00f3ff);
   border-color: var(--neon-cyan, #00f3ff);
   box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
 }
 
-.nav-btn.primary:hover,
-.nav-btn.active:hover {
+.nav-btn.active:hover,
+.nav-btn.primary:hover {
   background: #33f6ff;
   box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
 }
@@ -346,6 +346,7 @@
 
   <!-- Navigation Menu -->
 <nav class="nav-container">
+  <a href="https://arunkobi27-max.github.io/brevet/index.html" class="nav-btn" target="_parent">🏠 Index DNB</a>
   <a href="https://arunkobi27-max.github.io/brevet/annales.html" class="nav-btn" target="_parent">📚 Annales DNB</a>
   <a href="https://arunkobi27-max.github.io/brevet/calculateur.html" class="nav-btn" target="_parent">🧮 Calculateur DNB</a>
   <a href="https://arunkobi27-max.github.io/brevet/quiz.html" class="nav-btn" target="_parent">⚡ Quiz DNB</a>
