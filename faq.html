@@ -344,6 +344,78 @@
   background: #33f6ff;
   box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
 }
+  /* --- FAQ STYLE CYBERPUNK --- */
+.faq-section {
+  width: 100%;
+  max-width: 950px;
+  margin: 30px auto;
+}
+
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: var(--card-bg, #111422);
+  border: 1.5px solid rgba(0, 240, 255, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-item[open] {
+  border-color: var(--neon-cyan, #00f0ff);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.faq-question {
+  padding: 16px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  user-select: none;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-icon {
+  color: var(--neon-cyan, #00f0ff);
+  font-size: 1.4rem;
+  font-weight: 900;
+  transition: transform 0.3s ease;
+}
+
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+  color: var(--neon-pink, #ff007f);
+}
+
+.faq-answer {
+  padding: 0 20px 18px 20px;
+  color: var(--text-dim, #94a3b8);
+  font-size: 1rem;
+  line-height: 1.6;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.faq-answer strong {
+  color: var(--neon-cyan, #00f0ff);
+}
+
+.faq-answer ul {
+  margin: 8px 0 0 20px;
+  padding: 0;
+}
 </style>
 </head>
 <body>
@@ -530,6 +602,65 @@
       </div>
 
     </div>
+
+    <!-- --- FAQ CYBERPUNK ACCORDION --- -->
+<section class="faq-section">
+  <div class="section-title">💬 Foire Aux Questions (FAQ)</div>
+  
+  <div class="faq-container">
+    <!-- Question 1 -->
+    <details class="faq-item">
+      <summary class="faq-question">
+        <span>Comment sont calculés les points du Brevet (DNB) ?</span>
+        <span class="faq-icon">+</span>
+      </summary>
+      <div class="faq-answer">
+        <p>Le Brevet est noté sur <strong>800 points</strong> au total :</p>
+        <ul>
+          <li><strong>400 points</strong> pour le contrôle continu (évaluation des compétences du socle commun).</li>
+          <li><strong>400 points</strong> pour les épreuves finales (Français, Mathématiques, Histoire-Géo/EMC, Sciences et l'Épreuve Orale).</li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- Question 2 -->
+    <details class="faq-item">
+      <summary class="faq-question">
+        <span>Combien de points faut-il pour obtenir une mention ?</span>
+        <span class="faq-icon">+</span>
+      </summary>
+      <div class="faq-answer">
+        <ul>
+          <li><strong>Assez Bien :</strong> 480 points</li>
+          <li><strong>Bien :</strong> 560 points</li>
+          <li><strong>Très Bien :</strong> 640 points</li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- Question 3 -->
+    <details class="faq-item">
+      <summary class="faq-question">
+        <span>Quelles sont les deux matières tirées au sort pour l'épreuve de Sciences ?</span>
+        <span class="faq-icon">+</span>
+      </summary>
+      <div class="faq-answer">
+        <p>L'épreuve de sciences combine <strong>deux matières</strong> parmi les trois suivantes : Physique-Chimie, SVT, et Technologie. Les deux matières retenues sont annoncées quelques mois avant l'examen.</p>
+      </div>
+    </details>
+
+    <!-- Question 4 -->
+    <details class="faq-item">
+      <summary class="faq-question">
+        <span>L'utilisation du dictionnaire est-elle autorisée pendant les épreuves ?</span>
+        <span class="faq-icon">+</span>
+      </summary>
+      <div class="faq-answer">
+        <p>En règle générale, le dictionnaire n'est pas autorisé pour l'épreuve de Français, sauf mention contraire spécifique figurant sur le sujet pour la partie rédaction ou pour les candidats bénéficiant d'aménagements particuliers.</p>
+      </div>
+    </details>
+  </div>
+</section>
 
     <div class="no-results" id="noResults">
       ⚠️ Aucune question trouvée correspondant à ta recherche.
