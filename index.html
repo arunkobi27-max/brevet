@@ -101,58 +101,63 @@
       line-height: 1.5;
     }
 
-    /* --- NAVIGATION BAR --- */
-    .nav-container {
-      width: 100%;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 12px 15px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-      align-items: center;
-      box-sizing: border-box;
-      margin-bottom: 30px;
-    }
+    /* --- BARRE DE NAVIGATION CYBERPUNK --- */
+.nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto 30px auto;
+  padding: 12px 16px;
+  background: var(--card-bg, #121824);
+  border: 1.5px solid rgba(0, 243, 255, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
+}
 
-    .nav-btn {
-      font-family: inherit;
-      font-weight: 800;
-      font-size: 0.9rem;
-      color: var(--text-main);
-      text-decoration: none;
-      padding: 10px 18px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
+.nav-btn {
+  font-family: 'Orbitron', system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-muted, #94a3b8);
+  background: var(--card-inner, #1a2332);
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.5px;
+}
 
-    .nav-btn:hover {
-      background: rgba(0, 240, 255, 0.1);
-      border-color: var(--neon-cyan);
-      color: var(--neon-cyan);
-      box-shadow: var(--glow-cyan);
-      transform: translateY(-2px);
-    }
+/* Effet au survol (Hover) */
+.nav-btn:hover {
+  color: var(--neon-cyan, #00f3ff);
+  border-color: var(--neon-cyan, #00f3ff);
+  background: rgba(0, 243, 255, 0.08);
+  box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+  transform: translateY(-2px);
+}
 
-    .nav-btn.primary {
-      background: var(--neon-cyan);
-      color: var(--bg-dark);
-      border-color: var(--neon-cyan);
-      box-shadow: var(--glow-cyan);
-    }
+/* Page active */
+.nav-btn.active,
+.nav-btn.primary {
+  color: #0b0e14;
+  background: var(--neon-cyan, #00f3ff);
+  border-color: var(--neon-cyan, #00f3ff);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+}
 
-    .nav-btn.primary:hover {
-      background: #00d8e6;
-      color: var(--bg-dark);
-    }
+.nav-btn.active:hover,
+.nav-btn.primary:hover {
+  background: #33f6ff;
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
+}
 
     /* --- STATS GRID --- */
     .stats-grid {
@@ -276,14 +281,15 @@
       </p>
     </header>
 
-    <!-- 2. Navigation Menu -->
-    <nav class="nav-container">
-      <a href="https://arunkobi27-max.github.io/brevet/annales.html" class="nav-btn primary" target="_parent">📚 Annales DNB</a>
-      <a href="https://arunkobi27-max.github.io/brevet/calculateur.html" class="nav-btn" target="_parent">🧮 Calculateur DNB</a>
-      <a href="https://arunkobi27-max.github.io/brevet/quiz.html" class="nav-btn" target="_parent">⚡ Quiz DNB</a>
-      <a href="https://arunkobi27-max.github.io/brevet/cours.html" class="nav-btn" target="_parent">📖 Cours DNB</a>
-      <a href="https://arunkobi27-max.github.io/brevet/faq.html" class="nav-btn" target="_parent">❓ FAQ DNB</a>
-    </nav>
+    <!-- Navigation Menu -->
+<nav class="nav-container">
+  <a href="https://arunkobi27-max.github.io/brevet/index.html" class="nav-btn" target="_parent">🏠 Index DNB</a>
+  <a href="https://arunkobi27-max.github.io/brevet/annales.html" class="nav-btn" target="_parent">📚 Annales DNB</a>
+  <a href="https://arunkobi27-max.github.io/brevet/calculateur.html" class="nav-btn" target="_parent">🧮 Calculateur DNB</a>
+  <a href="https://arunkobi27-max.github.io/brevet/quiz.html" class="nav-btn" target="_parent">⚡ Quiz DNB</a>
+  <a href="https://arunkobi27-max.github.io/brevet/cours.html" class="nav-btn" target="_parent">📖 Cours DNB</a>
+  <a href="https://arunkobi27-max.github.io/brevet/faq.html" class="nav-btn" target="_parent">❓ FAQ DNB</a>
+</nav>
 
     <!-- 3. Cyber Statistics Grid -->
     <div class="stats-grid">
