@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quizz Express DNB 2026 - Gamer Edition</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Orbitron:wght@700;900&display=swap');
+
+  :root {
+    --bg-main: #0b0e14;
+    --card-bg: #121824;
+    --card-inner: #1a2332;
+    --neon-cyan: #00f3ff;
+    --neon-magenta: #ff0055;
+    --neon-purple: #b537f2;
+    --neon-yellow: #ffe600;
+    --neon-green: #00ff66;
+    --text-light: #f1f5f9;
+    --text-muted: #94a3b8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-light);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  /* BANNIÈRE EN-TÊTE */
+  .hero-header {
+    width: 100%;
+    max-width: 850px;
+    background: var(--card-bg);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.25);
+    padding: 25px;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    color: var(--neon-cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    border: 1.5px solid var(--neon-cyan);
+    border-radius: 20px;
+    box-shadow: inset 0 0 8px rgba(0, 243, 255, 0.3);
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .hero-title span {
+    color: var(--bg-main);
+    background: var(--neon-cyan);
+    padding: 2px 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 12px var(--neon-cyan);
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* CONTAINER PRINCIPAL */
+  .quiz-container {
+    width: 100%;
+    max-width: 850px;
+    background: var(--card-bg);
+    border: 2px solid var(--neon-purple);
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(181, 55, 242, 0.25);
+    padding: 25px;
+    text-align: center;
+  }
+
+  .quiz-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--neon-yellow);
+    margin: 0 0 20px 0;
+    letter-spacing: 1px;
+  }
+
+  /* BOUTONS MATIÈRES */
+  .subject-select {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+  }
+
+  .btn-subject {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: var(--card-inner);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-subject.active {
+    background: transparent;
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.4), inset 0 0 5px rgba(0, 243, 255, 0.2);
+  }
+
+  /* CARTE QUESTION */
+  .question-card {
+    background: var(--card-inner);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .question-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: rgba(255, 0, 85, 0.15);
+    color: var(--neon-magenta);
+    padding: 4px 10px;
+    border: 1px solid var(--neon-magenta);
+    border-radius: 20px;
+  }
+
+  .best-score-badge {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    color: var(--neon-green);
+    border: 1px solid var(--neon-green);
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(0, 255, 102, 0.1);
+  }
+
+  .question-text {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    color: #fff;
+    line-height: 1.4;
+  }
+
+  /* OPTIONS DE RÉPONSE */
+  .options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn-option {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: left;
+    padding: 14px 16px;
+    background: #0b0e14;
+    color: var(--text-light);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-option:hover:not([disabled]) {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+    transform: translateX(4px);
+  }
+
+  .btn-option.correct {
+    background: rgba(0, 255, 102, 0.15) !important;
+    border-color: var(--neon-green) !important;
+    color: var(--neon-green) !important;
+    box-shadow: 0 0 12px rgba(0, 255, 102, 0.3);
+  }
+
+  .btn-option.wrong {
+    background: rgba(255, 0, 85, 0.15) !important;
+    border-color: var(--neon-magenta) !important;
+    color: var(--neon-magenta) !important;
+    box-shadow: 0 0 12px rgba(255, 0, 85, 0.3);
+  }
+
+  /* EXPLICATION & BOUTONS ACTION */
+  .explanation-box {
+    margin-top: 15px;
+    padding: 14px;
+    background: #0b0e14;
+    border: 1px solid var(--neon-yellow);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--neon-yellow);
+    display: none;
+    line-height: 1.4;
+  }
+
+  .action-bar {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+
+  .btn-action {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+
+  .btn-next {
+    background: var(--neon-cyan);
+    color: var(--bg-main);
+    box-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
+    display: none;
+  }
+
+  .btn-restart {
+    background: transparent;
+    color: var(--neon-magenta);
+    border: 1px solid var(--neon-magenta);
+  }
+
+  .btn-action:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+  }
+
+  /* CARTE RÉSULTAT */
+  .score-card {
+    display: none;
+    background: var(--card-inner);
+    border: 2px solid var(--neon-green);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
+  }
+
+  .score-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: #fff;
+    margin: 0 0 15px 0;
+  }
+
+  .score-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--neon-green);
+    background: #0b0e14;
+    display: inline-block;
+    padding: 10px 25px;
+    border: 1.5px solid var(--neon-green);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+    margin-bottom: 20px;
+  }
+
+  .score-record {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+  <header class="hero-header">
+    <div class="hero-badge">🎯 ENTRAÎNEMENT RAPIDE</div>
+    <h1 class="hero-title">Quizz Express <span>DNB</span></h1>
+    <p class="hero-subtitle">
+      Teste tes révisions avec 10 questions ciblées par matière et enregistre tes meilleurs scores.
+    </p>
+  </header>
+
+  <div class="quiz-container">
+    <h2 class="quiz-title">🎮 SELECTIONNER UNE MATIERE</h2>
+
+    <div class="subject-select">
+      <button class="btn-subject active" onclick="loadSubject('maths', event)">📐 Maths</button>
+      <button class="btn-subject" onclick="loadSubject('francais', event)">📖 Français</button>
+      <button class="btn-subject" onclick="loadSubject('histoire', event)">🌍 Hist-Géo</button>
+      <button class="btn-subject" onclick="loadSubject('sciences', event)">🔬 Sciences</button>
+    </div>
+
+    <!-- Zone du Quiz -->
+    <div id="quizBox">
+      <div class="question-card">
+        <div class="question-header">
+          <span class="question-number" id="qNum">Question 1 / 10</span>
+          <span class="best-score-badge" id="bestScoreBadge">Record : 0 / 10</span>
+        </div>
+        <p class="question-text" id="qText">Chargement...</p>
+
+        <div class="options-grid" id="optionsBox"></div>
+        <div class="explanation-box" id="explanationBox"></div>
+      </div>
+
+      <div class="action-bar">
+        <button class="btn-action btn-restart" onclick="restartQuiz()">🔄 Recommencer</button>
+        <button class="btn-action btn-next" id="nextBtn" onclick="nextQuestion()">Suivant ➔</button>
+      </div>
+    </div>
+
+    <!-- Zone Résultat -->
+    <div class="score-card" id="scoreCard">
+      <h3 class="score-title">SESSION TERMINÉE ! 🎉</h3>
+      <div class="score-value" id="finalScore">0 / 10</div>
+      <p class="score-record" id="recordText"></p>
+      <button class="btn-action btn-next" style="display:inline-block;" onclick="restartQuiz()">Rejouer cette matière 🔄</button>
+    </div>
+  </div>
+
+<script>
+const quizData = {
+  maths: [
+    { q: "Dans un triangle rectangle, quel théorème permet de calculer la longueur d'un côté ?", options: ["Théorème de Thalès", "Théorème de Pythagore", "Théorème de Chasles"], answer: 1, exp: "Le théorème de Pythagore s'applique dans un triangle rectangle (a² + b² = c²)." },
+    { q: "Quelle est la valeur de √81 ?", options: ["7", "8", "9"], answer: 2, exp: "9 × 9 = 81, donc √81 = 9." },
+    { q: "Quelle est l'image de 3 par la fonction f(x) = 2x + 1 ?", options: ["7", "6", "8"], answer: 0, exp: "f(3) = 2 × 3 + 1 = 6 + 1 = 7." },
+    { q: "Quelle est l'étendue de la série statistique : 4, 8, 15, 16, 23, 42 ?", options: ["38", "42", "37"], answer: 0, exp: "L'étendue est la différence entre la valeur max et min : 42 - 4 = 38." },
+    { q: "Comment se note le développement de (a + b)² ?", options: ["a² + b²", "a² + 2ab + b²", "a² - 2ab + b²"], answer: 1, exp: "C'est la 1ère identité remarquable : (a+b)² = a² + 2ab + b²." },
+    { q: "Si une échelle d'une carte est 1/10 000, 1 cm sur la carte représente :", options: ["10 m", "100 m", "1 km"], answer: 1, exp: "1 cm = 10 000 cm = 100 mètres dans la réalité." },
+    { q: "Combien de faces possède un cube ?", options: ["6", "8", "12"], answer: 0, exp: "Un cube possède 6 faces carrées, 8 sommets et 12 arêtes." },
+    { q: "Quelle est la probabilité d'obtenir un chiffre impair en lançant un dé à 6 faces ?", options: ["1/3", "1/2", "2/3"], answer: 1, exp: "Les nombres impairs sont 1, 3, 5 (3 cas sur 6) = 1/2." },
+    { q: "Si un produit à 50 € baisse de 20%, quel est son nouveau prix ?", options: ["30 €", "40 €", "45 €"], answer: 1, exp: "20% de 50 € = 10 €. Donc 50 - 10 = 40 €." },
+    { q: "Quel est le résultat du produit (-4) × (-5) ?", options: ["-20", "20", "-9"], answer: 1, exp: "Le produit de deux nombres négatifs donne un résultat positif." }
+  ],
+  francais: [
+    { q: "Quelle figure de style compare deux éléments avec un outil de comparaison (comme, tel que) ?", options: ["La métaphore", "La comparaison", "L'hyperbole"], answer: 1, exp: "La comparaison utilise un outil explicite (comme, tel que...)." },
+    { q: "Quel est le sujet du verbe dans : « Dans la forêt chantent les oiseaux » ?", options: ["la forêt", "les oiseaux", "Dans"], answer: 1, exp: "Sujet inversé : Qui est-ce qui chante ? Les oiseaux." },
+    { q: "Au brevet, combien de temps dure l'épreuve écrite globale de Français ?", options: ["2 heures", "3 heures", "1 heure 30"], answer: 1, exp: "L'épreuve complète (compréhension, grammaire, dictée, rédaction) dure 3h." },
+    { q: "Quel mode verbal utilise-t-on pour exprimer un ordre ou un conseil ?", options: ["L'indicatif", "Le subjonctif", "L'impératif"], answer: 2, exp: "L'impératif sert à donner une ordonnance, une consigne ou une défense." },
+    { q: "Dans la phrase « Le chat noir dort », quelle est la fonction du mot « noir » ?", options: ["Épithète liée", "Attribut du sujet", "Complément d'objet"], answer: 0, exp: "L'adjectif placé directement à côté du nom qu'il qualifie est épithète." },
+    { q: "Que signifie un récit à la première personne ?", options: ["Le narrateur est externe", "Le narrateur est un personnage du récit", "Le récit n'a pas de personnage"], answer: 1, exp: "Le narrateur emploie le pronom 'je' et participe à l'histoire." },
+    { q: "Parmi ces mots, lequel est un pléonasme ?", options: ["Monter en haut", "Grand bruit", "Sombre nuit"], answer: 0, exp: "Monter implique nécessairement d'aller vers le haut." },
+    { q: "Quel temps du passé utilise-t-on pour une action de second plan ou une description ?", options: ["Passé simple", "Imparfait", "Plus-que-parfait"], answer: 1, exp: "L'imparfait sert aux descriptions et aux actions secondaires durables." },
+    { q: "Quel auteur a écrit la pièce 'Roméo et Juliette' ?", options: ["Molière", "William Shakespeare", "Victor Hugo"], answer: 1, exp: "Shakespeare est le dramaturge britannique auteur de la pièce." },
+    { q: "Quel est le synonyme du mot 'éphémère' ?", options: ["Durable", "Provisoire", "Éternel"], answer: 1, exp: "Ce qui est éphémère ne dure que très peu de temps." }
+  ],
+  histoire: [
+    { q: "En quelle année débute la Première Guerre mondiale ?", options: ["1914", "1918", "1939"], answer: 0, exp: "La Grande Guerre débute durant l'été 1914 et s'achève en 1918." },
+    { q: "Quelle est la capitale de l'Union Européenne (siège principal des institutions) ?", options: ["Paris", "Bruxelles", "Berlin"], answer: 1, exp: "Bruxelles accueille les sièges de la Commission et du Conseil de l'UE." },
+    { q: "Que signifie le sigle EMC ?", options: ["Éducation Morale et Civique", "Épreuve de Mathématiques Complémentaires", "Étude des Médias et de la Culture"], answer: 0, exp: "L'EMC enseigne les valeurs de la République et la citoyenneté." },
+    { q: "Qui prend le pouvoir en Allemagne en 1933 ?", options: ["Staline", "Mussolini", "Adolf Hitler"], answer: 2, exp: "Hitler est nommé chancelier d'Allemagne en janvier 1933." },
+    { q: "En quelle année le droit de vote a-t-il été accordé aux femmes en France ?", options: ["1789", "1936", "1944"], answer: 2, exp: "Le Comité français de libération nationale accorde le droit de vote aux femmes en 1944." },
+    { q: "Quel événement marque le début de la Seconde Guerre mondiale en Europe ?", options: ["L'invasion de la Pologne en 1939", "L'attaque de Pearl Harbor", "Le débarquement de Normandie"], answer: 0, exp: "L'invasion de la Pologne par l'Allemagne le 1er septembre 1939 déclenche la guerre." },
+    { q: "Quelle est la valeur centrale rappelée par la devise républicaine 'Liberté, Égalité, ...' ?", options: ["Solidarité", "Fraternité", "Justice"], answer: 1, exp: "La devise officielle de la République française est Liberté, Égalité, Fraternité." },
+    { q: "Comment appelle-t-on le déplacement massif de populations des campagnes vers les villes ?", options: ["L'exode rural", "La mondialisation", "La périurbanisation"], answer: 0, exp: "L'exode rural correspond au départ d'habitants des campagnes vers les zones urbaines." },
+    { q: "Quel traité met fin officiellement à la Première Guerre mondiale en 1919 ?", options: ["Traité de Rome", "Traité de Versailles", "Traité de Maastricht"], answer: 1, exp: "Le traité de Versailles a été signé le 28 juin 1919." },
+    { q: "Où se situe le siège de l'Organisation des Nations Unies (ONU) ?", options: ["Genève", "New York", "Washington"], answer: 1, exp: "Le siège principal des Nations Unies est établi à New York." }
+  ],
+  sciences: [
+    { q: "Quel est le pH d'une solution neutre à 25°C ?", options: ["0", "7", "14"], answer: 1, exp: "Un pH égal à 7 est neutre. En dessous il est acide, au-dessus il est basique." },
+    { q: "Où se situe l'information génétique (ADN) dans une cellule animale ?", options: ["Dans le cytoplasme", "Dans le noyau", "Dans la membrane"], answer: 1, exp: "L'ADN est regroupé sous forme de chromosomes dans le noyau." },
+    { q: "Quelle est la formule de la vitesse moyenne ?", options: ["V = d / t", "V = d × t", "V = t / d"], answer: 0, exp: "La vitesse (V) correspond à la distance (d) divisée par le temps (t)." },
+    { q: "Quel gaz est nécessaire à la combustion ?", options: ["Le dioxyde de carbone", "Le dioxygène", "L'azote"], answer: 1, exp: "Le dioxygène (O2) joue le rôle de comburant lors d'une réaction de combustion." },
+    { q: "Quelle est l'unité internationale de mesure de la force ?", options: ["Le Joule", "Le Newton", "Le Watt"], answer: 1, exp: "Les forces se mesurent en Newtons (N) à l'aide d'un dynamomètre." },
+    { q: "Chez l'humain, combien de chromosomes contiennent la majorité de nos cellules ?", options: ["23", "46", "48"], answer: 1, exp: "Nos cellules possèdent 23 paires de chromosomes, soit 46 chromosomes." },
+    { q: "Quel organe filtre le sang pour fabriquer l'urine ?", options: ["Le foie", "Les reins", "Le poumon"], answer: 1, exp: "Les reins épurent le sang en éliminant les déchets sous forme d'urine." },
+    { q: "Quelle est la formule chimique de la molécule d'eau ?", options: ["CO2", "H2O", "NaCl"], answer: 1, exp: "L'eau se compose de deux atomes d'hydrogène et d'un atome d'oxygène (H2O)." },
+    { q: "Quelle énergie dépend de la hauteur d'un objet par rapport au sol ?", options: ["Énergie cinétique", "Énergie potentielle de pesanteur", "Énergie thermique"], answer: 1, exp: "L'énergie potentielle dépend de la masse et de l'altitude de l'objet." },
+    { q: "Quel est le rôle des globules rouges dans le sang ?", options: ["Lutter contre les infections", "Transporter le dioxygène", "Permettre la coagulation"], answer: 1, exp: "L'hémoglobine contenue dans les globules rouges fixe et transporte l'oxygène." }
+  ]
+};
+
+let currentSubject = 'maths';
+let currentQIndex = 0;
+let score = 0;
+
+function loadSubject(subject, ev) {
+  currentSubject = subject;
+  currentQIndex = 0;
+  score = 0;
+
+  document.querySelectorAll('.btn-subject').forEach(btn => btn.classList.remove('active'));
+  if (ev && ev.target) {
+    ev.target.classList.add('active');
+  }
+
+  document.getElementById('quizBox').style.display = 'block';
+  document.getElementById('scoreCard').style.display = 'none';
+
+  updateBestScoreDisplay();
+  showQuestion();
+}
+
+function updateBestScoreDisplay() {
+  const savedBest = localStorage.getItem('quiz_best_' + currentSubject) || 0;
+  document.getElementById('bestScoreBadge').innerText = `Record : ${savedBest} / 10`;
+}
+
+function showQuestion() {
+  const qList = quizData[currentSubject];
+  const q = qList[currentQIndex];
+
+  document.getElementById('qNum').innerText = `Question ${currentQIndex + 1} / ${qList.length}`;
+  document.getElementById('qText').innerText = q.q;
+
+  const optionsBox = document.getElementById('optionsBox');
+  optionsBox.innerHTML = '';
+
+  document.getElementById('explanationBox').style.display = 'none';
+  document.getElementById('nextBtn').style.display = 'none';
+
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'btn-option';
+    btn.innerText = `${String.fromCharCode(65 + idx)}. ${opt}`;
+    btn.onclick = () => selectOption(idx);
+    optionsBox.appendChild(btn);
+  });
+}
+
+function selectOption(selectedIdx) {
+  const q = quizData[currentSubject][currentQIndex];
+  const buttons = document.querySelectorAll('.btn-option');
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+    if (idx === q.answer) {
+      btn.classList.add('correct');
+    }
+    if (idx === selectedIdx && selectedIdx !== q.answer) {
+      btn.classList.add('wrong');
+    }
+  });
+
+  if (selectedIdx === q.answer) {
+    score++;
+  }
+
+  const expBox = document.getElementById('explanationBox');
+  expBox.innerHTML = "⚡ <strong>EXPLICATION :</strong> " + q.exp;
+  expBox.style.display = 'block';
+
+  document.getElementById('nextBtn').style.display = 'inline-block';
+}
+
+function nextQuestion() {
+  currentQIndex++;
+  const qList = quizData[currentSubject];
+
+  if (currentQIndex < qList.length) {
+    showQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+function finishQuiz() {
+  const qList = quizData[currentSubject];
+  document.getElementById('quizBox').style.display = 'none';
+  document.getElementById('scoreCard').style.display = 'block';
+  document.getElementById('finalScore').innerText = `${score} / ${qList.length}`;
+
+  const currentBest = parseInt(localStorage.getItem('quiz_best_' + currentSubject) || "0", 10);
+  let recordMsg = "";
+
+  if (score > currentBest) {
+    localStorage.setItem('quiz_best_' + currentSubject, score);
+    recordMsg = "🔥 NOUVEAU RECORD PERSONNEL DÉBLOQUÉ !";
+  } else {
+    recordMsg = `Meilleur score enregistré : ${currentBest} / ${qList.length}`;
+  }
+
+  document.getElementById('recordText').innerText = recordMsg;
+  updateBestScoreDisplay();
+}
+
+function restartQuiz() {
+  loadSubject(currentSubject);
+}
+
+// Lancement au chargement
+updateBestScoreDisplay();
+showQuestion();
+</script>
+
+</body>
+</html>
