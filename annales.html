@@ -10,12 +10,14 @@
   :root {
     --bg-dark: #090a0f;
     --card-bg: #111422;
+    --card-inner: #1a2332;
     --neon-cyan: #00f0ff;
     --neon-pink: #ff007f;
     --neon-yellow: #ffe600;
     --neon-purple: #9d4edd;
     --text-light: #e2e8f0;
     --text-dim: #94a3b8;
+    --text-muted: #94a3b8;
     --border-glow: 0 0 10px rgba(0, 240, 255, 0.5);
   }
 
@@ -40,7 +42,7 @@
 
   .main-container {
     width: 100%;
-    max-width: 900px;
+    max-width: 950px;
   }
 
   /* --- HERO HEADER CYBERPUNK --- */
@@ -54,7 +56,7 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
   }
 
   .hero-header::before {
@@ -112,7 +114,61 @@
     line-height: 1.5;
   }
 
-  /* --- MENU DÉROULANT CYBERPUNK --- */
+  /* --- BARRE DE NAVIGATION CYBERPUNK --- */
+  .nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto 30px auto;
+    padding: 12px 16px;
+    background: var(--card-bg);
+    border: 1.5px solid rgba(0, 243, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
+  }
+
+  .nav-btn {
+    font-family: 'Orbitron', system-ui, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text-muted);
+    background: var(--card-inner);
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-btn:hover {
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    background: rgba(0, 243, 255, 0.08);
+    box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  /* Indique la page courante */
+  .nav-btn.active {
+    color: #0b0e14;
+    background: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+  }
+
+  .nav-btn.active:hover {
+    background: #33f6ff;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
+  }
+
+  /* --- SELECTEUR D'ANNÉE --- */
   .select-container {
     display: flex;
     justify-content: center;
@@ -139,7 +195,7 @@
     background-position: right 15px center;
   }
 
-  .cyber-select:hover {
+  .cyber-select:hover, .cyber-select:focus {
     box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
     border-color: #fff;
     color: #fff;
@@ -189,6 +245,11 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .table-container:hover {
+    border-color: rgba(0, 240, 255, 0.3);
   }
 
   table {
@@ -216,7 +277,7 @@
   }
 
   tr:last-child td { border-bottom: none; }
-  tr:hover { background-color: rgba(255, 255, 255, 0.02); }
+  tr:hover { background-color: rgba(255, 255, 255, 0.03); }
 
   .subject-name {
     font-size: 1.15rem;
@@ -250,7 +311,6 @@
     display: inline-block;
     text-align: center;
     letter-spacing: 1px;
-    position: relative;
   }
 
   .btn-sujet {
@@ -270,63 +330,12 @@
   .btn-sujet:active {
     transform: translateY(0);
   }
-/* --- BARRE DE NAVIGATION CYBERPUNK --- */
-.nav-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 950px;
-  margin: 0 auto 30px auto;
-  padding: 12px 16px;
-  background: var(--card-bg, #121824);
-  border: 1.5px solid rgba(0, 243, 255, 0.3);
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
-}
 
-.nav-btn {
-  font-family: 'Orbitron', system-ui, sans-serif;
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--text-muted, #94a3b8);
-  background: var(--card-inner, #1a2332);
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  letter-spacing: 0.5px;
-}
-
-/* Effet au survol (Hover) */
-.nav-btn:hover {
-  color: var(--neon-cyan, #00f3ff);
-  border-color: var(--neon-cyan, #00f3ff);
-  background: rgba(0, 243, 255, 0.08);
-  box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
-  transform: translateY(-2px);
-}
-
-/* Page active */
-.nav-btn.active,
-.nav-btn.primary {
-  color: #0b0e14;
-  background: var(--neon-cyan, #00f3ff);
-  border-color: var(--neon-cyan, #00f3ff);
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
-}
-
-.nav-btn.active:hover,
-.nav-btn.primary:hover {
-  background: #33f6ff;
-  box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
-}
+  @media (max-width: 600px) {
+    th, td { padding: 12px 10px; }
+    .hero-title { font-size: 1.7rem; }
+    .nav-btn { font-size: 0.75rem; padding: 8px 10px; }
+  }
 </style>
 </head>
 <body>
@@ -345,18 +354,18 @@
   </header>
 
   <!-- Navigation Menu -->
-<nav class="nav-container">
-  <a href="https://arunkobi27-max.github.io/brevet/index.html" class="nav-btn" target="_parent">🏠 Index DNB</a>
-  <a href="https://arunkobi27-max.github.io/brevet/annales.html" class="nav-btn" target="_parent">📚 Annales DNB</a>
-  <a href="https://arunkobi27-max.github.io/brevet/calculateur.html" class="nav-btn" target="_parent">🧮 Calculateur DNB</a>
-  <a href="https://arunkobi27-max.github.io/brevet/quiz.html" class="nav-btn" target="_parent">⚡ Quiz DNB</a>
-  <a href="https://arunkobi27-max.github.io/brevet/cours.html" class="nav-btn" target="_parent">📖 Cours DNB</a>
-  <a href="https://arunkobi27-max.github.io/brevet/faq.html" class="nav-btn" target="_parent">❓ FAQ DNB</a>
-</nav>
+  <nav class="nav-container" aria-label="Menu principal">
+    <a href="https://arunkobi27-max.github.io/brevet/index.html" class="nav-btn" target="_parent">🏠 Index DNB</a>
+    <a href="https://arunkobi27-max.github.io/brevet/annales.html" class="nav-btn active" target="_parent">📚 Annales DNB</a>
+    <a href="https://arunkobi27-max.github.io/brevet/calculateur.html" class="nav-btn" target="_parent">🧮 Calculateur DNB</a>
+    <a href="https://arunkobi27-max.github.io/brevet/quiz.html" class="nav-btn" target="_parent">⚡ Quiz DNB</a>
+    <a href="https://arunkobi27-max.github.io/brevet/cours.html" class="nav-btn" target="_parent">📖 Cours DNB</a>
+    <a href="https://arunkobi27-max.github.io/brevet/faq.html" class="nav-btn" target="_parent">❓ FAQ DNB</a>
+  </nav>
 
   <!-- SELECTEUR D'ANNÉE -->
   <div class="select-container">
-    <select id="yearSelect" class="cyber-select" onchange="switchYear()">
+    <select id="yearSelect" class="cyber-select" aria-label="Choisir l'année de la session du Brevet">
       <option value="year-2026" selected>Session 2026</option>
       <option value="year-2025">Session 2025</option>
       <option value="year-2024">Session 2024</option>
@@ -370,7 +379,7 @@
   </div>
 
   <!-- Métropole 2026 -->
-  <div id="year-2026" class="year-content active">
+  <div id="year-2026" class="year-content active" role="region" aria-label="Sujets 2026">
     <div class="section-title">Métropole — 2026</div>
     <div class="table-container">
       <table>
@@ -385,22 +394,22 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-sciences-serie-generale-518633.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-sciences-serie-generale-518633.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-francais-grammaire-et-competences-linguistiques-comprehension-et_3.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-francais-grammaire-et-competences-linguistiques-comprehension-et_3.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-histoire-geographie-enseignement-moral-et-civique-serie-generale_2.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-histoire-geographie-enseignement-moral-et-civique-serie-generale_2.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-sciences-serie-generale-518603.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-sciences-serie-generale-518603.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
         </tbody>
       </table>
@@ -408,7 +417,7 @@
   </div>
 
   <!-- Métropole 2025 -->
-  <div id="year-2025" class="year-content">
+  <div id="year-2025" class="year-content" role="region" aria-label="Sujets 2025">
     <div class="section-title">Métropole — 2025</div>
     <div class="table-container">
       <table>
@@ -423,22 +432,22 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genmatmeag1pdf-125624.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genmatmeag1pdf-125624.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genfrqgcme1v1pdf-116892.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genfrqgcme1v1pdf-116892.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genhgemcme1v3pdf-116931.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genhgemcme1v3pdf-116931.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genscmeag1pdf-116934.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genscmeag1pdf-116934.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
         </tbody>
       </table>
@@ -446,7 +455,7 @@
   </div>
 
   <!-- Métropole 2024 -->
-  <div id="year-2024" class="year-content">
+  <div id="year-2024" class="year-content" role="region" aria-label="Sujets 2024">
     <div class="section-title">Métropole — 2024</div>
     <div class="table-container">
       <table>
@@ -461,22 +470,22 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genmatmeag1pdf-110346.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genmatmeag1pdf-110346.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genfrqgcme1v1pdf-110286.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genfrqgcme1v1pdf-110286.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genhgemcme1pdf-110313.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genhgemcme1pdf-110313.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genscmeag1pdf-110355.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genscmeag1pdf-110355.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
         </tbody>
       </table>
@@ -484,7 +493,7 @@
   </div>
 
   <!-- Métropole 2023 -->
-  <div id="year-2023" class="year-content">
+  <div id="year-2023" class="year-content" role="region" aria-label="Sujets 2023">
     <div class="section-title">Métropole — 2023</div>
     <div class="table-container">
       <table>
@@ -499,22 +508,22 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genmatmeag1pdf-102552.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genmatmeag1pdf-102552.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genfrqgcme1pdf-102504.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genfrqgcme1pdf-102504.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genhgemcme1pdf-102522.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genhgemcme1pdf-102522.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genscmeag1pdf-102558.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genscmeag1pdf-102558.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
         </tbody>
       </table>
@@ -522,7 +531,7 @@
   </div>
 
   <!-- Métropole 2022 -->
-  <div id="year-2022" class="year-content">
+  <div id="year-2022" class="year-content" role="region" aria-label="Sujets 2022">
     <div class="section-title">Métropole — 2022</div>
     <div class="table-container">
       <table>
@@ -537,22 +546,22 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/dnb22genmatmeagpdf-96468.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/dnb22genmatmeagpdf-96468.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/22genfrqgcme1pdf-100173.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/22genfrqgcme1pdf-100173.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/dnb22genhgemcme2pdf-96012.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/dnb22genhgemcme2pdf-96012.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/dnb22genscmeagpdf-96474.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/dnb22genscmeagpdf-96474.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
         </tbody>
       </table>
@@ -560,7 +569,7 @@
   </div>
 
   <!-- Métropole 2021 -->
-  <div id="year-2021" class="year-content">
+  <div id="year-2021" class="year-content" role="region" aria-label="Sujets 2021">
     <div class="section-title">Métropole — 2021</div>
     <div class="table-container">
       <table>
@@ -575,22 +584,22 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genmatmeag1pdf-94179.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genmatmeag1pdf-94179.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genfrqgcme1pdf-94215.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genfrqgcme1pdf-94215.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genhgemcme4pdf-94185.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genhgemcme4pdf-94185.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genscmeag1pdf-94191.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genscmeag1pdf-94191.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
         </tbody>
       </table>
@@ -598,7 +607,7 @@
   </div>
 
   <!-- Métropole 2020 -->
-  <div id="year-2020" class="year-content">
+  <div id="year-2020" class="year-content" role="region" aria-label="Sujets 2020">
     <div class="section-title">Métropole — 2020</div>
     <div class="table-container">
       <table>
@@ -613,22 +622,22 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genmatmeag1pdf-94161.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genmatmeag1pdf-94161.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genfrqgcme1pdf-73608.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genfrqgcme1pdf-73608.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genhgemcme1pdf-94173.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genhgemcme1pdf-94173.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genscmeag1pdf-94167.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genscmeag1pdf-94167.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
         </tbody>
       </table>
@@ -636,7 +645,7 @@
   </div>
 
   <!-- Métropole 2019 -->
-  <div id="year-2019" class="year-content">
+  <div id="year-2019" class="year-content" role="region" aria-label="Sujets 2019">
     <div class="section-title">Métropole — 2019</div>
     <div class="table-container">
       <table>
@@ -651,22 +660,22 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genmatmeag1pdf-80235.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genmatmeag1pdf-80235.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genfrqgcme1pdf-80253.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genfrqgcme1pdf-80253.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genhgemcme1pdf-80265.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genhgemcme1pdf-80265.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genscmeag1pdf-80271.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genscmeag1pdf-80271.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
         </tbody>
       </table>
@@ -674,7 +683,7 @@
   </div>
 
   <!-- Métropole 2018 -->
-  <div id="year-2018" class="year-content">
+  <div id="year-2018" class="year-content" role="region" aria-label="Sujets 2018">
     <div class="section-title">Métropole — 2018</div>
     <div class="table-container">
       <table>
@@ -689,22 +698,22 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genmatmeag1pdf-80277.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genmatmeag1pdf-80277.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genfrqgcme1pdf-80295.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genfrqgcme1pdf-80295.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genhgemcme2pdf-80307.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genhgemcme2pdf-80307.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genscmeag1pdf-80313.pdf" target="_blank" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genscmeag1pdf-80313.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
           </tr>
         </tbody>
       </table>
@@ -714,21 +723,34 @@
 </div>
 
 <script>
-function switchYear() {
-  var selectedYearId = document.getElementById("yearSelect").value;
-  var contents = document.getElementsByClassName("year-content");
+  document.addEventListener("DOMContentLoaded", function () {
+    const select = document.getElementById("yearSelect");
+    const contents = document.querySelectorAll(".year-content");
 
-  for (var i = 0; i < contents.length; i++) {
-    contents[i].classList.remove("active");
-  }
+    function switchYear(targetId) {
+      contents.forEach(content => content.classList.remove("active"));
+      const activeElement = document.getElementById(targetId);
+      if (activeElement) {
+        activeElement.classList.add("active");
+      }
+    }
 
-  var activeElement = document.getElementById(selectedYearId);
-  if (activeElement) {
-    activeElement.classList.add("active");
-  }
-}
+    // Détection d'un paramètre d'URL (ex: annales.html?annee=2024)
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramYear = urlParams.get('annee');
+    
+    if (paramYear && document.getElementById(`year-${paramYear}`)) {
+      select.value = `year-${paramYear}`;
+      switchYear(`year-${paramYear}`);
+    } else {
+      switchYear(select.value);
+    }
 
-document.addEventListener("DOMContentLoaded", switchYear);
+    // Écouteur de changement sur le selecteur
+    select.addEventListener("change", function () {
+      switchYear(this.value);
+    });
+  });
 </script>
 
 </body>
