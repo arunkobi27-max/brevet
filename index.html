@@ -414,7 +414,7 @@
     const inputField = document.getElementById("chat-input");
     const chatBox = document.getElementById("chat-box");
     const userText = inputField.value.trim();
-   const apiKey = "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"; // உனது Hugging Face Token-ஐ இங்கு போடவும்
+  const apiKey = document.getElementById("user-api-key").value.trim() || localStorage.getItem("hf_api_key");
 
     if (!userText) return;
     if (!apiKey) {
