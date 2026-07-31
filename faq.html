@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ DNB 2026 - Gamer Edition</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Orbitron:wght@700;900&display=swap');
+
+  :root {
+    --bg-main: #0b0e14;
+    --card-bg: #121824;
+    --card-inner: #1a2332;
+    --neon-cyan: #00f3ff;
+    --neon-magenta: #ff0055;
+    --neon-purple: #b537f2;
+    --neon-yellow: #ffe600;
+    --neon-green: #00ff66;
+    --text-light: #f1f5f9;
+    --text-muted: #94a3b8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-light);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  /* BANNIÈRE EN-TÊTE */
+  .hero-header {
+    width: 100%;
+    max-width: 850px;
+    background: var(--card-bg);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.25);
+    padding: 25px;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    color: var(--neon-cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    border: 1.5px solid var(--neon-cyan);
+    border-radius: 20px;
+    box-shadow: inset 0 0 8px rgba(0, 243, 255, 0.3);
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .hero-title span {
+    color: var(--bg-main);
+    background: var(--neon-cyan);
+    padding: 2px 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 12px var(--neon-cyan);
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* CONTAINER FAQ */
+  .faq-container {
+    width: 100%;
+    max-width: 850px;
+    background: var(--card-bg);
+    border: 2px solid var(--neon-purple);
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(181, 55, 242, 0.25);
+    padding: 25px;
+    text-align: center;
+  }
+
+  .faq-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--neon-yellow);
+    margin: 0 0 20px 0;
+    letter-spacing: 1px;
+  }
+
+  /* BARRE DE RECHERCHE & FILTRES */
+  .search-box {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 14px 18px;
+    background: var(--card-inner);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .search-input:focus {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+  }
+
+  .filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+  }
+
+  .btn-filter {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background: var(--card-inner);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-filter.active {
+    background: transparent;
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+  }
+
+  /* LISTE DES QUESTIONS */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: left;
+  }
+
+  .faq-item {
+    background: var(--card-inner);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .faq-item:hover {
+    border-color: rgba(0, 243, 255, 0.4);
+  }
+
+  .faq-question {
+    padding: 16px 20px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    color: #fff;
+    user-select: none;
+  }
+
+  .faq-question-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .faq-icon {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0, 1, 0, 1), padding 0.3s ease;
+    padding: 0 20px;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    background: rgba(11, 14, 20, 0.5);
+    border-top: 1px solid transparent;
+  }
+
+  .faq-answer ul {
+    margin: 8px 0;
+    padding-left: 20px;
+  }
+
+  .faq-answer li {
+    margin-bottom: 6px;
+  }
+
+  .faq-answer strong {
+    color: var(--text-light);
+  }
+
+  /* ÉTAT ACTIF (OUVERT) */
+  .faq-item.active {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+  }
+
+  .faq-item.active .faq-question {
+    color: var(--neon-cyan);
+  }
+
+  .faq-item.active .faq-icon {
+    transform: rotate(45deg);
+    border-color: var(--neon-magenta);
+    color: var(--neon-magenta);
+    box-shadow: 0 0 8px rgba(255, 0, 85, 0.4);
+  }
+
+  .faq-item.active .faq-answer {
+    max-height: 600px;
+    padding: 16px 20px;
+    border-top: 1px dashed rgba(0, 243, 255, 0.3);
+  }
+
+  /* BADGES CATEGORIES */
+  .badge-tag {
+    font-family: 'Orbitron', sans-serif;
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .tag-notes { background: rgba(181, 55, 242, 0.15); color: var(--neon-purple); border: 1px solid var(--neon-purple); }
+  .tag-orale { background: rgba(0, 255, 102, 0.15); color: var(--neon-green); border: 1px solid var(--neon-green); }
+  .tag-epreuves { background: rgba(255, 0, 85, 0.15); color: var(--neon-magenta); border: 1px solid var(--neon-magenta); }
+  .tag-pratique { background: rgba(0, 243, 255, 0.15); color: var(--neon-cyan); border: 1px solid var(--neon-cyan); }
+  .tag-option { background: rgba(255, 230, 0, 0.15); color: var(--neon-yellow); border: 1px solid var(--neon-yellow); }
+
+  .no-results {
+    display: none;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- En-tête -->
+  <header class="hero-header">
+    <div class="hero-badge">💬 CENTRE D'AIDE ET INFORMATIONS</div>
+    <h1 class="hero-title">Foire Aux <span>Questions</span></h1>
+    <p class="hero-subtitle">
+      Toutes les réponses officielles et pratiques concernant le Brevet DNB, l'oral, le calcul du contrôle continu et l'organisation des épreuves.
+    </p>
+  </header>
+
+  <!-- Container FAQ -->
+  <div class="faq-container">
+    <h2 class="faq-title">❓ BASE DE CONNAISSANCES DNB</h2>
+
+    <!-- Recherche -->
+    <div class="search-box">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Rechercher une question (ex: calcul, matériel, oral, option...)" onkeyup="filterQuestions()">
+    </div>
+
+    <!-- Filtres -->
+    <div class="filter-bar">
+      <button class="btn-filter active" onclick="setCategory('all', event)">Toutes</button>
+      <button class="btn-filter" onclick="setCategory('notes', event)">Calcul & Notes</button>
+      <button class="btn-filter" onclick="setCategory('epreuves', event)">Épreuves Écrites</button>
+      <button class="btn-filter" onclick="setCategory('orale', event)">Épreuve Orale</button>
+      <button class="btn-filter" onclick="setCategory('pratique', event)">Organisation</button>
+    </div>
+
+    <!-- Liste des Questions -->
+    <div class="faq-list" id="faqList">
+
+      <!-- Question 1 -->
+      <div class="faq-item" data-category="notes">
+        <div class="faq-question">
+          <div class="faq-question-text">
+            <span class="badge-tag tag-notes">Calcul</span>
+            <span>Comment est calculée la note globale du Brevet DNB ?</span>
+          </div>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Le Brevet s'évalue au total sur <strong>800 points</strong> :
+          <ul>
+            <li><strong>Contrôle continu (400 points) :</strong> Évaluation de l'acquisition des 8 composantes du socle commun de compétences à la fin de la 3ème.</li>
+            <li><strong>Épreuves finales (400 points) :</strong> 
+              <ul>
+                <li>Français (100 pts)</li>
+                <li>Mathématiques (100 pts)</li>
+                <li>Histoire-Géographie & EMC (50 pts)</li>
+                <li>Sciences : SVT, Physique-Chimie, Techno (50 pts)</li>
+                <li>Épreuve Orale (100 pts)</li>
+              </ul>
+            </li>
+          </ul>
+          Il faut obtenir un minimum de <strong>400 points sur 800</strong> (équivalent à 10/20) pour décrocher le diplôme.
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="faq-item" data-category="notes">
+        <div class="faq-question">
+          <div class="faq-question-text">
+            <span class="badge-tag tag-notes">Mentions</span>
+            <span>Quel est le barème des mentions au DNB ?</span>
+          </div>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Les mentions attribuées en fonction de la totalité de tes points accumulés (sur 800) sont :
+          <ul>
+            <li><strong>Mention Assez Bien (AB) :</strong> À partir de <strong>480 points</strong> (12/20).</li>
+            <li><strong>Mention Bien (B) :</strong> À partir de <strong>560 points</strong> (14/20).</li>
+            <li><strong>Mention Très Bien (TB) :</strong> À partir de <strong>640 points</strong> (16/20).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="faq-item" data-category="orale">
+        <div class="faq-question">
+          <div class="faq-question-text">
+            <span class="badge-tag tag-orale">Oral</span>
+            <span>Comment se déroule et est notée l'Épreuve Orale ?</span>
+          </div>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          L'épreuve orale se déroule généralement entre mai et juin :
+          <ul>
+            <li><strong>Durée :</strong> 15 minutes en individuel (5 min d'exposé + 10 min d'entretien) ou 25 minutes en groupe (10 min d'exposé + 15 min d'entretien).</li>
+            <li><strong>Sujets possibles :</strong> Un projet mené dans le cadre d'un EPI, un parcours éducatif (Avenir, Citoyen, Artistique) ou ton stage d'observation (ex: stage en pharmacie).</li>
+            <li><strong>Notation (100 points) :</strong> 50 points sur la maîtrise de l'expression orale et 50 points sur la maîtrise du sujet présenté.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="faq-item" data-category="epreuves">
+        <div class="faq-question">
+          <div class="faq-question-text">
+            <span class="badge-tag tag-epreuves">Épreuves</span>
+            <span>Quelles sont les matières retenues pour l'épreuve écrite de Sciences ?</span>
+          </div>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          L'épreuve de Sciences (d'une durée de 1h) porte sur <strong>2 matières tirées au sort</strong> chaque année parmi les trois suivantes :
+          <ul>
+            <li>Physique-Chimie</li>
+            <li>Sciences de la Vie et de la Terre (SVT)</li>
+            <li>Technologie</li>
+          </ul>
+          L'annonce officielle des deux matières sélectionnées est publiée au printemps par le Ministère de l'Éducation Nationale.
+        </div>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="faq-item" data-category="option">
+        <div class="faq-question">
+          <div class="faq-question-text">
+            <span class="badge-tag tag-option">Options</span>
+            <span>Comment comptent les options facultatives (Latin, Grec, LCR, Chant) ?</span>
+          </div>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Les enseignements optionnels permettent d'apporter des points bonus au contrôle continu :
+          <ul>
+            <li><strong>10 points bonus :</strong> Si les objectifs d'apprentissage du programme sont atteints.</li>
+            <li><strong>20 points bonus :</strong> Si les objectifs d'apprentissage sont dépassés.</li>
+          </ul>
+          Seuls ces points bonus viennent s'ajouter au total général (sur 800) sans aucun risque de pénaliser la moyenne.
+        </div>
+      </div>
+
+      <!-- Question 6 -->
+      <div class="faq-item" data-category="pratique">
+        <div class="faq-question">
+          <div class="faq-question-text">
+            <span class="badge-tag tag-pratique">Matériel</span>
+            <span>Quel matériel est indispensable pour les épreuves écrites ?</span>
+          </div>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Assure-toi de préparer ton sac la veille des épreuves écrites :
+          <ul>
+            <li><strong>Documents requis :</strong> Convocation officielle sous format papier + Pièce d'identité originale en cours de validité (Carte d'identité ou passeport).</li>
+            <li><strong>Fournitures de base :</strong> Stylos (bleu ou noir), correcteur, crayons de couleur, gomme, règle graduée.</li>
+            <li><strong>Matériel de Géométrie / Maths :</strong> Équerre, rapporteur, compas et calculatrice en mode examen activé.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Question 7 -->
+      <div class="faq-item" data-category="pratique">
+        <div class="faq-question">
+          <div class="faq-question-text">
+            <span class="badge-tag tag-pratique">Urgence</span>
+            <span>Que faire en cas d'absence, de maladie ou de retard le jour J ?</span>
+          </div>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Voici la marche à suivre selon les événements :
+          <ul>
+            <li><strong>Retard :</strong> Un retard de moins de 1 heure peut être toléré de manière exceptionnelle par le chef de centre, mais aucun temps supplémentaire ne sera accordé.</li>
+            <li><strong>Absence médicale :</strong> En cas de force majeure ou maladie dûment justifiée par un certificat médical, tu seras inscrit automatiquement à la <strong>session de remplacement</strong> organisée au mois de septembre.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="no-results" id="noResults">
+      ⚠️ Aucune question trouvée correspondant à ta recherche.
+    </div>
+  </div>
+
+<script>
+  let activeCategory = 'all';
+
+  // Gestion de l'accordéon
+  document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+      const item = question.parentElement;
+      
+      // Referme les autres cartes ouvertes
+      document.querySelectorAll('.faq-item').forEach(otherItem => {
+        if (otherItem !== item) {
+          otherItem.classList.remove('active');
+        }
+      });
+
+      // Bascule la carte sélectionnée
+      item.classList.toggle('active');
+    });
+  });
+
+  // Gestion des filtres par catégorie
+  function setCategory(category, event) {
+    activeCategory = category;
+    
+    document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+    if (event && event.target) {
+      event.target.classList.add('active');
+    }
+
+    filterQuestions();
+  }
+
+  // Filtrage combiné (Recherche + Catégorie)
+  function filterQuestions() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const items = document.querySelectorAll('.faq-item');
+    let visibleCount = 0;
+
+    items.forEach(item => {
+      const categoryMatch = (activeCategory === 'all' || item.getAttribute('data-category') === activeCategory);
+      const textMatch = item.innerText.toLowerCase().includes(query);
+
+      if (categoryMatch && textMatch) {
+        item.style.display = 'block';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
+        item.classList.remove('active');
+      }
+    });
+
+    const noResults = document.getElementById('noResults');
+    if (visibleCount === 0) {
+      noResults.style.display = 'block';
+    } else {
+      noResults.style.display = 'none';
+    }
+  }
+</script>
+
+</body>
+</html>
