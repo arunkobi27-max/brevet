@@ -344,6 +344,244 @@
   background: #33f6ff;
   box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
 }
+  /* --- ESTIMATEUR DE SCORE STYLE --- */
+.calculator-section {
+  width: 100%;
+  max-width: 950px;
+  margin: 30px auto;
+}
+
+.calculator-card {
+  background: var(--card-bg, #111422);
+  border: 1.5px solid rgba(0, 240, 255, 0.3);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+}
+
+.calc-description {
+  color: var(--text-dim, #94a3b8);
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.85rem;
+  color: var(--neon-cyan, #00f0ff);
+  letter-spacing: 0.5px;
+}
+
+.cyber-input, .cyber-select-calc {
+  background: var(--card-inner, #1a2332);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.cyber-input:focus, .cyber-select-calc:focus {
+  border-color: var(--neon-pink, #ff007f);
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
+}
+
+.btn-calc {
+  width: 100%;
+  background: linear-gradient(135deg, var(--neon-cyan, #00f0ff), #0088ff);
+  color: #090a0f;
+  border: none;
+  cursor: pointer;
+  padding: 14px;
+  font-size: 1rem;
+}
+
+.btn-calc:hover {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+.calc-result-box {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  border-left: 4px solid var(--neon-yellow, #ffe600);
+  animation: fadeIn 0.3s ease;
+}
+
+.result-main {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.result-sub {
+  color: var(--text-dim, #94a3b8);
+  font-size: 0.95rem;
+  margin-top: 6px;
+}
+  /* --- STYLES DU CALCULATEUR --- */
+  .calculator-section {
+    width: 100%;
+    max-width: 950px;
+    margin: 30px auto;
+  }
+
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .calc-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .calc-card {
+    background: var(--card-bg, #111422);
+    border: 1.5px solid rgba(0, 240, 255, 0.25);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .card-subtitle {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    color: var(--neon-cyan, #00f0ff);
+    margin: 0 0 18px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .input-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .input-group label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-light, #e2e8f0);
+  }
+
+  .input-group label span {
+    font-size: 0.75rem;
+    color: var(--text-dim, #94a3b8);
+    display: block;
+  }
+
+  .input-group input {
+    width: 90px;
+    background: var(--card-inner, #1a2332);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    padding: 8px;
+    text-align: center;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+
+  .input-group input:focus {
+    border-color: var(--neon-cyan, #00f0ff);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  }
+
+  /* Carte Résultat */
+  .result-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(145deg, #111422, #181d30);
+    border-color: var(--neon-pink, #ff007f);
+  }
+
+  .score-display {
+    font-family: 'Orbitron', sans-serif;
+    margin: 15px 0 5px 0;
+  }
+
+  .score-number {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--neon-cyan, #00f0ff);
+    text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+  }
+
+  .score-max {
+    font-size: 1.5rem;
+    color: var(--text-dim, #94a3b8);
+  }
+
+  .total-points {
+    font-size: 1.1rem;
+    color: var(--text-light, #e2e8f0);
+    margin-bottom: 15px;
+  }
+
+  .mention-badge {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 800;
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .mention-refuse { background: #331010; color: #ff4d4d; border: 1px solid #ff4d4d; }
+  .mention-admis { background: #1a2e1a; color: #4dff88; border: 1px solid #4dff88; }
+  .mention-ab { background: #2b2810; color: #ffe600; border: 1px solid #ffe600; }
+  .mention-bien { background: #2a1033; color: #d946ef; border: 1px solid #d946ef; }
+  .mention-tb { background: #002b3d; color: #00f0ff; border: 1px solid #00f0ff; box-shadow: 0 0 15px #00f0ff; }
+
+  .progress-bar-bg {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon-purple, #9d4edd), var(--neon-cyan, #00f0ff));
+    border-radius: 6px;
+    transition: width 0.4s ease;
+  }
+
+  .status-msg {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text-light, #e2e8f0);
+  }
 </style>
 </head>
 <body>
@@ -426,6 +664,74 @@
     <div class="result-box" id="resultBox">
       <p class="score-display" id="totalPoints">0.00 / 20</p>
       <div class="mention-badge" id="mentionText">SAISIS TES NOTES</div>
+    </div>
+  </div>
+<div class="section-title">🧮 Estimateur de Score DNB (Note /20)</div>
+
+  <div class="calc-grid">
+    <!-- Formulaire d'entrée des notes -->
+    <div class="calc-card">
+      <h3 class="card-subtitle">⚡ Saisis tes points DNB</h3>
+      
+      <div class="input-group">
+        <label for="pts-continu">Contrôle Continu <span>(max 400 pts)</span></label>
+        <input type="number" id="pts-continu" min="0" max="400" placeholder="Ex: 320" value="300">
+      </div>
+
+      <div class="input-group">
+        <label for="pts-francais">Français <span>(max 100 pts)</span></label>
+        <input type="number" id="pts-francais" min="0" max="100" placeholder="Ex: 75" value="70">
+      </div>
+
+      <div class="input-group">
+        <label for="pts-maths">Mathématiques <span>(max 100 pts)</span></label>
+        <input type="number" id="pts-maths" min="0" max="100" placeholder="Ex: 80" value="75">
+      </div>
+
+      <div class="input-group">
+        <label for="pts-histegeo">Histoire-Géo & EMC <span>(max 50 pts)</span></label>
+        <input type="number" id="pts-histegeo" min="0" max="50" placeholder="Ex: 40" value="35">
+      </div>
+
+      <div class="input-group">
+        <label for="pts-sciences">Sciences <span>(max 50 pts)</span></label>
+        <input type="number" id="pts-sciences" min="0" max="50" placeholder="Ex: 35" value="40">
+      </div>
+
+      <div class="input-group">
+        <label for="pts-orale">Épreuve Orale <span>(max 100 pts)</span></label>
+        <input type="number" id="pts-orale" min="0" max="100" placeholder="Ex: 90" value="85">
+      </div>
+    </div>
+
+    <!-- Panneau de Résultats -->
+    <div class="calc-card result-card">
+      <h3 class="card-subtitle">📊 Résultat estimé</h3>
+
+      <!-- Note globale sur 20 -->
+      <div class="score-display">
+        <span class="score-number" id="note-sur-20">15.1</span>
+        <span class="score-max">/ 20</span>
+      </div>
+
+      <div class="total-points">
+        Total : <strong id="total-pts">605</strong> / 800 pts
+      </div>
+
+      <!-- Badge Mention -->
+      <div class="mention-badge mention-bien" id="mention-badge">
+        Mention Bien 🌟
+      </div>
+
+      <!-- Barre de progression -->
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill" style="width: 75.6%;"></div>
+      </div>
+
+      <!-- Status d'admission -->
+      <div class="status-msg" id="status-msg">
+        🚀 Admis avec Succès !
+      </div>
     </div>
   </div>
 
@@ -582,6 +888,72 @@ function genererPagePDF() {
 }
 
 window.onload = restaurerNotes;
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const inputs = [
+      'pts-continu', 'pts-francais', 'pts-maths',
+      'pts-histegeo', 'pts-sciences', 'pts-orale'
+    ];
+
+    function calculateScore() {
+      let totalPts = 0;
+
+      inputs.forEach(id => {
+        const input = document.getElementById(id);
+        let val = parseFloat(input.value) || 0;
+        const max = parseFloat(input.getAttribute('max'));
+
+        if (val < 0) val = 0;
+        if (val > max) { val = max; input.value = max; }
+
+        totalPts += val;
+      });
+
+      // Calcul de la note sur 20
+      const noteSur20 = (totalPts / 800) * 20;
+      const percentage = (totalPts / 800) * 100;
+
+      // Mises à jour DOM
+      document.getElementById('total-pts').textContent = totalPts;
+      document.getElementById('note-sur-20').textContent = noteSur20.toFixed(1);
+      document.getElementById('progress-fill').style.width = percentage + '%';
+
+      // Gestion des mentions et statuts
+      const badge = document.getElementById('mention-badge');
+      const status = document.getElementById('status-msg');
+
+      badge.className = 'mention-badge ';
+
+      if (totalPts < 400) {
+        badge.textContent = 'Ajourné (Pas de mention)';
+        badge.classList.add('mention-refuse');
+        status.textContent = '⚠️ Attention, sous la barre des 400 pts';
+      } else if (totalPts < 480) {
+        badge.textContent = 'Admis (Sans mention)';
+        badge.classList.add('mention-admis');
+        status.textContent = '✅ Brevet Obtenu !';
+      } else if (totalPts < 560) {
+        badge.textContent = 'Mention Assez Bien 🎖️';
+        badge.classList.add('mention-ab');
+        status.textContent = '👍 Beau travail !';
+      } else if (totalPts < 640) {
+        badge.textContent = 'Mention Bien 🌟';
+        badge.classList.add('mention-bien');
+        status.textContent = '🚀 Excellent niveau !';
+      } else {
+        badge.textContent = 'Mention Très Bien 🏆';
+        badge.classList.add('mention-tb');
+        status.textContent = '🔥 Performance Exceptionnelle !';
+      }
+    }
+
+    // Écouteurs d'événements
+    inputs.forEach(id => {
+      document.getElementById(id).addEventListener('input', calculateScore);
+    });
+
+    calculateScore(); // Calcul initial
+  });
 </script>
 
 </body>
