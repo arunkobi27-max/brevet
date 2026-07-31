@@ -674,33 +674,38 @@
       <h3 class="card-subtitle">⚡ Saisis tes points DNB</h3>
       
       <div class="input-group">
-        <label for="pts-continu">Contrôle Continu <span>(max 400 pts)</span></label>
-        <input type="number" id="pts-continu" min="0" max="400" placeholder="Ex: 320" value="300">
+        <label for="pts-continu">Contrôle Continu <span>(max 20 pts)</span></label>
+        <input type="number" id="pts-continu" min="0" max="20" placeholder="Ex: 14,5" value="10">
       </div>
 
       <div class="input-group">
-        <label for="pts-francais">Français <span>(max 100 pts)</span></label>
-        <input type="number" id="pts-francais" min="0" max="100" placeholder="Ex: 75" value="70">
+        <label for="pts-francais">Français <span>(max 20 pts)</span></label>
+        <input type="number" id="pts-francais" min="0" max="20" placeholder="Ex: 12" value="10">
       </div>
 
       <div class="input-group">
-        <label for="pts-maths">Mathématiques <span>(max 100 pts)</span></label>
-        <input type="number" id="pts-maths" min="0" max="100" placeholder="Ex: 80" value="75">
+        <label for="pts-maths">Mathématiques <span>(max 20 pts)</span></label>
+        <input type="number" id="pts-maths" min="0" max="20" placeholder="Ex: 15" value="10">
       </div>
 
       <div class="input-group">
-        <label for="pts-histegeo">Histoire-Géo & EMC <span>(max 50 pts)</span></label>
-        <input type="number" id="pts-histegeo" min="0" max="50" placeholder="Ex: 40" value="35">
+        <label for="pts-histegeo">Histoire-Géo <span>(max 20 pts)</span></label>
+        <input type="number" id="pts-histegeo" min="0" max="20" placeholder="Ex: 13,5" value="10">
       </div>
 
       <div class="input-group">
-        <label for="pts-sciences">Sciences <span>(max 50 pts)</span></label>
-        <input type="number" id="pts-sciences" min="0" max="50" placeholder="Ex: 35" value="40">
+        <label for="pts-histegeo">EMC <span>(max 20 pts)</span></label>
+        <input type="number" id="pts-histegeo" min="0" max="20" placeholder="Ex: 16" value="10">
       </div>
 
       <div class="input-group">
-        <label for="pts-orale">Épreuve Orale <span>(max 100 pts)</span></label>
-        <input type="number" id="pts-orale" min="0" max="100" placeholder="Ex: 90" value="85">
+        <label for="pts-sciences">Sciences <span>(max 20 pts)</span></label>
+        <input type="number" id="pts-sciences" min="0" max="20" placeholder="Ex: 14" value="10">
+      </div>
+
+      <div class="input-group">
+        <label for="pts-orale">Épreuve Orale <span>(max 20 pts)</span></label>
+        <input type="number" id="pts-orale" min="0" max="20" placeholder="Ex: 18" value="10">
       </div>
     </div>
 
@@ -710,12 +715,12 @@
 
       <!-- Note globale sur 20 -->
       <div class="score-display">
-        <span class="score-number" id="note-sur-20">15.1</span>
+        <span class="score-number" id="note-sur-20">10</span>
         <span class="score-max">/ 20</span>
       </div>
 
       <div class="total-points">
-        Total : <strong id="total-pts">605</strong> / 800 pts
+        Total : <strong id="total-pts">10</strong> / 20 pts
       </div>
 
       <!-- Badge Mention -->
@@ -924,19 +929,19 @@ window.onload = restaurerNotes;
 
       badge.className = 'mention-badge ';
 
-      if (totalPts < 400) {
+      if (totalPts < 10) {
         badge.textContent = 'Ajourné (Pas de mention)';
         badge.classList.add('mention-refuse');
-        status.textContent = '⚠️ Attention, sous la barre des 400 pts';
-      } else if (totalPts < 480) {
+        status.textContent = '⚠️ Attention, sous la barre des 10 pts';
+      } else if (totalPts < 12) {
         badge.textContent = 'Admis (Sans mention)';
         badge.classList.add('mention-admis');
         status.textContent = '✅ Brevet Obtenu !';
-      } else if (totalPts < 560) {
+      } else if (totalPts < 14) {
         badge.textContent = 'Mention Assez Bien 🎖️';
         badge.classList.add('mention-ab');
         status.textContent = '👍 Beau travail !';
-      } else if (totalPts < 640) {
+      } else if (totalPts < 16) {
         badge.textContent = 'Mention Bien 🌟';
         badge.classList.add('mention-bien');
         status.textContent = '🚀 Excellent niveau !';
