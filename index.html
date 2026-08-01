@@ -266,26 +266,35 @@
     .chat-header h3 { margin: 0; font-family: 'Orbitron', sans-serif; font-size: 0.95rem; color: #fff; }
     .chat-header h3 span { color: #00ff88; font-size: 0.75rem; }
     .status-dot { width: 10px; height: 10px; background-color: #00ff88; border-radius: 50%; box-shadow: 0 0 8px #00ff88; }
-    .api-key-box { display: flex; gap: 6px; }
-    .api-key-box input { background: #0a0d18; border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 4px; color: #fff; padding: 5px 10px; font-size: 0.8rem; outline: none; width: 180px; }
-    .api-key-box button { background: #00f0ff; color: #000; border: none; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
     .chat-box { flex: 1; padding: 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
     .message { max-width: 80%; padding: 12px 16px; border-radius: 8px; font-size: 0.95rem; line-height: 1.5; }
     .ai-message { background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.3); color: #e2e8f0; align-self: flex-start; }
     .user-message { background: rgba(255, 0, 127, 0.15); border: 1px solid rgba(255, 0, 127, 0.4); color: #fff; align-self: flex-end; }
+    
+    /* Generated Image Style */
+    .generated-img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 8px;
+      margin-top: 10px;
+      border: 1px solid #00f0ff;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+      display: block;
+    }
+
     .chat-input-area { display: flex; padding: 12px; background: #181d30; border-top: 1px solid rgba(255, 255, 255, 0.05); gap: 10px; }
     .chat-input-area input { flex: 1; background: #1a2332; border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 6px; padding: 10px 14px; color: #fff; outline: none; }
     .chat-input-area button { background: #ff007f; color: #fff; border: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; cursor: pointer; }
-  .status-badge {
-  background: rgba(0, 240, 255, 0.1);
-  border: 1px solid #00f0ff;
-  border-radius: 6px;
-  padding: 4px 10px;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.75rem;
-  color: #00f0ff;
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
-}
+    .status-badge {
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid #00f0ff;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      color: #00f0ff;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+    }
   </style>
   <script src="https://js.puter.com/v2/"></script>
 </head>
@@ -367,37 +376,38 @@
       </div>
     </div>
 
-    <!-- --- CYBERPUNK AI STUDY ASSISTANT (PUTER FREE EDITION) --- -->
-<section class="ai-chatbot-section">
-  <div class="chat-container">
-    <div class="chat-header">
-      <div class="header-left">
-        <span class="status-dot"></span>
-        <h3>CYBER-ASSISTANT DNB <span>(En ligne)</span></h3>
+    <!-- --- CYBERPUNK DUAL AI ASSISTANT (TEXT & IMAGE) --- -->
+    <section class="ai-chatbot-section">
+      <div class="chat-container">
+        <div class="chat-header">
+          <div class="header-left">
+            <span class="status-dot"></span>
+            <h3>CYBER-ASSISTANT DNB <span>(En ligne)</span></h3>
+          </div>
+          <div class="status-badge">
+            <span>🤖 ArunKobi AI (Text & Image)</span>
+          </div>
+        </div>
+        
+        <div class="chat-box" id="chat-box">
+          <div class="message ai-message">
+            👋 <strong>Bonjour !</strong> Je suis ton assistant virtuel 2-en-1 :<br>
+            • Pose-moi des <strong>questions</strong> sur le Brevet 📚<br>
+            • Demande-moi de <strong>générer une image</strong> (ex: <em>"image d'une cellule"</em> ou <em>"dessine un chat"</em>) 🎨
+          </div>
+        </div>
+        
+        <div class="chat-input-area">
+          <input type="text" id="chat-input" placeholder="Pose une question ou demande une image..." />
+          <button id="send-btn" onclick="handleAiRequest()">Envoyer ⚡</button>
+        </div>
       </div>
-      <!-- Token பெட்டி தேவையில்லை என்பதால் Badge ஆக மாற்றப்பட்டுள்ளது -->
-      <div class="status-badge">
-        <span>🤖 ArunKobi AI</span>
-      </div>
-    </div>
-    
-    <div class="chat-box" id="chat-box">
-      <div class="message ai-message">
-        👋 <strong>Bonjour !</strong> Je suis ton assistant virtuel pour le Brevet. Pose-moi toutes tes questions sur les Maths, le Français, l'Histoire-Géo ou les Sciences !
-      </div>
-    </div>
-    
-    <div class="chat-input-area">
-      <input type="text" id="chat-input" placeholder="Pose ta question sur le Brevet ici..." />
-      <button id="send-btn" onclick="sendMessage()">Envoyer ⚡</button>
-    </div>
-  </div>
-</section>
+    </section>
 
   </div>
 
   <script>
-  async function sendMessage() {
+  async function handleAiRequest() {
     const inputField = document.getElementById("chat-input");
     const chatBox = document.getElementById("chat-box");
     const userText = inputField.value.trim();
@@ -414,14 +424,38 @@
     chatBox.innerHTML += `<div class="message ai-message" id="${loadingId}">Réflexion en cours... ⚡</div>`;
     chatBox.scrollTop = chatBox.scrollHeight;
 
+    const lowerText = userText.toLowerCase();
+
+    // Image Request Keywords Checker
+    const isImageRequest = 
+      lowerText.includes("image") || 
+      lowerText.includes("photo") || 
+      lowerText.includes("dessine") || 
+      lowerText.includes("génère une image") ||
+      lowerText.includes("draw") ||
+      lowerText.includes("picture");
+
     try {
-      // 3. Puter.js Free AI Call (No API Keys Required!)
-      const prompt = `Tu es un assistant IA pédagogique expert du Brevet des collèges (DNB) en France. Réponds de manière claire, dynamique et bienveillante en français à la question suivante : ${userText}`;
-      
-      const response = await puter.ai.chat(prompt, { model: 'gpt-4o-mini' });
-      
-      let aiResponse = response.toString();
-      document.getElementById(loadingId).innerHTML = aiResponse.replace(/\n/g, '<br>');
+      if (isImageRequest) {
+        // --- 🎨 IMAGE GENERATION ---
+        document.getElementById(loadingId).innerText = "Génération de l'image en cours... 🎨⚡";
+        
+        const imageElement = await puter.ai.txt2img(userText);
+        const loadingMessage = document.getElementById(loadingId);
+        
+        loadingMessage.innerHTML = `Voici votre image :<br>`;
+        imageElement.classList.add("generated-img");
+        loadingMessage.appendChild(imageElement);
+
+      } else {
+        // --- 📚 TEXT QUESTION ANSWERING ---
+        const prompt = `Tu es un assistant IA pédagogique expert du Brevet des collèges (DNB) en France. Réponds de manière claire, dynamique et bienveillante en français à la question suivante : ${userText}`;
+        
+        const response = await puter.ai.chat(prompt, { model: 'gpt-4o-mini' });
+        let aiResponse = response.toString();
+        
+        document.getElementById(loadingId).innerHTML = aiResponse.replace(/\n/g, '<br>');
+      }
 
     } catch (error) {
       document.getElementById(loadingId).innerText = "❌ Une erreur s'est produite. Réessaie dans un instant.";
@@ -431,8 +465,8 @@
   }
 
   document.getElementById("chat-input").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") sendMessage();
+    if (e.key === "Enter") handleAiRequest();
   });
-</script>
+  </script>
 </body>
 </html>
