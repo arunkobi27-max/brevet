@@ -102,51 +102,67 @@
     }
 
     /* --- BARRE DE NAVIGATION CYBERPUNK --- */
-    .nav-container {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      width: 100%;
-      margin: 0 auto 25px auto;
-      padding: 10px 12px;
-      background: var(--card-bg);
-      border: 1.5px solid rgba(0, 240, 255, 0.3);
-      border-radius: 12px;
-       overflow-x: auto;
-      white-space: nowrap;
-    }
+ .nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px; /* பட்டன்களுக்கு இடையிலான இடைவெளியைக் குறைக்கவும் (10px -> 6px) */
+  width: 100%;
+  margin: 0 auto 30px auto;
+  padding: 10px 12px;
+  background: var(--card-bg);
+  border: 1.5px solid rgba(0, 240, 255, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+  box-sizing: border-box;
 
-    .nav-btn {
-      font-family: 'Orbitron', system-ui, sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-decoration: none;
-      color: var(--text-muted);
-      background: #1a2332;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      transition: all 0.25s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      white-space: nowrap;
-    }
+  /* 👇 இந்த 2 வரிகளைச் சேர்க்கவும் */
+  flex-wrap: nowrap;       /* அடுத்த வரிக்குச் செல்லாமல் ஒரே வரியில் வைக்கும் */
+  overflow-x: auto;        /* ஸ்கிரீன் சிறியதாக இருந்தால் Scroll செய்யும் வசதி */
+}
 
-    .nav-btn:hover {
-      color: var(--neon-cyan, #00f3ff);
-      border-color: var(--neon-cyan, #00f3ff);
-      background: rgba(0, 243, 255, 0.08);
-      box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
-      transform: translateY(-2px);
-    }
+  .nav-btn {
+  font-family: 'Orbitron', system-ui, sans-serif;
+  font-size: 0.72rem; /* ஃபான்ட் அளவைச் சிறிதாக்கவும் (0.8rem -> 0.72rem) */
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-muted);
+  background: #1a2332;
+  padding: 8px 10px;  /* Padding-ஐக் குறைக்கவும் (10px 14px -> 8px 10px) */
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 
-    .nav-btn.active, .nav-btn.primary {
-      color: #0b0e14;
-      background: var(--neon-cyan, #00f3ff);
-      border-color: var(--neon-cyan, #00f3ff);
-      box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
-    }
+  /* 👇 இந்த வரியைச் சேர்க்கவும் */
+  white-space: nowrap; /* பட்டனுക്കുള്ളில் உள்ள உரை மடங்காமல் தடுக்கும் */
+}
+
+/* Effet au survol (Hover) */
+.nav-btn:hover {
+  color: var(--neon-cyan, #00f3ff);
+  border-color: var(--neon-cyan, #00f3ff);
+  background: rgba(0, 243, 255, 0.08);
+  box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Page active */
+.nav-btn.active,
+.nav-btn.primary {
+  color: #0b0e14;
+  background: var(--neon-cyan, #00f3ff);
+  border-color: var(--neon-cyan, #00f3ff);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+}
+
+.nav-btn.active:hover,
+.nav-btn.primary:hover {
+  background: #33f6ff;
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
+}
 
     /* --- STATS GRID --- */
     .stats-grid {
