@@ -3,27 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guide d'Orientation Post-3ème & Baccalauréat - Cyber Edition</title>
+  <title>Guide d'Orientation Post-3ème & Baccalauréat — Cyber Edition</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Orbitron:wght@700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Orbitron:wght@700;800;900&display=swap');
 
     :root {
       --bg-dark: #090d16;
       --card-bg: #111827;
+      --card-inner: #162032;
       --card-border: #1f293d;
       --neon-cyan: #00f0ff;
       --neon-pink: #ff007f;
       --neon-purple: #8a2be2;
       --neon-green: #00ff88;
+      --neon-yellow: #ffe600;
       --text-main: #f3f4f6;
       --text-muted: #9ca3af;
       --glow-cyan: 0 0 15px rgba(0, 240, 255, 0.4);
       --glow-pink: 0 0 15px rgba(255, 0, 127, 0.4);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -35,6 +35,9 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(138, 43, 226, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(0, 240, 255, 0.08) 0%, transparent 50%);
     }
 
     .container {
@@ -83,8 +86,9 @@
     }
 
     .hero-title {
-      font-size: 2.3rem;
-      font-weight: 800;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
       margin: 0 0 12px 0;
       line-height: 1.2;
       text-transform: uppercase;
@@ -105,43 +109,38 @@
     }
 
     /* --- NAVIGATION BAR --- */
-     .nav-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px; /* பட்டன்களுக்கு இடையிலான இடைவெளியைக் குறைக்கவும் (10px -> 6px) */
-  width: 100%;
-  margin: 0 auto 30px auto;
-  padding: 10px 12px;
-  background: var(--card-bg);
-  border: 1.5px solid rgba(0, 240, 255, 0.3);
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
-  box-sizing: border-box;
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+      margin: 0 auto 30px auto;
+      padding: 10px 12px;
+      background: var(--card-bg);
+      border: 1.5px solid rgba(0, 240, 255, 0.3);
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
 
-  /* 👇 இந்த 2 வரிகளைச் சேர்க்கவும் */
-  flex-wrap: nowrap;       /* அடுத்த வரிக்குச் செல்லாமல் ஒரே வரியில் வைக்கும் */
-  overflow-x: auto;        /* ஸ்கிரீன் சிறியதாக இருந்தால் Scroll செய்யும் வசதி */
-}
-
-  .nav-btn {
-  font-family: 'Orbitron', system-ui, sans-serif;
-  font-size: 0.72rem; /* ஃபான்ட் அளவைச் சிறிதாக்கவும் (0.8rem -> 0.72rem) */
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--text-muted);
-  background: #1a2332;
-  padding: 8px 10px;  /* Padding-ஐக் குறைக்கவும் (10px 14px -> 8px 10px) */
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-
-  /* 👇 இந்த வரியைச் சேர்க்கவும் */
-  white-space: nowrap; /* பட்டனுക്കുള്ളில் உள்ள உரை மடங்காமல் தடுக்கும் */
-}
+    .nav-btn {
+      font-family: 'Orbitron', system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text-muted);
+      background: #1a2332;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
 
     .nav-btn:hover {
       color: var(--neon-cyan);
@@ -160,7 +159,8 @@
 
     /* --- SECTION TITLE --- */
     .section-title {
-      font-size: 1.4rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
       font-weight: 800;
       margin: 35px 0 20px 0;
       text-transform: uppercase;
@@ -246,7 +246,7 @@
       font-weight: bold;
     }
 
-    /* --- SPECIALTIES EXPLORER (BAC GÉNÉRAL) --- */
+    /* --- SPECIALTIES EXPLORER --- */
     .spe-container {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -263,6 +263,8 @@
     }
 
     .spe-tab-btn {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.78rem;
       background: #1a2332;
       color: var(--text-muted);
       border: 1px solid var(--card-border);
@@ -287,7 +289,7 @@
     }
 
     .spe-box {
-      background: #0d1322;
+      background: var(--card-inner);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 10px;
       padding: 16px;
@@ -322,15 +324,16 @@
       color: #a7f3d0;
       padding: 3px 8px;
       border-radius: 4px;
+      border: 1px solid rgba(167, 243, 208, 0.2);
     }
 
-    /* --- CAREER & STUDY PATHWAYS (MÉTIEURS & ÉTUDES) --- */
+    /* --- CAREER & STUDY PATHWAYS --- */
     .pathway-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 14px;
       padding: 22px;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -351,10 +354,11 @@
     }
 
     .pathway-recommended {
+      font-family: 'Orbitron', sans-serif;
       background: rgba(0, 255, 136, 0.15);
       color: var(--neon-green);
       border: 1px solid var(--neon-green);
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       padding: 4px 10px;
       border-radius: 6px;
       font-weight: 700;
@@ -366,7 +370,39 @@
       line-height: 1.5;
     }
 
-    /* --- INTERACTIVE SIMULATOR (JS QUIZ) --- */
+    /* BOUTONS DE REDIRECTION RAPIDE */
+    .action-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    .quick-link-btn {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--neon-cyan);
+      border: 1px solid var(--neon-cyan);
+      background: rgba(0, 240, 255, 0.05);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .quick-link-btn:hover {
+      background: var(--neon-cyan);
+      color: #090d16;
+      box-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    /* --- INTERACTIVE SIMULATOR --- */
     .simulator-card {
       background: linear-gradient(135deg, #111827 0%, #161f33 100%);
       border: 1.5px solid var(--neon-purple);
@@ -459,8 +495,6 @@
       <a href="cours.html" class="nav-btn">📖 Cours DNB</a>
       <a href="orientation.html" class="nav-btn active">🎓 Orientation & Bac</a>
       <a href="faq.html" class="nav-btn">❓ FAQ DNB</a>
-      
-      
     </nav>
 
     <!-- SECTION 1: VOIES POST-3ÈME -->
@@ -489,7 +523,7 @@
           <h3>Lycée Technologique (Bac Techno)</h3>
           <p>Allie enseignements généraux et enseignements technologiques appliqués à un secteur d'activité précis (Gestion, Industrie, Santé, Design).</p>
           <ul class="track-features">
-            <li>Séries spécialisées : STMG, STI2D, ST2S, STL, STD2A...</li>
+            <li>Séries spécialisées : STI2D, ST2S, STMG, STL, STD2A...</li>
             <li>Approche concrète via des projets et travaux en laboratoire</li>
             <li>Accès privilégié aux BTS, BUT (ex-DUT) et diplômes Bac+3/5</li>
           </ul>
@@ -522,10 +556,10 @@
       </p>
       
       <div class="spe-tabs">
-        <button class="spe-tab-btn active" onclick="filterSpe('all')">Toutes les spécialités</button>
-        <button class="spe-tab-btn" onclick="filterSpe('sciences')">🔬 Sciences & Tech</button>
-        <button class="spe-tab-btn" onclick="filterSpe('eco')">📊 Éco & Humain</button>
-        <button class="spe-tab-btn" onclick="filterSpe('lettres')">📖 Lettres & Langues</button>
+        <button class="spe-tab-btn active" onclick="filterSpe('all', event)">Toutes les spécialités</button>
+        <button class="spe-tab-btn" onclick="filterSpe('sciences', event)">🔬 Sciences & Tech</button>
+        <button class="spe-tab-btn" onclick="filterSpe('eco', event)">📊 Éco & Humain</button>
+        <button class="spe-tab-btn" onclick="filterSpe('lettres', event)">📖 Lettres & Langues</button>
       </div>
 
       <div class="spe-grid" id="spe-grid">
@@ -552,6 +586,12 @@
           <div class="spe-title">🧬 Sciences de la Vie et de la Terre (SVT)</div>
           <div class="spe-desc">Génétique, corps humain, santé, géologie, enjeux environnementaux et climat.</div>
           <span class="spe-tag">Santé / PASS, Vétérinaire, Biologie</span>
+        </div>
+        <!-- SI -->
+        <div class="spe-box sciences">
+          <div class="spe-title">⚙️ Sciences de l'Ingénieur (SI)</div>
+          <div class="spe-desc">Conception de systèmes mécaniques, électroniques et numériques. Modélisation et innovation technologique.</div>
+          <span class="spe-tag">Ingénierie, Robotique, Mécanique</span>
         </div>
         <!-- SES -->
         <div class="spe-box eco">
@@ -586,13 +626,18 @@
     <!-- Santé / Médecine -->
     <div class="pathway-card">
       <div class="pathway-header">
-        <div class="pathway-title">🩺 Études de Santé & Médecine (PASS / LAS)</div>
+        <div class="pathway-title">🩺 Études de Santé & Médecine (PASS / LAS / ST2S)</div>
         <span class="pathway-recommended">Parcours Santé</span>
       </div>
       <div class="pathway-details">
-        <strong>Spécialités conseillées en 1ère :</strong> SVT + Physique-Chimie + Mathématiques.<br>
+        <strong>Spécialités conseillées en 1ère Général :</strong> SVT + Physique-Chimie + Mathématiques.<br>
         <strong>Spécialités gardées en Terminale :</strong> SVT + Physique-Chimie (avec l'option <em>Maths Complémentaires</em>).<br>
-        <strong>Poursuite d'études :</strong> Parcours Accès Santé Spécifique (PASS) ou Licence Accès Santé (LAS) à l'Université pour devenir Médecin généraliste, Pharmacien, Dentiste ou Kinésithérapeute.
+        <strong>Option Technologique :</strong> Bac ST2S (Sciences et Technologies de la Santé et du Social) pour le paramédical.<br>
+        <strong>Poursuite d'études :</strong> PASS / LAS à l'Université pour devenir Médecin généraliste, Pharmacien, Dentiste, ou IFSI pour Infirmier(e).
+      </div>
+      <div class="action-links">
+        <a href="cours.html" class="quick-link-btn">📖 Réviser les cours SVT / Chimie</a>
+        <a href="faq.html" class="quick-link-btn">❓ Questions sur l'Oral DNB</a>
       </div>
     </div>
 
@@ -603,9 +648,13 @@
         <span class="pathway-recommended">Parcours Tech</span>
       </div>
       <div class="pathway-details">
-        <strong>Spécialités conseillées en 1ère :</strong> NSI + Mathématiques + Physique-Chimie (ou SES).<br>
-        <strong>Spécialités gardées en Terminale :</strong> NSI + Mathématiques (ou Bac Techno STI2D Sin).<br>
-        <strong>Poursuite d'études :</strong> BUT Informatique, Écoles d'Ingénieurs, Licences Informatique, BTS SIO.
+        <strong>Spécialités conseillées en 1ère :</strong> NSI + Mathématiques + Physique-Chimie (ou SI).<br>
+        <strong>Spécialités gardées en Terminale :</strong> NSI + Mathématiques (ou Bac Techno STI2D SIN).<br>
+        <strong>Poursuite d'études :</strong> BUT Informatique, Écoles d'Ingénieurs, Licences Informatique, BTS SIO / CIEL.
+      </div>
+      <div class="action-links">
+        <a href="cours.html" class="quick-link-btn">📖 Cours & Programmation</a>
+        <a href="quiz.html" class="quick-link-btn">⚡ Tester mes connaissances</a>
       </div>
     </div>
 
@@ -619,6 +668,9 @@
         <strong>Spécialités conseillées en 1ère :</strong> SES + Mathématiques + HGGSP.<br>
         <strong>En Lycée Technologique :</strong> Bac STMG (Gestion-Finance, Mercatique, Ressources Humaines).<br>
         <strong>Poursuite d'études :</strong> Écoles de Commerce, BUT Techniques de Commercialisation, Licences Droit/Éco.
+      </div>
+      <div class="action-links">
+        <a href="calculateur.html" class="quick-link-btn">🧮 Simuler mes notes DNB</a>
       </div>
     </div>
 
@@ -649,11 +701,13 @@
   </div>
 
   <script>
-    // Filtering Specialties
-    function filterSpe(category) {
+    // Filtrage des Spécialités
+    function filterSpe(category, event) {
       const buttons = document.querySelectorAll('.spe-tab-btn');
       buttons.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+      if (event && event.target) {
+        event.target.classList.add('active');
+      }
 
       const boxes = document.querySelectorAll('.spe-box');
       boxes.forEach(box => {
@@ -669,7 +723,7 @@
       });
     }
 
-    // Interactive Orientation Simulator
+    // Simulateur interactif
     function runSim(choice) {
       document.getElementById('sim-step-1').style.display = 'none';
       const resultDiv = document.getElementById('sim-result');
@@ -679,17 +733,17 @@
       resultDiv.style.display = 'block';
 
       if (choice === 'health') {
-        resultTitle.innerText = "🎯 Profil Recommandé : Voie Générale (Option Santé / Médecine)";
-        resultDesc.innerHTML = "<strong>Voie conseillée :</strong> Lycée Général.<br><strong>Spécialités recommandées en 1ère :</strong> SVT + Physique-Chimie + Mathématiques.<br><strong>Perspectives :</strong> Préparation optimale au concours PASS/LAS pour devenir Médecin, Pharmacien ou Kinésithérapeute.";
+        resultTitle.innerText = "🎯 Profil Recommandé : Voie Générale (Santé / Médecine) ou Bac ST2S";
+        resultDesc.innerHTML = "<strong>Voie conseillée :</strong> Lycée Général ou Lycée Technologique ST2S.<br><strong>Spécialités recommandées en 1ère :</strong> SVT + Physique-Chimie + Mathématiques.<br><strong>Perspectives :</strong> Préparation optimale au parcours PASS/LAS pour devenir Médecin, Pharmacien, Dentiste ou études en IFSI (Infirmier).";
       } else if (choice === 'tech') {
-        resultTitle.innerText = "🎯 Profil Recommandé : Voie Générale (Spé NSI/Maths) ou Bac Techno STI2D";
-        resultDesc.innerHTML = "<strong>Voie conseillée :</strong> Lycée Général ou Technologique STI2D.<br><strong>Spécialités recommandées :</strong> NSI (Informatique) + Mathématiques + Physique-Chimie.<br><strong>Perspectives :</strong> Écoles d'ingénieurs, BUT Informatique, Développement Web & Cyber-sécurité.";
+        resultTitle.innerText = "🎯 Profil Recommandé : Voie Générale (NSI/Maths) ou Bac Techno STI2D";
+        resultDesc.innerHTML = "<strong>Voie conseillée :</strong> Lycée Général ou Technologique STI2D (SIN).<br><strong>Spécialités recommandées :</strong> NSI (Informatique) + Mathématiques + Physique-Chimie (ou SI).<br><strong>Perspectives :</strong> Écoles d'ingénieurs, BUT Informatique, Développement Web & Cyber-sécurité.";
       } else if (choice === 'business') {
         resultTitle.innerText = "🎯 Profil Recommandé : Voie Générale (SES/HGGSP) ou Bac Techno STMG";
         resultDesc.innerHTML = "<strong>Voie conseillée :</strong> Lycée Général ou Lycée Technologique STMG.<br><strong>Spécialités recommandées :</strong> SES + Mathématiques + HGGSP.<br><strong>Perspectives :</strong> Écoles de commerce, Droit, Management, Commerce international.";
       } else if (choice === 'practical') {
         resultTitle.innerText = "🎯 Profil Recommandé : Voie Professionnelle (Bac Pro / Apprentissage)";
-        resultDesc.innerHTML = "<strong>Voie conseillée :</strong> Bac Professionnel en 3 ans ou CAP en 2 ans.<br><strong>Atouts :</strong> Apprentissage sur le terrain, stages en entreprise (PFMP) et insertion professionnelle rapide ou BTS.";
+        resultDesc.innerHTML = "<strong>Voie conseillée :</strong> Bac Professionnel en 3 ans ou CAP en 2 ans.<br><strong>Atouts :</strong> Apprentissage sur le terrain, stages en entreprise (PFMP) et insertion professionnelle rapide ou poursuite d'études en BTS.";
       }
     }
 
