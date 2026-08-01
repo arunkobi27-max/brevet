@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FAQ DNB 2026 - Gamer Edition</title>
+<title>FAQ DNB 2026 — Cyberpunk Edition</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Orbitron:wght@700;900&display=swap');
 
@@ -32,16 +32,19 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(181, 55, 242, 0.12) 0%, transparent 60%),
+      radial-gradient(circle at 80% 80%, rgba(0, 243, 255, 0.08) 0%, transparent 50%);
   }
 
   /* BANNIÈRE EN-TÊTE */
   .hero-header {
     width: 100%;
-    max-width: 850px;
+    max-width: 900px;
     background: var(--card-bg);
-    border: 2px solid var(--neon-cyan);
+    border: 2px solid var(--neon-purple);
     border-radius: 16px;
-    box-shadow: 0 0 20px rgba(0, 243, 255, 0.25);
+    box-shadow: 0 0 20px rgba(181, 55, 242, 0.25);
     padding: 25px;
     text-align: center;
     margin-bottom: 25px;
@@ -49,16 +52,17 @@
 
   .hero-badge {
     display: inline-block;
-    color: var(--neon-cyan);
+    color: var(--neon-purple);
     font-family: 'Orbitron', sans-serif;
     font-weight: 700;
     font-size: 0.85rem;
     padding: 6px 14px;
-    border: 1.5px solid var(--neon-cyan);
+    border: 1.5px solid var(--neon-purple);
     border-radius: 20px;
-    box-shadow: inset 0 0 8px rgba(0, 243, 255, 0.3);
+    box-shadow: inset 0 0 8px rgba(181, 55, 242, 0.3);
     margin-bottom: 12px;
     letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
   .hero-title {
@@ -72,42 +76,91 @@
 
   .hero-title span {
     color: var(--bg-main);
-    background: var(--neon-cyan);
+    background: var(--neon-purple);
     padding: 2px 10px;
     border-radius: 4px;
-    box-shadow: 0 0 12px var(--neon-cyan);
+    box-shadow: 0 0 12px var(--neon-purple);
   }
 
   .hero-subtitle {
     font-size: 0.95rem;
     color: var(--text-muted);
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
     line-height: 1.5;
+  }
+
+  /* BARRE DE NAVIGATION */
+  .nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 30px auto;
+    padding: 10px 12px;
+    background: var(--card-bg);
+    border: 1.5px solid rgba(0, 243, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .nav-btn {
+    font-family: 'Orbitron', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text-muted);
+    background: #1a2332;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  .nav-btn:hover {
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    background: rgba(0, 243, 255, 0.08);
+    box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .nav-btn.active {
+    color: #0b0e14;
+    background: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
   }
 
   /* CONTAINER FAQ */
   .faq-container {
     width: 100%;
-    max-width: 850px;
+    max-width: 900px;
     background: var(--card-bg);
-    border: 2px solid var(--neon-purple);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 16px;
-    box-shadow: 0 0 20px rgba(181, 55, 242, 0.25);
     padding: 25px;
-    text-align: center;
   }
 
   .faq-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 900;
     color: var(--neon-yellow);
     margin: 0 0 20px 0;
+    text-align: center;
     letter-spacing: 1px;
   }
 
-  /* BARRE DE RECHERCHE & FILTRES */
+  /* RECHERCHE ET FILTRES */
   .search-box {
     width: 100%;
     margin-bottom: 20px;
@@ -152,11 +205,11 @@
     transition: all 0.2s;
   }
 
-  .btn-filter.active {
+  .btn-filter.active, .btn-filter:hover {
     background: transparent;
     color: var(--neon-cyan);
     border-color: var(--neon-cyan);
-    box-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
   }
 
   /* LISTE DES QUESTIONS */
@@ -164,12 +217,11 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
-    text-align: left;
   }
 
   .faq-item {
     background: var(--card-inner);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 10px;
     overflow: hidden;
     transition: all 0.2s ease;
@@ -182,7 +234,7 @@
   .faq-question {
     padding: 16px 20px;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.98rem;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -208,7 +260,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
     border: 1px solid var(--neon-cyan);
     color: var(--neon-cyan);
     border-radius: 6px;
@@ -225,7 +276,6 @@
     line-height: 1.6;
     color: var(--text-muted);
     background: rgba(11, 14, 20, 0.5);
-    border-top: 1px solid transparent;
   }
 
   .faq-answer ul {
@@ -259,7 +309,7 @@
   }
 
   .faq-item.active .faq-answer {
-    max-height: 600px;
+    max-height: 650px;
     padding: 16px 20px;
     border-top: 1px dashed rgba(0, 243, 255, 0.3);
   }
@@ -281,106 +331,78 @@
   .tag-pratique { background: rgba(0, 243, 255, 0.15); color: var(--neon-cyan); border: 1px solid var(--neon-cyan); }
   .tag-option { background: rgba(255, 230, 0, 0.15); color: var(--neon-yellow); border: 1px solid var(--neon-yellow); }
 
+  /* BOUTONS D'ACTION DIRECTE DANS LA FAQ */
+  .faq-action-box {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dotted rgba(255, 255, 255, 0.1);
+  }
+
+  .faq-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--neon-cyan);
+    text-decoration: none;
+    border: 1px solid var(--neon-cyan);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .faq-action-btn:hover {
+    background: var(--neon-cyan);
+    color: var(--bg-main);
+    box-shadow: 0 0 10px var(--neon-cyan);
+  }
+
   .no-results {
     display: none;
     color: var(--text-muted);
     font-size: 0.95rem;
     padding: 20px;
+    text-align: center;
   }
-  /* --- BARRE DE NAVIGATION CYBERPUNK --- */
- .nav-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px; /* பட்டன்களுக்கு இடையிலான இடைவெளியைக் குறைக்கவும் (10px -> 6px) */
-  width: 100%;
-  margin: 0 auto 30px auto;
-  padding: 10px 12px;
-  background: var(--card-bg);
-  border: 1.5px solid rgba(0, 240, 255, 0.3);
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
-  box-sizing: border-box;
 
-  /* 👇 இந்த 2 வரிகளைச் சேர்க்கவும் */
-  flex-wrap: nowrap;       /* அடுத்த வரிக்குச் செல்லாமல் ஒரே வரியில் வைக்கும் */
-  overflow-x: auto;        /* ஸ்கிரீன் சிறியதாக இருந்தால் Scroll செய்யும் வசதி */
-}
-
-  .nav-btn {
-  font-family: 'Orbitron', system-ui, sans-serif;
-  font-size: 0.72rem; /* ஃபான்ட் அளவைச் சிறிதாக்கவும் (0.8rem -> 0.72rem) */
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--text-muted);
-  background: #1a2332;
-  padding: 8px 10px;  /* Padding-ஐக் குறைக்கவும் (10px 14px -> 8px 10px) */
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-
-  /* 👇 இந்த வரியைச் சேர்க்கவும் */
-  white-space: nowrap; /* பட்டனுക്കുള്ളில் உள்ள உரை மடங்காமல் தடுக்கும் */
-}
-/* Effet au survol (Hover) */
-.nav-btn:hover {
-  color: var(--neon-cyan, #00f3ff);
-  border-color: var(--neon-cyan, #00f3ff);
-  background: rgba(0, 243, 255, 0.08);
-  box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
-  transform: translateY(-2px);
-}
-
-/* Page active */
-.nav-btn.active,
-.nav-btn.primary {
-  color: #0b0e14;
-  background: var(--neon-cyan, #00f3ff);
-  border-color: var(--neon-cyan, #00f3ff);
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
-}
-
-.nav-btn.active:hover,
-.nav-btn.primary:hover {
-  background: #33f6ff;
-  box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
-}
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    .hero-title { font-size: 1.6rem; }
+    .faq-container { padding: 15px; }
+  }
 </style>
 </head>
 <body>
 
-  <!-- En-tête -->
+  <!-- BANNIÈRE EN-TÊTE -->
   <header class="hero-header">
-    <div class="hero-badge">💬 CENTRE D'AIDE ET INFORMATIONS</div>
-    <h1 class="hero-title">Foire Aux <span>Questions</span></h1>
+    <div class="hero-badge">💬 BASE DE CONNAISSANCES & AIDE</div>
+    <h1 class="hero-title">FOIRE AUX <span>QUESTIONS</span></h1>
     <p class="hero-subtitle">
-      Toutes les réponses officielles et pratiques concernant le Brevet DNB, l'oral, le calcul du contrôle continu et l'organisation des épreuves.
+      Toutes les réponses claires sur le calcul du contrôle continu, le déroulement de l'oral, les épreuves écrites et les équipements autorisés au Brevet DNB !
     </p>
   </header>
 
-  <!-- Navigation Menu -->
-<nav class="nav-container">
-      <a href="index.html" class="nav-btn">🏠 Index DNB</a>
-      <a href="annales.html" class="nav-btn">📚 Annales</a>
-      <a href="calculateur.html" class="nav-btn">🧮 Calculateur</a>
-      <a href="quiz.html" class="nav-btn">⚡ Quiz DNB</a>
-      <a href="cours.html" class="nav-btn">📖 Cours DNB</a>
-      <a href="orientation.html" class="nav-btn">🎓 Orientation & Bac</a>
-      <a href="faq.html" class="nav-btn active">❓ FAQ DNB</a>
-      
-      
-    </nav>
+  <!-- BARRE DE NAVIGATION -->
+  <nav class="nav-container">
+    <a href="index.html" class="nav-btn">🏠 Index DNB</a>
+    <a href="annales.html" class="nav-btn">📚 Annales</a>
+    <a href="calculateur.html" class="nav-btn">🧮 Calculateur</a>
+    <a href="quiz.html" class="nav-btn">⚡ Quiz DNB</a>
+    <a href="cours.html" class="nav-btn">📖 Cours DNB</a>
+    <a href="orientation.html" class="nav-btn">🎓 Orientation & Bac</a>
+    <a href="faq.html" class="nav-btn active">❓ FAQ DNB</a>
+  </nav>
 
-  <!-- Container FAQ -->
+  <!-- CONTAINER FAQ -->
   <div class="faq-container">
-    <h2 class="faq-title">❓ BASE DE CONNAISSANCES DNB</h2>
+    <h2 class="faq-title">⚡ RECHERCHER UNE INFORMATIVE RATIONNELLE</h2>
 
     <!-- Recherche -->
     <div class="search-box">
-      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Rechercher une question (ex: calcul, matériel, oral, option...)" onkeyup="filterQuestions()">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Taper un mot-clé (ex: points, calcul, oral, calculatrice, latin...)" onkeyup="filterQuestions()">
     </div>
 
     <!-- Filtres -->
@@ -392,10 +414,10 @@
       <button class="btn-filter" onclick="setCategory('pratique', event)">Organisation</button>
     </div>
 
-    <!-- Liste des Questions -->
+    <!-- LISTE DES QUESTIONS -->
     <div class="faq-list" id="faqList">
 
-      <!-- Question 1 -->
+      <!-- Q1 : Calcul global -->
       <div class="faq-item" data-category="notes">
         <div class="faq-question">
           <div class="faq-question-text">
@@ -405,10 +427,10 @@
           <span class="faq-icon">+</span>
         </div>
         <div class="faq-answer">
-          Le Brevet s'évalue au total sur <strong>800 points</strong> :
+          Le Diplôme National du Brevet est évalué sur un total de <strong>800 points</strong> :
           <ul>
-            <li><strong>Contrôle continu (400 points) :</strong> Évaluation de l'acquisition des 8 composantes du socle commun de compétences à la fin de la 3ème.</li>
-            <li><strong>Épreuves finales (400 points) :</strong> 
+            <li><strong>Contrôle continu (400 points) :</strong> Évaluation de l'acquisition des 8 composantes du socle commun en fin de 3ème.</li>
+            <li><strong>Épreuves finales (400 points) :</strong>
               <ul>
                 <li>Français (100 pts)</li>
                 <li>Mathématiques (100 pts)</li>
@@ -418,120 +440,148 @@
               </ul>
             </li>
           </ul>
-          Il faut obtenir un minimum de <strong>400 points sur 800</strong> (équivalent à 10/20) pour décrocher le diplôme.
+          Il faut un total minimum de <strong>400 points sur 800</strong> (soit 10/20) pour valider l'examen.
+          <div class="faq-action-box">
+            <a href="calculateur.html" class="faq-action-btn">🧮 Simuler mes points en direct</a>
+          </div>
         </div>
       </div>
 
-      <!-- Question 2 -->
+      <!-- Q2 : Mentions -->
       <div class="faq-item" data-category="notes">
         <div class="faq-question">
           <div class="faq-question-text">
             <span class="badge-tag tag-notes">Mentions</span>
-            <span>Quel est le barème des mentions au DNB ?</span>
+            <span>Quel est le barème officiel des mentions au DNB ?</span>
           </div>
           <span class="faq-icon">+</span>
         </div>
         <div class="faq-answer">
-          Les mentions attribuées en fonction de la totalité de tes points accumulés (sur 800) sont :
+          Les mentions sont attribuées selon les seuils de points cumulés sur 800 :
           <ul>
             <li><strong>Mention Assez Bien (AB) :</strong> À partir de <strong>480 points</strong> (12/20).</li>
             <li><strong>Mention Bien (B) :</strong> À partir de <strong>560 points</strong> (14/20).</li>
             <li><strong>Mention Très Bien (TB) :</strong> À partir de <strong>640 points</strong> (16/20).</li>
           </ul>
+          <div class="faq-action-box">
+            <a href="calculateur.html" class="faq-action-btn">🎯 Voir quelle mention je vise</a>
+          </div>
         </div>
       </div>
 
-      <!-- Question 3 -->
+      <!-- Q3 : Socle commun -->
+      <div class="faq-item" data-category="notes">
+        <div class="faq-question">
+          <div class="faq-question-text">
+            <span class="badge-tag tag-notes">Socle</span>
+            <span>Comment sont convertis les niveaux de maîtrise du socle ?</span>
+          </div>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Pour chacun des 8 domaines de compétences évalués au Conseil de classe du 3ème trimestre :
+          <ul>
+            <li><strong>Maîtrise insuffisante :</strong> 10 points</li>
+            <li><strong>Maîtrise fragile :</strong> 25 points</li>
+            <li><strong>Maîtrise satisfaisante :</strong> 40 points</li>
+            <li><strong>Très bonne maîtrise :</strong> 50 points</li>
+          </ul>
+          Si tu obtiens "Très bonne maîtrise" partout, tu cumules le maximum de 400 points avant même d'avoir passé les épreuves écrites !
+        </div>
+      </div>
+
+      <!-- Q4 : Épreuve orale -->
       <div class="faq-item" data-category="orale">
         <div class="faq-question">
           <div class="faq-question-text">
             <span class="badge-tag tag-orale">Oral</span>
-            <span>Comment se déroule et est notée l'Épreuve Orale ?</span>
+            <span>Comment se déroule et est notée l'épreuve orale ?</span>
           </div>
           <span class="faq-icon">+</span>
         </div>
         <div class="faq-answer">
-          L'épreuve orale se déroule généralement entre mai et juin :
+          L'épreuve orale (passée en mai ou juin) évalue la capacité à s'exprimer et à argumenter :
           <ul>
-            <li><strong>Durée :</strong> 15 minutes en individuel (5 min d'exposé + 10 min d'entretien) ou 25 minutes en groupe (10 min d'exposé + 15 min d'entretien).</li>
-            <li><strong>Sujets possibles :</strong> Un projet mené dans le cadre d'un EPI, un parcours éducatif (Avenir, Citoyen, Artistique) ou ton stage d'observation (ex: stage en pharmacie).</li>
-            <li><strong>Notation (100 points) :</strong> 50 points sur la maîtrise de l'expression orale et 50 points sur la maîtrise du sujet présenté.</li>
+            <li><strong>Durée :</strong> 15 minutes individuel (5 min d'exposé + 10 min d'entretien) ou 25 minutes en groupe (10 min d'exposé + 15 min d'entretien).</li>
+            <li><strong>Thèmes autorisés :</strong> Un projet d'EPI, un parcours éducatif (Avenir, Citoyen, EAC) ou le stage d'observation en entreprise.</li>
+            <li><strong>Notation (100 pts) :</strong> 50 points sur l'expression orale et 50 points sur la maîtrise du sujet présenté.</li>
           </ul>
         </div>
       </div>
 
-      <!-- Question 4 -->
+      <!-- Q5 : Tirage au sort Sciences -->
       <div class="faq-item" data-category="epreuves">
         <div class="faq-question">
           <div class="faq-question-text">
             <span class="badge-tag tag-epreuves">Épreuves</span>
-            <span>Quelles sont les matières retenues pour l'épreuve écrite de Sciences ?</span>
+            <span>Comment fonctionnent les matières tirées au sort en Sciences ?</span>
           </div>
           <span class="faq-icon">+</span>
         </div>
         <div class="faq-answer">
-          L'épreuve de Sciences (d'une durée de 1h) porte sur <strong>2 matières tirées au sort</strong> chaque année parmi les trois suivantes :
+          L'épreuve de Sciences d'une durée d'1 heure (sur 50 points) retient <strong>2 matières parmi 3</strong> :
           <ul>
             <li>Physique-Chimie</li>
             <li>Sciences de la Vie et de la Terre (SVT)</li>
             <li>Technologie</li>
           </ul>
-          L'annonce officielle des deux matières sélectionnées est publiée au printemps par le Ministère de l'Éducation Nationale.
-        </div>
-      </div>
-
-      <!-- Question 5 -->
-      <div class="faq-item" data-category="option">
-        <div class="faq-question">
-          <div class="faq-question-text">
-            <span class="badge-tag tag-option">Options</span>
-            <span>Comment comptent les options facultatives (Latin, Grec, LCR, Chant) ?</span>
+          Les deux disciplines sélectionnées pour la session courante sont dévoilées officiellement par le Ministère au cours du printemps.
+          <div class="faq-action-box">
+            <a href="cours.html" class="faq-action-btn">📖 Réviser les cours de Sciences</a>
           </div>
-          <span class="faq-icon">+</span>
-        </div>
-        <div class="faq-answer">
-          Les enseignements optionnels permettent d'apporter des points bonus au contrôle continu :
-          <ul>
-            <li><strong>10 points bonus :</strong> Si les objectifs d'apprentissage du programme sont atteints.</li>
-            <li><strong>20 points bonus :</strong> Si les objectifs d'apprentissage sont dépassés.</li>
-          </ul>
-          Seuls ces points bonus viennent s'ajouter au total général (sur 800) sans aucun risque de pénaliser la moyenne.
         </div>
       </div>
 
-      <!-- Question 6 -->
+      <!-- Q6 : Matériel & Calculatrice -->
       <div class="faq-item" data-category="pratique">
         <div class="faq-question">
           <div class="faq-question-text">
             <span class="badge-tag tag-pratique">Matériel</span>
-            <span>Quel matériel est indispensable pour les épreuves écrites ?</span>
+            <span>Quelle est la règle pour la calculatrice et les dictionnaires ?</span>
           </div>
           <span class="faq-icon">+</span>
         </div>
         <div class="faq-answer">
-          Assure-toi de préparer ton sac la veille des épreuves écrites :
           <ul>
-            <li><strong>Documents requis :</strong> Convocation officielle sous format papier + Pièce d'identité originale en cours de validité (Carte d'identité ou passeport).</li>
-            <li><strong>Fournitures de base :</strong> Stylos (bleu ou noir), correcteur, crayons de couleur, gomme, règle graduée.</li>
-            <li><strong>Matériel de Géométrie / Maths :</strong> Équerre, rapporteur, compas et calculatrice en mode examen activé.</li>
+            <li><strong>Calculatrice :</strong> Elle est autorisée en Mathématiques et Sciences <u>uniquement si le sujet le précise</u>. Lorsqu'elle est autorisée, le <b>Mode Examen</b> doit impérativement être activé.</li>
+            <li><strong>Dictionnaires :</strong> Le dictionnaire de langue française est autorisé uniquement pour la deuxième partie de l'épreuve de Français (rédaction/dictée) pour les candidats autorisés ou selon consignes spécifiques.</li>
           </ul>
         </div>
       </div>
 
-      <!-- Question 7 -->
-      <div class="faq-item" data-category="pratique">
+      <!-- Q7 : Options facultatives -->
+      <div class="faq-item" data-category="option">
         <div class="faq-question">
           <div class="faq-question-text">
-            <span class="badge-tag tag-pratique">Urgence</span>
-            <span>Que faire en cas d'absence, de maladie ou de retard le jour J ?</span>
+            <span class="badge-tag tag-option">Options</span>
+            <span>Combien de points bonus rapportent le Latin, Grec ou LCR ?</span>
           </div>
           <span class="faq-icon">+</span>
         </div>
         <div class="faq-answer">
-          Voici la marche à suivre selon les événements :
+          Les options de langues et cultures de l'antiquité ou régionales permettent d'ajouter des points bonus au contrôle continu :
           <ul>
-            <li><strong>Retard :</strong> Un retard de moins de 1 heure peut être toléré de manière exceptionnelle par le chef de centre, mais aucun temps supplémentaire ne sera accordé.</li>
-            <li><strong>Absence médicale :</strong> En cas de force majeure ou maladie dûment justifiée par un certificat médical, tu seras inscrit automatiquement à la <strong>session de remplacement</strong> organisée au mois de septembre.</li>
+            <li><strong>+10 points :</strong> Si les objectifs du programme sont atteints.</li>
+            <li><strong>+20 points :</strong> Si les objectifs du programme sont dépassés.</li>
+          </ul>
+          Ces points s'additionnent directement à ton score total sur 800 sans risque de perte.
+        </div>
+      </div>
+
+      <!-- Q8 : Absences ou Urgences -->
+      <div class="faq-item" data-category="pratique">
+        <div class="faq-question">
+          <div class="faq-question-text">
+            <span class="badge-tag tag-pratique">Urgence</span>
+            <span>Que faire en cas d'absence pour maladie le jour d'une épreuve ?</span>
+          </div>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          En cas de force majeure ou de raison médicale dument attestée par un certificat médical fourni immédiatement à l'établissement :
+          <ul>
+            <li>Le candidat est convoqué d'office à la <strong>session de remplacement</strong> qui se déroule au mois de septembre.</li>
+            <li>Les notes du contrôle continu obtenues durant l'année restent valables.</li>
           </ul>
         </div>
       </div>
@@ -539,14 +589,14 @@
     </div>
 
     <div class="no-results" id="noResults">
-      ⚠️ Aucune question trouvée correspondant à ta recherche.
+      ⚠️ Aucune question ne correspond à ta recherche. Essaie d'autres termes !
     </div>
   </div>
 
 <script>
   let activeCategory = 'all';
 
-  // Gestion de l'accordéon
+  // Gestion de l'accordéon (Ouverture / Fermeture)
   document.querySelectorAll('.faq-question').forEach(question => {
     question.addEventListener('click', () => {
       const item = question.parentElement;
@@ -558,12 +608,12 @@
         }
       });
 
-      // Bascule la carte sélectionnée
+      // Bascule l'élément cliqué
       item.classList.toggle('active');
     });
   });
 
-  // Gestion des filtres par catégorie
+  // Filtrage par catégories
   function setCategory(category, event) {
     activeCategory = category;
     
@@ -575,9 +625,9 @@
     filterQuestions();
   }
 
-  // Filtrage combiné (Recherche + Catégorie)
+  // Recherche textuelle + Filtrage combiné
   function filterQuestions() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
     const items = document.querySelectorAll('.faq-item');
     let visibleCount = 0;
 
