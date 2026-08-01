@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planning & Countdown DNB — Cyber Edition</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Orbitron:wght@700;800;900&display=swap');
+
+    :root {
+      --bg-main: #0b0e14;
+      --card-bg: #121824;
+      --card-inner: #1a2332;
+      --neon-cyan: #00f3ff;
+      --neon-magenta: #ff0055;
+      --neon-purple: #b537f2;
+      --neon-yellow: #ffe600;
+      --neon-green: #00ff66;
+      --text-light: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-light);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(181, 55, 242, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(0, 243, 255, 0.08) 0%, transparent 50%);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    /* BANNIÈRE EN-TÊTE */
+    .hero-header {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid rgba(0, 243, 255, 0.3);
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+      padding: 25px;
+      text-align: center;
+      margin-bottom: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-magenta));
+    }
+
+    .hero-badge {
+      display: inline-block;
+      color: var(--neon-cyan);
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      border: 1px solid var(--neon-cyan);
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      margin: 0 0 10px 0;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .hero-title span {
+      color: var(--bg-main);
+      background: var(--neon-cyan);
+      padding: 2px 10px;
+      border-radius: 4px;
+      box-shadow: 0 0 12px var(--neon-cyan);
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* NAVIGATION BAR */
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+      margin: 0 auto 30px auto;
+      padding: 10px 12px;
+      background: var(--card-bg);
+      border: 1.5px solid rgba(0, 240, 255, 0.3);
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+
+    .nav-btn {
+      font-family: 'Orbitron', system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text-muted);
+      background: #1a2332;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover {
+      color: var(--neon-cyan);
+      border-color: var(--neon-cyan);
+      background: rgba(0, 243, 255, 0.08);
+      box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .nav-btn.active {
+      color: #0b0e14;
+      background: var(--neon-cyan);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+    }
+
+    /* SECTION COUNTDOWN */
+    .countdown-section {
+      background: var(--card-bg);
+      border: 1.5px solid var(--neon-magenta);
+      border-radius: 16px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255, 0, 85, 0.2);
+      margin-bottom: 30px;
+    }
+
+    .countdown-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      color: var(--neon-yellow);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .time-box {
+      background: var(--card-inner);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 15px 10px;
+    }
+
+    .time-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+    }
+
+    .time-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 5px;
+      font-weight: 700;
+    }
+
+    /* SECTIONS GRID */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+
+    .card-box {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .card-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-top: 0;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+      padding-bottom: 12px;
+    }
+
+    /* TIMETABLE TABLE */
+    .timetable-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .timetable-table th, .timetable-table td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .timetable-table th {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      color: var(--neon-cyan);
+      background: var(--card-inner);
+    }
+
+    .timetable-table td {
+      font-size: 0.9rem;
+    }
+
+    .tag-date {
+      color: var(--neon-yellow);
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+    }
+
+    /* CHECKLIST */
+    .progress-bar-container {
+      width: 100%;
+      height: 10px;
+      background: var(--card-inner);
+      border-radius: 5px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-green));
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px var(--neon-green);
+    }
+
+    .add-task-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .input-task {
+      flex: 1;
+      background: var(--card-inner);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 12px;
+      color: #fff;
+      font-family: inherit;
+    }
+
+    .input-task:focus {
+      outline: none;
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 8px rgba(0, 243, 255, 0.3);
+    }
+
+    .btn-add {
+      background: var(--neon-cyan);
+      color: var(--bg-main);
+      border: none;
+      border-radius: 8px;
+      padding: 0 18px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-add:hover {
+      box-shadow: 0 0 12px var(--neon-cyan);
+      transform: translateY(-2px);
+    }
+
+    .todo-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .todo-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-inner);
+      padding: 12px 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.2s;
+    }
+
+    .todo-item.completed {
+      opacity: 0.5;
+      text-decoration: line-through;
+      border-color: var(--neon-green);
+    }
+
+    .todo-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .btn-delete {
+      background: transparent;
+      border: none;
+      color: var(--neon-magenta);
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .btn-delete:hover {
+      transform: scale(1.2);
+    }
+
+    /* NOTES BOX */
+    .notes-textarea {
+      width: 100%;
+      height: 120px;
+      background: var(--card-inner);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 12px;
+      color: var(--text-light);
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    .notes-textarea:focus {
+      outline: none;
+      border-color: var(--neon-purple);
+      box-shadow: 0 0 10px rgba(181, 55, 242, 0.3);
+    }
+
+    @media (max-width: 600px) {
+      .countdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- BANNIÈRE EN-TÊTE -->
+    <header class="hero-header">
+      <div class="hero-badge">⏳ ORGANISATION DNB</div>
+      <h1 class="hero-title">Planning & <span>Countdown</span></h1>
+      <p class="hero-subtitle">
+        Gère ton temps, suis tes révisions en direct et garde un œil sur les dates officielles du Brevet.
+      </p>
+    </header>
+
+    <!-- NAVIGATION MENU -->
+    <nav class="nav-container">
+      <a href="index.html" class="nav-btn">🏠 Index DNB</a>
+      <a href="annales.html" class="nav-btn">📚 Annales</a>
+      <a href="calculateur.html" class="nav-btn">🧮 Calculateur</a>
+      <a href="quiz.html" class="nav-btn">⚡ Quiz DNB</a>
+      <a href="cours.html" class="nav-btn">📖 Cours DNB</a>
+      <a href="planning.html" class="nav-btn active">📅 Planning</a>
+      <a href="orientation.html" class="nav-btn">🎓 Orientation & Bac</a>
+      <a href="faq.html" class="nav-btn">❓ FAQ DNB</a>
+    </nav>
+
+    <!-- COUNTDOWN CLOCK -->
+    <section class="countdown-section">
+      <div class="countdown-title">⚡ TEMPS RESTANT AVANT LE BREVET (DNB) ⚡</div>
+      <div class="countdown-grid">
+        <div class="time-box">
+          <div class="time-value" id="days">00</div>
+          <div class="time-label">Jours</div>
+        </div>
+        <div class="time-box">
+          <div class="time-value" id="hours">00</div>
+          <div class="time-label">Heures</div>
+        </div>
+        <div class="time-box">
+          <div class="time-value" id="minutes">00</div>
+          <div class="time-label">Minutes</div>
+        </div>
+        <div class="time-box">
+          <div class="time-value" id="seconds">00</div>
+          <div class="time-label">Secondes</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="main-grid">
+
+      <!-- EXAM TIMETABLE -->
+      <div class="card-box">
+        <h2 class="card-title">📅 Calendrier Officiel des Épreuves Écrites</h2>
+        <table class="timetable-table">
+          <thead>
+            <tr>
+              <th>Date / Horaire</th>
+              <th>Épreuve</th>
+              <th>Durée</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tag-date">Jour 1 — Matin (09:00 - 12:15)</td>
+              <td>Français (Grammaire, Dictée & Rédaction)</td>
+              <td>3h 15m</td>
+            </tr>
+            <tr>
+              <td class="tag-date">Jour 1 — Après-midi (14:30 - 16:30)</td>
+              <td>Mathématiques</td>
+              <td>2h 00m</td>
+            </tr>
+            <tr>
+              <td class="tag-date">Jour 2 — Matin (09:00 - 11:00)</td>
+              <td>Histoire-Géographie & EMC</td>
+              <td>2h 00m</td>
+            </tr>
+            <tr>
+              <td class="tag-date">Jour 2 — Après-midi (13:30 - 14:30)</td>
+              <td>Sciences (2 matières sur Physique, SVT, Tech)</td>
+              <td>1h 00m</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- INTERACTIVE CHECKLIST -->
+      <div class="card-box">
+        <h2 class="card-title">✅ Mon Programme de Révision (Sauvegarde Auto)</h2>
+        
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+
+        <form class="add-task-form" onsubmit="addTask(event)">
+          <input type="text" id="taskInput" class="input-task" placeholder="Ex: Revoir le chapitre de Pythagore..." required>
+          <button type="submit" class="btn-add">+ AJOUTER</button>
+        </form>
+
+        <ul class="todo-list" id="todoList"></ul>
+      </div>
+
+      <!-- QUICK EXAM REMINDERS / NOTES -->
+      <div class="card-box">
+        <h2 class="card-title">📝 Mes Notes & Liste de Matériel</h2>
+        <textarea class="notes-textarea" id="userNotes" placeholder="Écris ici tes reminders (ex: Convocation, Pièce d'identité, Règle, Calculatrice, Stylos de rechange...)" oninput="saveNotes()"></textarea>
+      </div>
+
+    </div>
+
+  </div>
+
+<script>
+// --- 1. COUNTDOWN TIMER ---
+// Target Date: June 25, 2027 (Standard DNB Period)
+const examDate = new Date("June 25, 2027 09:00:00").getTime();
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const distance = examDate - now;
+
+  if (distance < 0) {
+    document.getElementById("days").innerText = "00";
+    document.getElementById("hours").innerText = "00";
+    document.getElementById("minutes").innerText = "00";
+    document.getElementById("seconds").innerText = "00";
+    return;
+  }
+
+  const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("days").innerText = d < 10 ? "0" + d : d;
+  document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
+  document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
+  document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// --- 2. CHECKLIST WITH LOCALSTORAGE ---
+let tasks = JSON.parse(localStorage.getItem('dnb_tasks')) || [
+  { text: "Revoir les Repères Historiques (DNB Hist-Géo)", completed: false },
+  { text: "Faire 3 sujets d'Annales en Mathématiques", completed: false },
+  { text: "Préparer le diaporama pour l'Oral du Brevet", completed: false }
+];
+
+function saveTasks() {
+  localStorage.setItem('dnb_tasks', JSON.stringify(tasks));
+  renderTasks();
+}
+
+function renderTasks() {
+  const listEl = document.getElementById('todoList');
+  listEl.innerHTML = '';
+  let completedCount = 0;
+
+  tasks.forEach((task, index) => {
+    if (task.completed) completedCount++;
+
+    const li = document.createElement('li');
+    li.className = `todo-item ${task.completed ? 'completed' : ''}`;
+    
+    li.innerHTML = `
+      <div class="todo-left" onclick="toggleTask(${index})">
+        <input type="checkbox" ${task.completed ? 'checked' : ''}>
+        <span>${task.text}</span>
+      </div>
+      <button class="btn-delete" onclick="deleteTask(${index})">🗑️</button>
+    `;
+    listEl.appendChild(li);
+  });
+
+  // Progress Bar update
+  const percentage = tasks.length > 0 ? (completedCount / tasks.length) * 100 : 0;
+  document.getElementById('progressFill').style.width = percentage + '%';
+}
+
+function addTask(e) {
+  e.preventDefault();
+  const input = document.getElementById('taskInput');
+  if (input.value.trim() !== '') {
+    tasks.push({ text: input.value.trim(), completed: false });
+    input.value = '';
+    saveTasks();
+  }
+}
+
+function toggleTask(index) {
+  tasks[index].completed = !tasks[index].completed;
+  saveTasks();
+}
+
+function deleteTask(index) {
+  tasks.splice(index, 1);
+  saveTasks();
+}
+
+// --- 3. NOTES WITH LOCALSTORAGE ---
+function saveNotes() {
+  const notes = document.getElementById('userNotes').value;
+  localStorage.setItem('dnb_user_notes', notes);
+}
+
+function loadNotes() {
+  const savedNotes = localStorage.getItem('dnb_user_notes');
+  if (savedNotes) {
+    document.getElementById('userNotes').value = savedNotes;
+  }
+}
+
+// Initialize
+renderTasks();
+loadNotes();
+</script>
+
+</body>
+</html>
