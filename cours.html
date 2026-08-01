@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fiches de Cours DNB Troisième - Gamer Edition</title>
+<title>Fiches de Cours DNB Troisième — Cyberpunk Edition</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Orbitron:wght@700;900&display=swap');
 
@@ -33,19 +33,22 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.12) 0%, transparent 60%),
+      radial-gradient(circle at 80% 80%, rgba(181, 55, 242, 0.08) 0%, transparent 50%);
   }
 
   /* BANNIÈRE D'EN-TÊTE */
   .hero-header {
     width: 100%;
-    max-width: 950px;
+    max-width: 1000px;
     background: var(--card-bg);
     border: 2px solid var(--neon-cyan);
     border-radius: 16px;
     box-shadow: 0 0 20px rgba(0, 243, 255, 0.25);
-    padding: 25px;
+    padding: 30px 25px;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
   }
 
   .hero-badge {
@@ -60,6 +63,7 @@
     box-shadow: inset 0 0 8px rgba(0, 243, 255, 0.3);
     margin-bottom: 12px;
     letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
   .hero-title {
@@ -82,18 +86,68 @@
   .hero-subtitle {
     font-size: 0.95rem;
     color: var(--text-muted);
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
     line-height: 1.5;
+  }
+
+  /* BARRE DE NAVIGATION */
+  .nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 30px auto;
+    padding: 10px 12px;
+    background: var(--card-bg);
+    border: 1.5px solid rgba(0, 243, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .nav-btn {
+    font-family: 'Orbitron', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text-muted);
+    background: #1a2332;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  .nav-btn:hover {
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    background: rgba(0, 243, 255, 0.08);
+    box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .nav-btn.active {
+    color: #0b0e14;
+    background: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
   }
 
   /* GRILLE DES COURS */
   .courses-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     width: 100%;
-    max-width: 950px;
+    max-width: 1000px;
   }
 
   .course-card {
@@ -101,19 +155,20 @@
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 14px;
     padding: 20px;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 15px;
   }
 
   .course-card:hover {
     transform: translateY(-4px);
-    border-color: var(--neon-purple);
-    box-shadow: 0 0 15px rgba(181, 55, 242, 0.3);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 18px rgba(0, 243, 255, 0.25);
   }
 
-  /* TAGS & BADGES */
+  /* TAGS ET BADGES */
   .tag {
     display: inline-block;
     font-family: 'Orbitron', sans-serif;
@@ -123,7 +178,7 @@
     border-radius: 6px;
     text-transform: uppercase;
     width: fit-content;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     letter-spacing: 0.5px;
   }
 
@@ -140,18 +195,18 @@
     font-family: 'Orbitron', sans-serif;
     font-size: 1.15rem;
     font-weight: 700;
-    margin: 0 0 10px 0;
+    margin: 0 0 8px 0;
     color: #fff;
   }
 
   .course-desc {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: var(--text-muted);
-    line-height: 1.4;
-    margin-bottom: 15px;
+    line-height: 1.45;
+    margin-bottom: 10px;
   }
 
-  /* BLOC FORMULE / FORMULE CLEF */
+  /* FORMULES ET RAPPELS */
   .formula-box {
     background: var(--card-inner);
     border: 1px dashed rgba(255, 255, 255, 0.2);
@@ -159,213 +214,304 @@
     padding: 10px 12px;
     font-size: 0.85rem;
     color: var(--text-light);
-    line-height: 1.4;
+    line-height: 1.45;
   }
 
   .formula-box strong {
     color: var(--neon-cyan);
     font-family: 'Orbitron', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     display: block;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
   }
-  /* --- BARRE DE NAVIGATION CYBERPUNK --- */
- .nav-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px; /* பட்டன்களுக்கு இடையிலான இடைவெளியைக் குறைக்கவும் (10px -> 6px) */
-  width: 100%;
-  margin: 0 auto 30px auto;
-  padding: 10px 12px;
-  background: var(--card-bg);
-  border: 1.5px solid rgba(0, 240, 255, 0.3);
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
-  box-sizing: border-box;
 
-  /* 👇 இந்த 2 வரிகளைச் சேர்க்கவும் */
-  flex-wrap: nowrap;       /* அடுத்த வரிக்குச் செல்லாமல் ஒரே வரியில் வைக்கும் */
-  overflow-x: auto;        /* ஸ்கிரீன் சிறியதாக இருந்தால் Scroll செய்யும் வசதி */
-}
+  /* BOUTONS D'ACTION INTÉGRÉS */
+  .card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
 
-  .nav-btn {
-  font-family: 'Orbitron', system-ui, sans-serif;
-  font-size: 0.72rem; /* ஃபான்ட் அளவைச் சிறிதாக்கவும் (0.8rem -> 0.72rem) */
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--text-muted);
-  background: #1a2332;
-  padding: 8px 10px;  /* Padding-ஐக் குறைக்கவும் (10px 14px -> 8px 10px) */
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+  .action-btn {
+    flex: 1;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px 6px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+  }
 
-  /* 👇 இந்த வரியைச் சேர்க்கவும் */
-  white-space: nowrap; /* பட்டனுക്കുള്ളில் உள்ள உரை மடங்காமல் தடுக்கும் */
-}
+  .btn-quiz {
+    background: transparent;
+    color: var(--neon-green);
+    border: 1px solid var(--neon-green);
+  }
 
-/* Effet au survol (Hover) */
-.nav-btn:hover {
-  color: var(--neon-cyan, #00f3ff);
-  border-color: var(--neon-cyan, #00f3ff);
-  background: rgba(0, 243, 255, 0.08);
-  box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
-  transform: translateY(-2px);
-}
+  .btn-quiz:hover {
+    background: var(--neon-green);
+    color: var(--bg-main);
+    box-shadow: 0 0 10px var(--neon-green);
+  }
 
-/* Page active */
-.nav-btn.active,
-.nav-btn.primary {
-  color: #0b0e14;
-  background: var(--neon-cyan, #00f3ff);
-  border-color: var(--neon-cyan, #00f3ff);
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
-}
+  .btn-annales {
+    background: transparent;
+    color: var(--neon-yellow);
+    border: 1px solid var(--neon-yellow);
+  }
 
-.nav-btn.active:hover,
-.nav-btn.primary:hover {
-  background: #33f6ff;
-  box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
-}
+  .btn-annales:hover {
+    background: var(--neon-yellow);
+    color: var(--bg-main);
+    box-shadow: 0 0 10px var(--neon-yellow);
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    .hero-title { font-size: 1.6rem; }
+    .courses-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 
-  <!-- Composant En-tête -->
+  <!-- BANNIÈRE EN-TÊTE -->
   <header class="hero-header">
-    <div class="hero-badge">📚 ESPACE RÉVISIONS</div>
-    <h1 class="hero-title">Cours DNB <span>Troisième</span></h1>
+    <div class="hero-badge">⚡ ESPACE RÉVISIONS BREVET 2026</div>
+    <h1 class="hero-title">FICHES DE COURS <span>DNB</span></h1>
     <p class="hero-subtitle">
-      Retrouve les formules essentielles, définitions et repères clés pour réviser ton Brevet !
+      Retrouve les formules indispensables, les repères chronologiques et les concepts clés pour réussir tes épreuves !
     </p>
   </header>
 
-  <!-- Navigation Menu -->
-<nav class="nav-container">
-      <a href="index.html" class="nav-btn">🏠 Index DNB</a>
-      <a href="annales.html" class="nav-btn">📚 Annales</a>
-      <a href="calculateur.html" class="nav-btn">🧮 Calculateur</a>
-      <a href="quiz.html" class="nav-btn">⚡ Quiz DNB</a>
-      <a href="cours.html" class="nav-btn active">📖 Cours DNB</a>
-      <a href="orientation.html" class="nav-btn">🎓 Orientation & Bac</a>
-      <a href="faq.html" class="nav-btn">❓ FAQ DNB</a>
-      
-      
-    </nav>
+  <!-- BARRE DE NAVIGATION -->
+  <nav class="nav-container">
+    <a href="index.html" class="nav-btn">🏠 Index DNB</a>
+    <a href="annales.html" class="nav-btn">📚 Annales</a>
+    <a href="calculateur.html" class="nav-btn">🧮 Calculateur</a>
+    <a href="quiz.html" class="nav-btn">⚡ Quiz DNB</a>
+    <a href="cours.html" class="nav-btn active">📖 Cours DNB</a>
+    <a href="orientation.html" class="nav-btn">🎓 Orientation & Bac</a>
+    <a href="faq.html" class="nav-btn">❓ FAQ DNB</a>
+  </nav>
 
-  <!-- Grille Fiches de Cours -->
+  <!-- GRILLE DES COURS -->
   <div class="courses-grid">
 
-    <!-- Mathématiques -->
+    <!-- Mathématiques : Pythagore -->
     <div class="course-card">
       <div>
         <span class="tag tag-maths">📐 Mathématiques</span>
         <h2 class="course-title">Théorème de Pythagore</h2>
-        <p class="course-desc">Permet d'évaluer la longueur d'un côté dans un triangle rectangle à partir des deux autres.</p>
+        <p class="course-desc">Permet de calculer la longueur d'un côté dans un triangle rectangle connaissant les deux autres.</p>
+        <div class="formula-box">
+          <strong>⚡ FORMULE CLÉ :</strong>
+          Si le triangle ABC est rectangle en A, alors BC² = AB² + AC² (l'hypoténuse au carré).
+        </div>
       </div>
-      <div class="formula-box">
-        <strong>⚡ FORMULE CLÉ :</strong>
-        Si le triangle ABC est rectangle en A, alors BC² = AB² + AC² (l'hypoténuse au carré est égale à la somme des carrés des deux autres côtés).
+      <div class="card-actions">
+        <a href="quiz.html" class="action-btn btn-quiz">⚡ Quiz</a>
+        <a href="annales.html" class="action-btn btn-annales">📚 Annales</a>
       </div>
     </div>
 
-    <!-- Français -->
+    <!-- Mathématiques : Thalès -->
+    <div class="course-card">
+      <div>
+        <span class="tag tag-maths">📐 Mathématiques</span>
+        <h2 class="course-title">Théorème de Thalès</h2>
+        <p class="course-desc">Utilisé pour calculer des longueurs ou prouver le parallélisme de deux droites dans une figure.</p>
+        <div class="formula-box">
+          <strong>⚡ FORMULE CLÉ :</strong>
+          Si (BC) // (DE), alors : AB/AD = AC/AE = BC/DE.
+        </div>
+      </div>
+      <div class="card-actions">
+        <a href="quiz.html" class="action-btn btn-quiz">⚡ Quiz</a>
+        <a href="annales.html" class="action-btn btn-annales">📚 Annales</a>
+      </div>
+    </div>
+
+    <!-- Français : Figures de Style -->
     <div class="course-card">
       <div>
         <span class="tag tag-fr">✍️ Français</span>
         <h2 class="course-title">Figures de Style</h2>
-        <p class="course-desc">Procédés d'écriture essentiels pour analyser un texte littéraire à l'épreuve écrite.</p>
+        <p class="course-desc">Procédés littéraires essentiels pour réussir l'analyse de texte à l'écrit du Brevet.</p>
+        <div class="formula-box">
+          <strong>⚡ À RETENIR :</strong>
+          - <b>Comparaison :</b> avec outil (ex: fort comme un lion).<br>
+          - <b>Métaphore :</b> sans outil (ex: ce lion au combat).
+        </div>
       </div>
-      <div class="formula-box">
-        <strong>⚡ À RETENIR :</strong>
-        Comparaison = outil explicite (ex: <i>fort comme un lion</i>).<br>
-        Métaphore = comparaison sans mot outil (ex: <i>ce lion au combat</i>).
+      <div class="card-actions">
+        <a href="quiz.html" class="action-btn btn-quiz">⚡ Quiz</a>
+        <a href="annales.html" class="action-btn btn-annales">📚 Annales</a>
       </div>
     </div>
 
-    <!-- Histoire -->
+    <!-- Français : Temps du passé -->
+    <div class="course-card">
+      <div>
+        <span class="tag tag-fr">✍️ Français</span>
+        <h2 class="course-title">Valeurs des Temps du Passé</h2>
+        <p class="course-desc">Distinguer l'imparfait et le passé simple dans un récit autobiographique ou romanesque.</p>
+        <div class="formula-box">
+          <strong>⚡ À RETENIR :</strong>
+          - <b>Imparfait :</b> Description, habitude, arrière-plan.<br>
+          - <b>Passé Simple :</b> Action ponctuelle, soudaine et délimitée.
+        </div>
+      </div>
+      <div class="card-actions">
+        <a href="quiz.html" class="action-btn btn-quiz">⚡ Quiz</a>
+        <a href="annales.html" class="action-btn btn-annales">📚 Annales</a>
+      </div>
+    </div>
+
+    <!-- Histoire : Première Guerre Mondiale -->
     <div class="course-card">
       <div>
         <span class="tag tag-hist">📜 Histoire</span>
-        <h2 class="course-title">La Première Guerre Mondiale</h2>
-        <p class="course-desc">Phase de guerre totale (1914-1918) marquée par la violence de masse et le conflit des tranchées.</p>
+        <h2 class="course-title">Première Guerre Mondiale</h2>
+        <p class="course-desc">Conflit mondial (1914-1918) caractérisé par la guerre de position et la violence de masse.</p>
+        <div class="formula-box">
+          <strong>⚡ REPÈRES CLÉS :</strong>
+          - <b>1914-1918 :</b> WW1.<br>
+          - <b>1916 :</b> Bataille de Verdun.<br>
+          - <b>28 Juin 1919 :</b> Traité de Versailles.
+        </div>
       </div>
-      <div class="formula-box">
-        <strong>⚡ REPÈRES CLÉS :</strong>
-        1914-1918 : Première Guerre mondiale.<br>
-        1916 : Bataille de Verdun.<br>
-        28 juin 1919 : Signature du Traité de Versailles.
+      <div class="card-actions">
+        <a href="quiz.html" class="action-btn btn-quiz">⚡ Quiz</a>
+        <a href="annales.html" class="action-btn btn-annales">📚 Annales</a>
       </div>
     </div>
 
-    <!-- Géographie -->
+    <!-- Histoire : Seconde Guerre Mondiale -->
+    <div class="course-card">
+      <div>
+        <span class="tag tag-hist">📜 Histoire</span>
+        <h2 class="course-title">Seconde Guerre Mondiale</h2>
+        <p class="course-desc">Guerre d'anéantissement (1939-1945), génocide des Juifs et des Tziganes.</p>
+        <div class="formula-box">
+          <strong>⚡ REPÈRES CLÉS :</strong>
+          - <b>1939-1945 :</b> WW2.<br>
+          - <b>18 Juin 1940 :</b> Appel du Général de Gaulle.<br>
+          - <b>6 Juin 1944 :</b> Débarquement en Normandie.
+        </div>
+      </div>
+      <div class="card-actions">
+        <a href="quiz.html" class="action-btn btn-quiz">⚡ Quiz</a>
+        <a href="annales.html" class="action-btn btn-annales">📚 Annales</a>
+      </div>
+    </div>
+
+    <!-- Géographie : Aires Urbaines -->
     <div class="course-card">
       <div>
         <span class="tag tag-geo">🌍 Géographie</span>
         <h2 class="course-title">Aires Urbaines en France</h2>
-        <p class="course-desc">Organisation de l'espace urbain et étalement des populations sous l'effet de la périurbanisation.</p>
+        <p class="course-desc">Répartition de la population française et dynamique de périurbanisation.</p>
+        <div class="formula-box">
+          <strong>⚡ SCHÉMA CLÉ :</strong>
+          Aire Urbaine = Ville-centre + Banlieue (Pôle urbain) + Couronne périurbaine.
+        </div>
       </div>
-      <div class="formula-box">
-        <strong>⚡ SCHÉMA CLÉ :</strong>
-        Aire urbaine = Ville-centre + Banlieue (Pôle urbain) + Couronne périurbaine.
+      <div class="card-actions">
+        <a href="quiz.html" class="action-btn btn-quiz">⚡ Quiz</a>
+        <a href="annales.html" class="action-btn btn-annales">📚 Annales</a>
       </div>
     </div>
 
-    <!-- EMC -->
+    <!-- EMC : République & Laïcité -->
     <div class="course-card">
       <div>
         <span class="tag tag-emc">⚖️ EMC</span>
-        <h2 class="course-title">La République & Laïcité</h2>
-        <p class="course-desc">Fondements de la citoyenneté française et neutralité de l'État vis-à-vis des religions.</p>
+        <h2 class="course-title">République & Laïcité</h2>
+        <p class="course-desc">Principes fondateurs de la République française et liberté de conscience.</p>
+        <div class="formula-box">
+          <strong>⚡ VALEURS & PRINCIPES :</strong>
+          - <b>Devise :</b> Liberté, Égalité, Fraternité.<br>
+          - <b>Laïcité :</b> Neutralité de l'État & liberté de culte.
+        </div>
       </div>
-      <div class="formula-box">
-        <strong>⚡ DEVISE & PRINCIPES :</strong>
-        Devise : Liberté, Égalité, Fraternité.<br>
-        Laïcité : Garantit la liberté de conscience et la neutralité dans l'espace public et scolaire.
-      </div>
-    </div>
-
-    <!-- SVT -->
-    <div class="course-card">
-      <div>
-        <span class="tag tag-svt">🧬 SVT</span>
-        <h2 class="course-title">Génétique & Hérédité</h2>
-        <p class="course-desc">Transmission des caractères héréditaires et organisation du matériel génétique dans la cellule.</p>
-      </div>
-      <div class="formula-box">
-        <strong>⚡ RÈGLE CLÉ :</strong>
-        L'information génétique se trouve dans le noyau sous forme d'ADN (46 chromosomes regroupés en 23 paires chez l'humain).
+      <div class="card-actions">
+        <a href="quiz.html" class="action-btn btn-quiz">⚡ Quiz</a>
+        <a href="annales.html" class="action-btn btn-annales">📚 Annales</a>
       </div>
     </div>
 
-    <!-- Physique-Chimie -->
+    <!-- Physique-Chimie : Loi d'Ohm -->
     <div class="course-card">
       <div>
         <span class="tag tag-pc">⚡ Physique-Chimie</span>
         <h2 class="course-title">Loi d'Ohm & Électricité</h2>
-        <p class="course-desc">Relation mathématique entre la tension électrique, l'intensité et la résistance d'un dipôle.</p>
+        <p class="course-desc">Relation entre la tension électrique, la résistance et l'intensité du courant.</p>
+        <div class="formula-box">
+          <strong>⚡ FORMULE CLÉ :</strong>
+          <b>U = R × I</b><br>
+          (U en Volts [V], R en Ohms [Ω], I en Ampères [A]).
+        </div>
       </div>
-      <div class="formula-box">
-        <strong>⚡ FORMULE CLÉ :</strong>
-        U = R × I<br>
-        (Tension U en Volts [V], Résistance R en Ohms [Ω], Intensité I en Ampères [A]).
+      <div class="card-actions">
+        <a href="quiz.html" class="action-btn btn-quiz">⚡ Quiz</a>
+        <a href="annales.html" class="action-btn btn-annales">📚 Annales</a>
       </div>
     </div>
 
-    <!-- Technologie -->
+    <!-- Physique-Chimie : Gravitation -->
+    <div class="course-card">
+      <div>
+        <span class="tag tag-pc">⚡ Physique-Chimie</span>
+        <h2 class="course-title">Poids et Masse</h2>
+        <p class="course-desc">Différence entre la masse d'un objet et l'attraction terrestre exercée sur lui.</p>
+        <div class="formula-box">
+          <strong>⚡ FORMULE CLÉ :</strong>
+          <b>P = m × g</b><br>
+          (Poids P en Newtons [N], masse m en kg, intensité g en N/kg).
+        </div>
+      </div>
+      <div class="card-actions">
+        <a href="quiz.html" class="action-btn btn-quiz">⚡ Quiz</a>
+        <a href="annales.html" class="action-btn btn-annales">📚 Annales</a>
+      </div>
+    </div>
+
+    <!-- SVT : Génétique -->
+    <div class="course-card">
+      <div>
+        <span class="tag tag-svt">🧬 SVT</span>
+        <h2 class="course-title">Génétique & Hérédité</h2>
+        <p class="course-desc">Support de l'information génétique et transmission lors de la reproduction.</p>
+        <div class="formula-box">
+          <strong>⚡ RÈGLE CLÉ :</strong>
+          Information contenue dans le noyau sous forme d'ADN (46 chromosomes / 23 paires chez l'humain).
+        </div>
+      </div>
+      <div class="card-actions">
+        <a href="quiz.html" class="action-btn btn-quiz">⚡ Quiz</a>
+        <a href="annales.html" class="action-btn btn-annales">📚 Annales</a>
+      </div>
+    </div>
+
+    <!-- Technologie : Chaîne d'information -->
     <div class="course-card">
       <div>
         <span class="tag tag-techno">⚙️ Technologie</span>
         <h2 class="course-title">Chaîne d'Information</h2>
-        <p class="course-desc">Description du parcours des signaux et données au sein d'un système automatisé.</p>
+        <p class="course-desc">Fonctionnement des composants intelligents dans un système automatisé.</p>
+        <div class="formula-box">
+          <strong>⚡ PARCOURS :</strong>
+          <b>Acquérir</b> (Capteur) ➔ <b>Traiter</b> (Microcontrôleur) ➔ <b>Communiquer</b> (Écran/Voyant).
+        </div>
       </div>
-      <div class="formula-box">
-        <strong>⚡ PARCOURS TYPE :</strong>
-        Acquérir (Capteur) ➔ Traiter (Boîtier / Processeur) ➔ Communiquer (Interface / Écran).
+      <div class="card-actions">
+        <a href="quiz.html" class="action-btn btn-quiz">⚡ Quiz</a>
+        <a href="annales.html" class="action-btn btn-annales">📚 Annales</a>
       </div>
     </div>
 
