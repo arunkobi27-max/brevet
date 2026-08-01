@@ -103,42 +103,38 @@
 
     /* --- BARRE DE NAVIGATION CYBERPUNK --- */
     .nav-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px; /* பட்டன்களுக்கு இடையிலான இடைவெளியைக் குறைக்கவும் (10px -> 6px) */
-  width: 100%;
-  margin: 0 auto 30px auto;
-  padding: 10px 12px;
-  background: var(--card-bg);
-  border: 1.5px solid rgba(0, 240, 255, 0.3);
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
-  box-sizing: border-box;
-
-  /* 👇 இந்த 2 வரிகளைச் சேர்க்கவும் */
-  flex-wrap: nowrap;       /* அடுத்த வரிக்குச் செல்லாமல் ஒரே வரியில் வைக்கும் */
-  overflow-x: auto;        /* ஸ்கிரீன் சிறியதாக இருந்தால் Scroll செய்யும் வசதி */
-}
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+      margin: 0 auto 30px auto;
+      padding: 10px 12px;
+      background: var(--card-bg);
+      border: 1.5px solid rgba(0, 240, 255, 0.3);
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+      box-sizing: border-box;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
 
     .nav-btn {
-  font-family: 'Orbitron', system-ui, sans-serif;
-  font-size: 0.72rem; /* ஃபான்ட் அளவைச் சிறிதாக்கவும் (0.8rem -> 0.72rem) */
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--text-muted);
-  background: #1a2332;
-  padding: 8px 10px;  /* Padding-ஐக் குறைக்கவும் (10px 14px -> 8px 10px) */
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-
-  /* 👇 இந்த வரியைச் சேர்க்கவும் */
-  white-space: nowrap; /* பட்டனுക്കുള്ളில் உள்ள உரை மடங்காமல் தடுக்கும் */
-}
+      font-family: 'Orbitron', system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text-muted);
+      background: #1a2332;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
 
     .nav-btn:hover {
       color: var(--neon-cyan, #00f3ff);
@@ -326,8 +322,6 @@
       <a href="cours.html" class="nav-btn">📖 Cours DNB</a>
       <a href="orientation.html" class="nav-btn">🎓 Orientation & Bac</a>
       <a href="faq.html" class="nav-btn">❓ FAQ DNB</a>
-      
-      
     </nav>
 
     <!-- 3. Cyber Statistics Grid -->
@@ -438,24 +432,36 @@
       lowerText.includes("image") || 
       lowerText.includes("photo") || 
       lowerText.includes("dessine") || 
-      lowerText.includes("génère une image") ||
+      lowerText.includes("génère") ||
       lowerText.includes("draw") ||
       lowerText.includes("picture");
 
     try {
       if (isImageRequest) {
-        // --- 🎨 IMAGE GENERATION ---
-        document.getElementById(loadingId).innerText = "Génération de l'image en cours... 🎨⚡";
-        
-        const imageElement = await puter.ai.txt2img(userText);
+        // --- 🎨 RELIABLE IMAGE GENERATION VIA POLLINATIONS ---
         const loadingMessage = document.getElementById(loadingId);
+        loadingMessage.innerText = "Génération de l'image en cours... 🎨⚡";
         
-        loadingMessage.innerHTML = `Voici votre image :<br>`;
-        imageElement.classList.add("generated-img");
-        loadingMessage.appendChild(imageElement);
+        const cleanPrompt = encodeURIComponent(userText.replace(/dessine|génère|une image|photo|de|d'/gi, '').trim() || userText);
+        const imageUrl = `https://image.pollinations.ai/prompt/${cleanPrompt}?width=500&height=500&nologo=true&seed=${Math.floor(Math.random() * 1000)}`;
+
+        const img = new Image();
+        img.src = imageUrl;
+        img.className = "generated-img";
+        img.alt = userText;
+        
+        img.onload = function() {
+          loadingMessage.innerHTML = `Voici votre image pour : <strong>"${userText}"</strong><br>`;
+          loadingMessage.appendChild(img);
+          chatBox.scrollTop = chatBox.scrollHeight;
+        };
+
+        img.onerror = function() {
+          loadingMessage.innerText = "❌ Impossible de générer l'image. Réessaie avec d'autres mots.";
+        };
 
       } else {
-        // --- 📚 TEXT QUESTION ANSWERING ---
+        // --- 📚 TEXT QUESTION ANSWERING VIA PUTER ---
         const prompt = `Tu es un assistant IA pédagogique expert du Brevet des collèges (DNB) en France. Réponds de manière claire, dynamique et bienveillante en français à la question suivante : ${userText}`;
         
         const response = await puter.ai.chat(prompt, { model: 'gpt-4o-mini' });
@@ -465,6 +471,7 @@
       }
 
     } catch (error) {
+      console.error(error);
       document.getElementById(loadingId).innerText = "❌ Une erreur s'est produite. Réessaie dans un instant.";
     }
 
