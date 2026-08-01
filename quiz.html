@@ -1,388 +1,444 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quizz Express DNB 2026 - Gamer Edition</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Orbitron:wght@700;900&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Express DNB — Cyber Edition</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Orbitron:wght@700;800;900&display=swap');
 
-  :root {
-    --bg-main: #0b0e14;
-    --card-bg: #121824;
-    --card-inner: #1a2332;
-    --neon-cyan: #00f3ff;
-    --neon-magenta: #ff0055;
-    --neon-purple: #b537f2;
-    --neon-yellow: #ffe600;
-    --neon-green: #00ff66;
-    --text-light: #f1f5f9;
-    --text-muted: #94a3b8;
-  }
+    :root {
+      --bg-main: #0b0e14;
+      --card-bg: #121824;
+      --card-inner: #1a2332;
+      --neon-cyan: #00f3ff;
+      --neon-magenta: #ff0055;
+      --neon-purple: #b537f2;
+      --neon-yellow: #ffe600;
+      --neon-green: #00ff66;
+      --text-light: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
 
-  * { box-sizing: border-box; }
+    * { box-sizing: border-box; }
 
-  body {
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    background-color: var(--bg-main);
-    color: var(--text-light);
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-  }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-light);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(181, 55, 242, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(0, 243, 255, 0.08) 0%, transparent 50%);
+    }
 
-  /* BANNIÈRE EN-TÊTE */
-  .hero-header {
-    width: 100%;
-    max-width: 850px;
-    background: var(--card-bg);
-    border: 2px solid var(--neon-cyan);
-    border-radius: 16px;
-    box-shadow: 0 0 20px rgba(0, 243, 255, 0.25);
-    padding: 25px;
-    text-align: center;
-    margin-bottom: 25px;
-  }
+    .container {
+      width: 100%;
+      max-width: 850px;
+    }
 
-  .hero-badge {
-    display: inline-block;
-    color: var(--neon-cyan);
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    padding: 6px 14px;
-    border: 1.5px solid var(--neon-cyan);
-    border-radius: 20px;
-    box-shadow: inset 0 0 8px rgba(0, 243, 255, 0.3);
-    margin-bottom: 12px;
-    letter-spacing: 1px;
-  }
+    /* BANNIÈRE EN-TÊTE */
+    .hero-header {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid rgba(0, 243, 255, 0.3);
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+      padding: 25px;
+      text-align: center;
+      margin-bottom: 25px;
+      position: relative;
+      overflow: hidden;
+    }
 
-  .hero-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2rem;
-    font-weight: 900;
-    margin: 0 0 10px 0;
-    text-transform: uppercase;
-    color: #fff;
-  }
+    .hero-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-magenta));
+    }
 
-  .hero-title span {
-    color: var(--bg-main);
-    background: var(--neon-cyan);
-    padding: 2px 10px;
-    border-radius: 4px;
-    box-shadow: 0 0 12px var(--neon-cyan);
-  }
+    .hero-badge {
+      display: inline-block;
+      color: var(--neon-cyan);
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      border: 1px solid var(--neon-cyan);
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
 
-  .hero-subtitle {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    max-width: 600px;
-    margin: 0 auto;
-  }
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      margin: 0 0 10px 0;
+      text-transform: uppercase;
+      color: #fff;
+    }
 
-  /* CONTAINER PRINCIPAL */
-  .quiz-container {
-    width: 100%;
-    max-width: 850px;
-    background: var(--card-bg);
-    border: 2px solid var(--neon-purple);
-    border-radius: 16px;
-    box-shadow: 0 0 20px rgba(181, 55, 242, 0.25);
-    padding: 25px;
-    text-align: center;
-  }
+    .hero-title span {
+      color: var(--bg-main);
+      background: var(--neon-cyan);
+      padding: 2px 10px;
+      border-radius: 4px;
+      box-shadow: 0 0 12px var(--neon-cyan);
+    }
 
-  .quiz-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: var(--neon-yellow);
-    margin: 0 0 20px 0;
-    letter-spacing: 1px;
-  }
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
 
-  /* BOUTONS MATIÈRES */
-  .subject-select {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 25px;
-  }
+    /* NAVIGATION BAR */
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+      margin: 0 auto 30px auto;
+      padding: 10px 12px;
+      background: var(--card-bg);
+      border: 1.5px solid rgba(0, 240, 255, 0.3);
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
 
-  .btn-subject {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    padding: 10px 14px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    background: var(--card-inner);
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
+    .nav-btn {
+      font-family: 'Orbitron', system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text-muted);
+      background: #1a2332;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
 
-  .btn-subject.active {
-    background: transparent;
-    color: var(--neon-cyan);
-    border-color: var(--neon-cyan);
-    box-shadow: 0 0 10px rgba(0, 243, 255, 0.4), inset 0 0 5px rgba(0, 243, 255, 0.2);
-  }
+    .nav-btn:hover {
+      color: var(--neon-cyan);
+      border-color: var(--neon-cyan);
+      background: rgba(0, 243, 255, 0.08);
+      box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+      transform: translateY(-2px);
+    }
 
-  /* CARTE QUESTION */
-  .question-card {
-    background: var(--card-inner);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 20px;
-    text-align: left;
-    margin-bottom: 20px;
-  }
+    .nav-btn.active {
+      color: #0b0e14;
+      background: var(--neon-cyan);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+    }
 
-  .question-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-  }
+    /* CONTAINER PRINCIPAL */
+    .quiz-container {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1.5px solid var(--neon-purple);
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(181, 55, 242, 0.2);
+      padding: 25px;
+      text-align: center;
+    }
 
-  .question-number {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 700;
-    background: rgba(255, 0, 85, 0.15);
-    color: var(--neon-magenta);
-    padding: 4px 10px;
-    border: 1px solid var(--neon-magenta);
-    border-radius: 20px;
-  }
+    .quiz-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--neon-yellow);
+      margin: 0 0 20px 0;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
 
-  .best-score-badge {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.8rem;
-    color: var(--neon-green);
-    border: 1px solid var(--neon-green);
-    padding: 4px 10px;
-    border-radius: 20px;
-    background: rgba(0, 255, 102, 0.1);
-  }
+    /* BOUTONS MATIÈRES */
+    .subject-select {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
 
-  .question-text {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin: 0 0 20px 0;
-    color: #fff;
-    line-height: 1.4;
-  }
+    .btn-subject {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      background: var(--card-inner);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
 
-  /* OPTIONS DE RÉPONSE */
-  .options-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+    .btn-subject:hover {
+      border-color: var(--neon-cyan);
+      color: #fff;
+    }
 
-  .btn-option {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    text-align: left;
-    padding: 14px 16px;
-    background: #0b0e14;
-    color: var(--text-light);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
+    .btn-subject.active {
+      background: transparent;
+      color: var(--neon-cyan);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.4), inset 0 0 5px rgba(0, 243, 255, 0.2);
+    }
 
-  .btn-option:hover:not([disabled]) {
-    border-color: var(--neon-cyan);
-    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
-    transform: translateX(4px);
-  }
+    /* CARTE QUESTION */
+    .question-card {
+      background: var(--card-inner);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: left;
+      margin-bottom: 20px;
+    }
 
-  .btn-option.correct {
-    background: rgba(0, 255, 102, 0.15) !important;
-    border-color: var(--neon-green) !important;
-    color: var(--neon-green) !important;
-    box-shadow: 0 0 12px rgba(0, 255, 102, 0.3);
-  }
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
 
-  .btn-option.wrong {
-    background: rgba(255, 0, 85, 0.15) !important;
-    border-color: var(--neon-magenta) !important;
-    color: var(--neon-magenta) !important;
-    box-shadow: 0 0 12px rgba(255, 0, 85, 0.3);
-  }
+    .question-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: rgba(255, 0, 85, 0.15);
+      color: var(--neon-magenta);
+      padding: 4px 10px;
+      border: 1px solid var(--neon-magenta);
+      border-radius: 20px;
+    }
 
-  /* EXPLICATION & BOUTONS ACTION */
-  .explanation-box {
-    margin-top: 15px;
-    padding: 14px;
-    background: #0b0e14;
-    border: 1px solid var(--neon-yellow);
-    border-radius: 8px;
-    font-size: 0.9rem;
-    color: var(--neon-yellow);
-    display: none;
-    line-height: 1.4;
-  }
+    .best-score-badge {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      color: var(--neon-green);
+      border: 1px solid var(--neon-green);
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(0, 255, 102, 0.1);
+    }
 
-  .action-bar {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    margin-top: 20px;
-  }
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      color: #fff;
+      line-height: 1.4;
+    }
 
-  .btn-action {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s;
-  }
+    /* OPTIONS DE RÉPONSE */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
-  .btn-next {
-    background: var(--neon-cyan);
-    color: var(--bg-main);
-    box-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
-    display: none;
-  }
+    .btn-option {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-align: left;
+      padding: 14px 16px;
+      background: #0b0e14;
+      color: var(--text-light);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
 
-  .btn-restart {
-    background: transparent;
-    color: var(--neon-magenta);
-    border: 1px solid var(--neon-magenta);
-  }
+    .btn-option:hover:not([disabled]) {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+      transform: translateX(4px);
+    }
 
-  .btn-action:hover {
-    filter: brightness(1.2);
-    transform: translateY(-2px);
-  }
+    .btn-option.correct {
+      background: rgba(0, 255, 102, 0.15) !important;
+      border-color: var(--neon-green) !important;
+      color: var(--neon-green) !important;
+      box-shadow: 0 0 12px rgba(0, 255, 102, 0.3);
+    }
 
-  /* CARTE RÉSULTAT */
-  .score-card {
-    display: none;
-    background: var(--card-inner);
-    border: 2px solid var(--neon-green);
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
-  }
+    .btn-option.wrong {
+      background: rgba(255, 0, 85, 0.15) !important;
+      border-color: var(--neon-magenta) !important;
+      color: var(--neon-magenta) !important;
+      box-shadow: 0 0 12px rgba(255, 0, 85, 0.3);
+    }
 
-  .score-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.8rem;
-    color: #fff;
-    margin: 0 0 15px 0;
-  }
+    /* EXPLICATION & ACTION BAR */
+    .explanation-box {
+      margin-top: 15px;
+      padding: 14px;
+      background: #0b0e14;
+      border: 1px solid var(--neon-yellow);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: var(--neon-yellow);
+      display: none;
+      line-height: 1.4;
+    }
 
-  .score-value {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: var(--neon-green);
-    background: #0b0e14;
-    display: inline-block;
-    padding: 10px 25px;
-    border: 1.5px solid var(--neon-green);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
-    margin-bottom: 20px;
-  }
+    .action-bar {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
 
-  .score-record {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-  }
-  /* --- BARRE DE NAVIGATION CYBERPUNK --- */
- .nav-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px; /* பட்டன்களுக்கு இடையிலான இடைவெளியைக் குறைக்கவும் (10px -> 6px) */
-  width: 100%;
-  margin: 0 auto 30px auto;
-  padding: 10px 12px;
-  background: var(--card-bg);
-  border: 1.5px solid rgba(0, 240, 255, 0.3);
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
-  box-sizing: border-box;
+    .btn-action {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
 
-  /* 👇 இந்த 2 வரிகளைச் சேர்க்கவும் */
-  flex-wrap: nowrap;       /* அடுத்த வரிக்குச் செல்லாமல் ஒரே வரியில் வைக்கும் */
-  overflow-x: auto;        /* ஸ்கிரீன் சிறியதாக இருந்தால் Scroll செய்யும் வசதி */
-}
+    .btn-next {
+      background: var(--neon-cyan);
+      color: var(--bg-main);
+      box-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
+      display: none;
+    }
 
-  .nav-btn {
-  font-family: 'Orbitron', system-ui, sans-serif;
-  font-size: 0.72rem; /* ஃபான்ட் அளவைச் சிறிதாக்கவும் (0.8rem -> 0.72rem) */
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--text-muted);
-  background: #1a2332;
-  padding: 8px 10px;  /* Padding-ஐக் குறைக்கவும் (10px 14px -> 8px 10px) */
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+    .btn-restart {
+      background: transparent;
+      color: var(--neon-magenta);
+      border: 1px solid var(--neon-magenta);
+    }
 
-  /* 👇 இந்த வரியைச் சேர்க்கவும் */
-  white-space: nowrap; /* பட்டனுക്കുള്ളில் உள்ள உரை மடங்காமல் தடுக்கும் */
-}
+    .btn-action:hover {
+      filter: brightness(1.2);
+      transform: translateY(-2px);
+    }
 
-/* Effet au survol (Hover) */
-.nav-btn:hover {
-  color: var(--neon-cyan, #00f3ff);
-  border-color: var(--neon-cyan, #00f3ff);
-  background: rgba(0, 243, 255, 0.08);
-  box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
-  transform: translateY(-2px);
-}
+    /* CARTE RÉSULTAT ET QUICK LINKS */
+    .score-card {
+      display: none;
+      background: var(--card-inner);
+      border: 2px solid var(--neon-green);
+      border-radius: 12px;
+      padding: 30px 20px;
+      box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
+    }
 
-/* Page active */
-.nav-btn.active,
-.nav-btn.primary {
-  color: #0b0e14;
-  background: var(--neon-cyan, #00f3ff);
-  border-color: var(--neon-cyan, #00f3ff);
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
-}
+    .score-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      color: #fff;
+      margin: 0 0 15px 0;
+    }
 
-.nav-btn.active:hover,
-.nav-btn.primary:hover {
-  background: #33f6ff;
-  box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
-}
-</style>
+    .score-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: var(--neon-green);
+      background: #0b0e14;
+      display: inline-block;
+      padding: 10px 25px;
+      border: 1.5px solid var(--neon-green);
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+      margin-bottom: 15px;
+    }
+
+    .score-record {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 25px;
+    }
+
+    /* BOUTONS DE REDIRECTION RAPIDE EN FIN DE GAME */
+    .quick-links-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      color: var(--neon-cyan);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .action-links {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    .quick-link-btn {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--neon-cyan);
+      border: 1px solid var(--neon-cyan);
+      background: rgba(0, 243, 255, 0.05);
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .quick-link-btn:hover {
+      background: var(--neon-cyan);
+      color: #0b0e14;
+      box-shadow: 0 0 10px var(--neon-cyan);
+    }
+  </style>
 </head>
 <body>
 
-  <header class="hero-header">
-    <div class="hero-badge">🎯 ENTRAÎNEMENT RAPIDE</div>
-    <h1 class="hero-title">Quizz Express <span>DNB</span></h1>
-    <p class="hero-subtitle">
-      Teste tes révisions avec 10 questions ciblées par matière et enregistre tes meilleurs scores.
-    </p>
-  </header>
+  <div class="container">
 
-  <!-- Navigation Menu -->
-<nav class="nav-container">
+    <!-- BANNIÈRE EN-TÊTE -->
+    <header class="hero-header">
+      <div class="hero-badge">🎯 ENTRAÎNEMENT RAPIDE DNB</div>
+      <h1 class="hero-title">Quizz Express <span>DNB</span></h1>
+      <p class="hero-subtitle">
+        Teste tes révisions avec des questions ciblées par matière, débloque des explications instantanées et enregistre tes meilleurs scores.
+      </p>
+    </header>
+
+    <!-- NAVIGATION MENU -->
+    <nav class="nav-container">
       <a href="index.html" class="nav-btn">🏠 Index DNB</a>
       <a href="annales.html" class="nav-btn">📚 Annales</a>
       <a href="calculateur.html" class="nav-btn">🧮 Calculateur</a>
@@ -390,46 +446,58 @@
       <a href="cours.html" class="nav-btn">📖 Cours DNB</a>
       <a href="orientation.html" class="nav-btn">🎓 Orientation & Bac</a>
       <a href="faq.html" class="nav-btn">❓ FAQ DNB</a>
-      
-      
     </nav>
 
-  <div class="quiz-container">
-    <h2 class="quiz-title">🎮 SELECTIONNER UNE MATIERE</h2>
+    <!-- CONTAINER DU QUIZ -->
+    <div class="quiz-container">
+      <h2 class="quiz-title">🎮 CHOISIS TA MATIÈRE</h2>
 
-    <div class="subject-select">
-      <button class="btn-subject active" onclick="loadSubject('maths', event)">📐 Maths</button>
-      <button class="btn-subject" onclick="loadSubject('francais', event)">📖 Français</button>
-      <button class="btn-subject" onclick="loadSubject('histoire', event)">🌍 Hist-Géo</button>
-      <button class="btn-subject" onclick="loadSubject('sciences', event)">🔬 Sciences</button>
-    </div>
+      <div class="subject-select">
+        <button class="btn-subject active" onclick="loadSubject('maths', event)">📐 Maths</button>
+        <button class="btn-subject" onclick="loadSubject('francais', event)">📖 Français</button>
+        <button class="btn-subject" onclick="loadSubject('histoire', event)">🌍 Hist-Géo</button>
+        <button class="btn-subject" onclick="loadSubject('emc', event)">⚖️ EMC</button>
+        <button class="btn-subject" onclick="loadSubject('sciences', event)">🔬 Sciences & Tech</button>
+      </div>
 
-    <!-- Zone du Quiz -->
-    <div id="quizBox">
-      <div class="question-card">
-        <div class="question-header">
-          <span class="question-number" id="qNum">Question 1 / 10</span>
-          <span class="best-score-badge" id="bestScoreBadge">Record : 0 / 10</span>
+      <!-- Zone du Quiz -->
+      <div id="quizBox">
+        <div class="question-card">
+          <div class="question-header">
+            <span class="question-number" id="qNum">Question 1 / 10</span>
+            <span class="best-score-badge" id="bestScoreBadge">Record : 0 / 10</span>
+          </div>
+          <p class="question-text" id="qText">Chargement...</p>
+
+          <div class="options-grid" id="optionsBox"></div>
+          <div class="explanation-box" id="explanationBox"></div>
         </div>
-        <p class="question-text" id="qText">Chargement...</p>
 
-        <div class="options-grid" id="optionsBox"></div>
-        <div class="explanation-box" id="explanationBox"></div>
+        <div class="action-bar">
+          <button class="btn-action btn-restart" onclick="restartQuiz()">🔄 Recommencer</button>
+          <button class="btn-action btn-next" id="nextBtn" onclick="nextQuestion()">Suivant ➔</button>
+        </div>
       </div>
 
-      <div class="action-bar">
-        <button class="btn-action btn-restart" onclick="restartQuiz()">🔄 Recommencer</button>
-        <button class="btn-action btn-next" id="nextBtn" onclick="nextQuestion()">Suivant ➔</button>
+      <!-- Zone Résultat avec Redirection Directe -->
+      <div class="score-card" id="scoreCard">
+        <h3 class="score-title">SESSION TERMINÉE ! 🎉</h3>
+        <div class="score-value" id="finalScore">0 / 10</div>
+        <p class="score-record" id="recordText"></p>
+        
+        <button class="btn-action btn-next" style="display:inline-block; margin-bottom: 20px;" onclick="restartQuiz()">Rejouer cette matière 🔄</button>
+
+        <div class="quick-links-title">🚀 Continuer tes révisions sur d'autres pages :</div>
+        <div class="action-links">
+          <a href="cours.html" class="quick-link-btn">📖 Revoir les Cours</a>
+          <a href="annales.html" class="quick-link-btn">📚 S'entraîner sur les Annales</a>
+          <a href="calculateur.html" class="quick-link-btn">🧮 Simuler ses Notes DNB</a>
+          <a href="orientation.html" class="quick-link-btn">🎓 Découvrir le Lycée</a>
+        </div>
       </div>
+
     </div>
 
-    <!-- Zone Résultat -->
-    <div class="score-card" id="scoreCard">
-      <h3 class="score-title">SESSION TERMINÉE ! 🎉</h3>
-      <div class="score-value" id="finalScore">0 / 10</div>
-      <p class="score-record" id="recordText"></p>
-      <button class="btn-action btn-next" style="display:inline-block;" onclick="restartQuiz()">Rejouer cette matière 🔄</button>
-    </div>
   </div>
 
 <script>
@@ -461,14 +529,21 @@ const quizData = {
   histoire: [
     { q: "En quelle année débute la Première Guerre mondiale ?", options: ["1914", "1918", "1939"], answer: 0, exp: "La Grande Guerre débute durant l'été 1914 et s'achève en 1918." },
     { q: "Quelle est la capitale de l'Union Européenne (siège principal des institutions) ?", options: ["Paris", "Bruxelles", "Berlin"], answer: 1, exp: "Bruxelles accueille les sièges de la Commission et du Conseil de l'UE." },
-    { q: "Que signifie le sigle EMC ?", options: ["Éducation Morale et Civique", "Épreuve de Mathématiques Complémentaires", "Étude des Médias et de la Culture"], answer: 0, exp: "L'EMC enseigne les valeurs de la République et la citoyenneté." },
     { q: "Qui prend le pouvoir en Allemagne en 1933 ?", options: ["Staline", "Mussolini", "Adolf Hitler"], answer: 2, exp: "Hitler est nommé chancelier d'Allemagne en janvier 1933." },
     { q: "En quelle année le droit de vote a-t-il été accordé aux femmes en France ?", options: ["1789", "1936", "1944"], answer: 2, exp: "Le Comité français de libération nationale accorde le droit de vote aux femmes en 1944." },
     { q: "Quel événement marque le début de la Seconde Guerre mondiale en Europe ?", options: ["L'invasion de la Pologne en 1939", "L'attaque de Pearl Harbor", "Le débarquement de Normandie"], answer: 0, exp: "L'invasion de la Pologne par l'Allemagne le 1er septembre 1939 déclenche la guerre." },
     { q: "Quelle est la valeur centrale rappelée par la devise républicaine 'Liberté, Égalité, ...' ?", options: ["Solidarité", "Fraternité", "Justice"], answer: 1, exp: "La devise officielle de la République française est Liberté, Égalité, Fraternité." },
     { q: "Comment appelle-t-on le déplacement massif de populations des campagnes vers les villes ?", options: ["L'exode rural", "La mondialisation", "La périurbanisation"], answer: 0, exp: "L'exode rural correspond au départ d'habitants des campagnes vers les zones urbaines." },
     { q: "Quel traité met fin officiellement à la Première Guerre mondiale en 1919 ?", options: ["Traité de Rome", "Traité de Versailles", "Traité de Maastricht"], answer: 1, exp: "Le traité de Versailles a été signé le 28 juin 1919." },
-    { q: "Où se situe le siège de l'Organisation des Nations Unies (ONU) ?", options: ["Genève", "New York", "Washington"], answer: 1, exp: "Le siège principal des Nations Unies est établi à New York." }
+    { q: "Où se situe le siège de l'Organisation des Nations Unies (ONU) ?", options: ["Genève", "New York", "Washington"], answer: 1, exp: "Le siège principal des Nations Unies est établi à New York." },
+    { q: "Quel président français a instauré la Ve République en 1958 ?", options: ["François Mitterrand", "Charles de Gaulle", "Georges Pompidou"], answer: 1, exp: "Le Général de Gaulle fait adopter la constitution de la Ve République en 1958." }
+  ],
+  emc: [
+    { q: "Que signifie le sigle EMC ?", options: ["Éducation Morale et Civique", "Étude des Médias et Culture", "Élection Municipale et Citoyenneté"], answer: 0, exp: "L'EMC enseigne les valeurs de la République, la laïcité et les droits des citoyens." },
+    { q: "Lequel de ces principes n'est PAS un pilier de la République française ?", options: ["La laïcité", "La monarchie", "La démocratie"], answer: 1, exp: "La France est une République démocratique, indivisible, laïque et sociale." },
+    { q: "À quel âge s'effectue le recensement citoyen obligatoire en France ?", options: ["15 ans", "16 ans", "18 ans"], answer: 1, exp: "Chaque jeune Français doit se faire recenser en mairie à partir de ses 16 ans." },
+    { q: "Quel texte fondamental garantit la liberté d'expression en France depuis 1789 ?", options: ["La Déclaration des Droits de l'Homme et du Citoyen", "Le Code Civil", "Le Traité de Rome"], answer: 0, exp: "L'article 11 de la DDHC de 1789 protège la libre communication des pensées." },
+    { q: "Qui détient la souveraineté nationale dans une démocratie républicaine ?", options: ["Le Président", "Le Peuple", "L'Armée"], answer: 1, exp: "La souveraineté nationale appartient au peuple qui l'exerce par ses représentants et par le référendum." }
   ],
   sciences: [
     { q: "Quel est le pH d'une solution neutre à 25°C ?", options: ["0", "7", "14"], answer: 1, exp: "Un pH égal à 7 est neutre. En dessous il est acide, au-dessus il est basique." },
@@ -480,7 +555,7 @@ const quizData = {
     { q: "Quel organe filtre le sang pour fabriquer l'urine ?", options: ["Le foie", "Les reins", "Le poumon"], answer: 1, exp: "Les reins épurent le sang en éliminant les déchets sous forme d'urine." },
     { q: "Quelle est la formule chimique de la molécule d'eau ?", options: ["CO2", "H2O", "NaCl"], answer: 1, exp: "L'eau se compose de deux atomes d'hydrogène et d'un atome d'oxygène (H2O)." },
     { q: "Quelle énergie dépend de la hauteur d'un objet par rapport au sol ?", options: ["Énergie cinétique", "Énergie potentielle de pesanteur", "Énergie thermique"], answer: 1, exp: "L'énergie potentielle dépend de la masse et de l'altitude de l'objet." },
-    { q: "Quel est le rôle des globules rouges dans le sang ?", options: ["Lutter contre les infections", "Transporter le dioxygène", "Permettre la coagulation"], answer: 1, exp: "L'hémoglobine contenue dans les globules rouges fixe et transporte l'oxygène." }
+    { q: "Quel composant d'un circuit informatique exécute les instructions du programme ?", options: ["Le disque dur", "Le processeur (CPU)", "La mémoire RAM"], answer: 1, exp: "Le processeur est le cerveau informatique chargé du traitement de l'information." }
   ]
 };
 
@@ -507,7 +582,8 @@ function loadSubject(subject, ev) {
 
 function updateBestScoreDisplay() {
   const savedBest = localStorage.getItem('quiz_best_' + currentSubject) || 0;
-  document.getElementById('bestScoreBadge').innerText = `Record : ${savedBest} / 10`;
+  const totalQ = quizData[currentSubject].length;
+  document.getElementById('bestScoreBadge').innerText = `Record : ${savedBest} / ${totalQ}`;
 }
 
 function showQuestion() {
@@ -592,7 +668,7 @@ function restartQuiz() {
   loadSubject(currentSubject);
 }
 
-// Lancement au chargement
+// Lancement automatique
 updateBestScoreDisplay();
 showQuestion();
 </script>
