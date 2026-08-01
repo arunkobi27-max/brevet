@@ -18,7 +18,6 @@
     --text-light: #e2e8f0;
     --text-dim: #94a3b8;
     --text-muted: #94a3b8;
-    --border-glow: 0 0 10px rgba(0, 240, 255, 0.5);
   }
 
   * {
@@ -45,7 +44,7 @@
     max-width: 950px;
   }
 
-  /* --- HERO HEADER CYBERPUNK --- */
+  /* --- HERO HEADER --- */
   .hero-header {
     width: 100%;
     background: var(--card-bg);
@@ -114,44 +113,39 @@
     line-height: 1.5;
   }
 
-  /* --- BARRE DE NAVIGATION CYBERPUNK --- */
+  /* --- NAVIGATION --- */
   .nav-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px; /* பட்டன்களுக்கு இடையிலான இடைவெளியைக் குறைக்கவும் (10px -> 6px) */
-  width: 100%;
-  margin: 0 auto 30px auto;
-  padding: 10px 12px;
-  background: var(--card-bg);
-  border: 1.5px solid rgba(0, 240, 255, 0.3);
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
-  box-sizing: border-box;
-
-  /* 👇 இந்த 2 வரிகளைச் சேர்க்கவும் */
-  flex-wrap: nowrap;       /* அடுத்த வரிக்குச் செல்லாமல் ஒரே வரியில் வைக்கும் */
-  overflow-x: auto;        /* ஸ்கிரீன் சிறியதாக இருந்தால் Scroll செய்யும் வசதி */
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    margin: 0 auto 30px auto;
+    padding: 10px 12px;
+    background: var(--card-bg);
+    border: 1.5px solid rgba(0, 240, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
 
   .nav-btn {
-  font-family: 'Orbitron', system-ui, sans-serif;
-  font-size: 0.72rem; /* ஃபான்ட் அளவைச் சிறிதாக்கவும் (0.8rem -> 0.72rem) */
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--text-muted);
-  background: #1a2332;
-  padding: 8px 10px;  /* Padding-ஐக் குறைக்கவும் (10px 14px -> 8px 10px) */
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-
-  /* 👇 இந்த வரியைச் சேர்க்கவும் */
-  white-space: nowrap; /* பட்டனுക്കുള്ളில் உள்ள உரை மடங்காமல் தடுக்கும் */
-}
+    font-family: 'Orbitron', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text-muted);
+    background: var(--card-inner);
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
 
   .nav-btn:hover {
     color: var(--neon-cyan);
@@ -161,17 +155,11 @@
     transform: translateY(-2px);
   }
 
-  /* Indique la page courante */
   .nav-btn.active {
     color: #0b0e14;
     background: var(--neon-cyan);
     border-color: var(--neon-cyan);
     box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
-  }
-
-  .nav-btn.active:hover {
-    background: #33f6ff;
-    box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
   }
 
   /* --- SELECTEUR D'ANNÉE --- */
@@ -214,7 +202,7 @@
     font-weight: 700;
   }
 
-  /* --- CONTENU ET TABLEAU --- */
+  /* --- CONTENU & TABLEAUX --- */
   .year-content {
     display: none;
     animation: fadeIn 0.3s ease-in-out;
@@ -302,13 +290,17 @@
     font-weight: 600;
   }
 
-  /* --- BOUTONS GAMER / CYBERPUNK --- */
-  .btn-group { display: flex; gap: 10px; }
+  /* --- BOUTONS SUJET ET CORRIGÉ --- */
+  .btn-group { 
+    display: flex; 
+    gap: 8px; 
+    flex-wrap: wrap;
+  }
 
   .cyber-btn {
     font-family: 'Orbitron', sans-serif;
-    padding: 10px 22px;
-    font-size: 0.85rem;
+    padding: 8px 16px;
+    font-size: 0.8rem;
     font-weight: 800;
     text-transform: uppercase;
     text-decoration: none;
@@ -319,6 +311,7 @@
     letter-spacing: 1px;
   }
 
+  /* Bouton Sujet (Purple) */
   .btn-sujet {
     color: #fff;
     background: linear-gradient(135deg, var(--neon-purple), #6d28d9);
@@ -328,19 +321,28 @@
 
   .btn-sujet:hover {
     background: linear-gradient(135deg, #b55fe6, #7c3aed);
-    box-shadow: 0 0 20px rgba(157, 78, 221, 0.8);
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.8);
     transform: translateY(-2px);
-    color: #fff;
   }
 
-  .btn-sujet:active {
-    transform: translateY(0);
+  /* Bouton Corrigé (Pink) */
+  .btn-corrige {
+    color: #fff;
+    background: linear-gradient(135deg, var(--neon-pink), #be123c);
+    border: 1px solid var(--neon-pink);
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
+  }
+
+  .btn-corrige:hover {
+    background: linear-gradient(135deg, #ff3399, #e11d48);
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.8);
+    transform: translateY(-2px);
   }
 
   @media (max-width: 600px) {
     th, td { padding: 12px 10px; }
     .hero-title { font-size: 1.7rem; }
-    .nav-btn { font-size: 0.75rem; padding: 8px 10px; }
+    .cyber-btn { padding: 6px 10px; font-size: 0.75rem; }
   }
 </style>
 </head>
@@ -359,18 +361,16 @@
     </p>
   </header>
 
-  <!-- Navigation Menu -->
+  <!-- NAVBAR -->
   <nav class="nav-container">
-      <a href="index.html" class="nav-btn">🏠 Index DNB</a>
-      <a href="annales.html" class="nav-btn active">📚 Annales</a>
-      <a href="calculateur.html" class="nav-btn">🧮 Calculateur</a>
-      <a href="quiz.html" class="nav-btn">⚡ Quiz DNB</a>
-      <a href="cours.html" class="nav-btn">📖 Cours DNB</a>
-      <a href="orientation.html" class="nav-btn">🎓 Orientation & Bac</a>
-      <a href="faq.html" class="nav-btn">❓ FAQ DNB</a>
-      
-      
-    </nav>
+    <a href="index.html" class="nav-btn">🏠 Index DNB</a>
+    <a href="annales.html" class="nav-btn active">📚 Annales</a>
+    <a href="calculateur.html" class="nav-btn">🧮 Calculateur</a>
+    <a href="quiz.html" class="nav-btn">⚡ Quiz DNB</a>
+    <a href="cours.html" class="nav-btn">📖 Cours DNB</a>
+    <a href="orientation.html" class="nav-btn">🎓 Orientation & Bac</a>
+    <a href="faq.html" class="nav-btn">❓ FAQ DNB</a>
+  </nav>
 
   <!-- SELECTEUR D'ANNÉE -->
   <div class="select-container">
@@ -403,22 +403,42 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-sciences-serie-generale-518633.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-sciences-serie-generale-518633.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-francais-grammaire-et-competences-linguistiques-comprehension-et_3.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-francais-grammaire-et-competences-linguistiques-comprehension-et_3.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-histoire-geographie-enseignement-moral-et-civique-serie-generale_2.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-histoire-geographie-enseignement-moral-et-civique-serie-generale_2.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-sciences-serie-generale-518603.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://www.education.gouv.fr/sites/default/files/document/diplome-national-du-brevet-2026-sciences-serie-generale-518603.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -441,22 +461,42 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genmatmeag1pdf-125624.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genmatmeag1pdf-125624.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genfrqgcme1v1pdf-116892.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genfrqgcme1v1pdf-116892.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genhgemcme1v3pdf-116931.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genhgemcme1v3pdf-116931.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genscmeag1pdf-116934.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/25genscmeag1pdf-116934.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -479,22 +519,42 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genmatmeag1pdf-110346.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genmatmeag1pdf-110346.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genfrqgcme1v1pdf-110286.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genfrqgcme1v1pdf-110286.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genhgemcme1pdf-110313.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genhgemcme1pdf-110313.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genscmeag1pdf-110355.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/24genscmeag1pdf-110355.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -517,22 +577,42 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genmatmeag1pdf-102552.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genmatmeag1pdf-102552.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genfrqgcme1pdf-102504.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genfrqgcme1pdf-102504.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genhgemcme1pdf-102522.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genhgemcme1pdf-102522.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genscmeag1pdf-102558.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/23genscmeag1pdf-102558.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -555,22 +635,42 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/dnb22genmatmeagpdf-96468.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/dnb22genmatmeagpdf-96468.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/22genfrqgcme1pdf-100173.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/22genfrqgcme1pdf-100173.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/dnb22genhgemcme2pdf-96012.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/dnb22genhgemcme2pdf-96012.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/dnb22genscmeagpdf-96474.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/dnb22genscmeagpdf-96474.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -593,22 +693,42 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genmatmeag1pdf-94179.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genmatmeag1pdf-94179.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genfrqgcme1pdf-94215.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genfrqgcme1pdf-94215.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genhgemcme4pdf-94185.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genhgemcme4pdf-94185.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genscmeag1pdf-94191.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/21genscmeag1pdf-94191.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -631,22 +751,42 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genmatmeag1pdf-94161.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genmatmeag1pdf-94161.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genfrqgcme1pdf-73608.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genfrqgcme1pdf-73608.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genhgemcme1pdf-94173.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genhgemcme1pdf-94173.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genscmeag1pdf-94167.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/20genscmeag1pdf-94167.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -669,22 +809,42 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genmatmeag1pdf-80235.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genmatmeag1pdf-80235.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genfrqgcme1pdf-80253.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genfrqgcme1pdf-80253.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genhgemcme1pdf-80265.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genhgemcme1pdf-80265.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genscmeag1pdf-80271.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/19genscmeag1pdf-80271.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -707,22 +867,42 @@
           <tr>
             <td class="subject-name">Mathématiques</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genmatmeag1pdf-80277.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genmatmeag1pdf-80277.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Français</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genfrqgcme1pdf-80295.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genfrqgcme1pdf-80295.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Histoire-Géographie & EMC</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genhgemcme2pdf-80307.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genhgemcme2pdf-80307.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="subject-name">Sciences</td>
             <td><span class="centre-badge">Métropole</span></td>
-            <td><div class="btn-group"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genscmeag1pdf-80313.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a></div></td>
+            <td>
+              <div class="btn-group">
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genscmeag1pdf-80313.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -744,7 +924,6 @@
       }
     }
 
-    // Détection d'un paramètre d'URL (ex: annales.html?annee=2024)
     const urlParams = new URLSearchParams(window.location.search);
     const paramYear = urlParams.get('annee');
     
@@ -755,7 +934,6 @@
       switchYear(select.value);
     }
 
-    // Écouteur de changement sur le selecteur
     select.addEventListener("change", function () {
       switchYear(this.value);
     });
