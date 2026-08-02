@@ -93,65 +93,79 @@
       line-height: 1.6;
     }
 
-    /* --- NAVIGATION BAR --- */
-    .nav-container {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-      margin: 0 auto 30px auto;
-      padding: 12px;
-      background: var(--card-bg);
-      border: 1.5px solid rgba(0, 240, 255, 0.3);
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
-      box-sizing: border-box;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-    }
+.nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  background: rgba(13, 17, 23, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 12px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-    /* Custom Scrollbar for Nav */
-    .nav-container::-webkit-scrollbar {
-      height: 4px;
-    }
-    .nav-container::-webkit-scrollbar-thumb {
-      background: var(--neon-cyan);
-      border-radius: 4px;
-    }
+.nav-btn {
+  color: #e6edf3;
+  text-decoration: none;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  transition: all 0.3s ease;
+}
 
-    .nav-btn {
-      font-family: 'Orbitron', system-ui, sans-serif;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-decoration: none;
-      color: var(--text-muted);
-      background: #1a2332;
-      padding: 9px 12px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      transition: all 0.25s ease;
-      white-space: nowrap;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
+.nav-btn:hover,
+.nav-btn.active {
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.12);
+  border-color: #00f0ff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.25);
+}
 
-    .nav-btn:hover {
-      color: var(--neon-cyan);
-      border-color: var(--neon-cyan);
-      background: rgba(0, 240, 255, 0.08);
-      box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
-      transform: translateY(-2px);
-    }
+/* Toggle Button Style */
+.mobile-nav-toggle {
+  display: none;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid #00f0ff;
+  color: #00f0ff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
 
-    .nav-btn.active {
-      color: #0b0e14;
-      background: var(--neon-cyan);
-      border-color: var(--neon-cyan);
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
-    }
+/* Mobile Screens Styling */
+@media (max-width: 820px) {
+  .mobile-nav-toggle {
+    display: block; /* Show Toggle Button */
+  }
 
+  .nav-container {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px 16px;
+  }
+
+  .nav-btn {
+    display: none; /* Hide Menu Buttons initially */
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 1.05rem;
+  }
+
+  .nav-container.open .nav-btn {
+    display: block; /* Show Menu Buttons when open */
+  }
+}
     /* --- STATS GRID --- */
     .stats-grid {
       display: grid;
@@ -587,7 +601,7 @@
       <a href="cours.html" class="nav-btn">📖 Cours</a>
       <a href="orientation.html" class="nav-btn">🎓 Orientation</a>
       <a href="faq.html" class="nav-btn">❓ FAQ</a>
-      <a href="faq.html" class="nav-btn">📅 Planning </a>
+      <a href="planning.html" class="nav-btn">📅 Planning </a>
     </nav>
 
     <!-- STATISTICS GRID -->
@@ -824,6 +838,24 @@
   const selectedSubject = document.getElementById('quickSubject').value;
   // URL-ல் பாடத்தின் பெயரை query parameter ஆக அனுப்பும்
   this.href = `annales.html?subject=${encodeURIComponent(selectedSubject)}`;
+});
+    document.addEventListener('DOMContentLoaded', () => {
+  const navContainer = document.querySelector('.nav-container');
+
+  // Inject Mobile Toggle Button dynamically without touching your HTML file
+  if (window.innerWidth <= 820 && navContainer) {
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'mobile-nav-toggle';
+    toggleBtn.innerHTML = '⚡ Menu Navigation ☰';
+    navContainer.prepend(toggleBtn);
+
+    toggleBtn.addEventListener('click', () => {
+      navContainer.classList.toggle('open');
+      toggleBtn.innerHTML = navContainer.classList.contains('open') 
+        ? '⚡ Fermer Le Menu ✖' 
+        : '⚡ Menu Navigation ☰';
+    });
+  }
 });
   </script>
 </body>
