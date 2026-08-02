@@ -344,6 +344,77 @@
     .hero-title { font-size: 1.7rem; }
     .cyber-btn { padding: 6px 10px; font-size: 0.75rem; }
   }
+  cyber-tools-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .filter-card, .chrono-card {
+    background: var(--card-bg);
+    border: 1.5px solid rgba(0, 240, 255, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+  }
+
+  .tool-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    color: var(--neon-cyan);
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+  }
+
+  .filter-grid, .chrono-controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .cyber-input, .cyber-select-sm {
+    background: var(--card-inner);
+    color: var(--text-light);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+    flex: 1;
+    min-width: 180px;
+  }
+
+  .cyber-input:focus, .cyber-select-sm:focus {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+  }
+
+  .timer-display {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--neon-yellow);
+    text-shadow: 0 0 10px rgba(255, 230, 0, 0.5);
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .bookmark-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease;
+    padding: 0 5px;
+  }
+
+  .bookmark-btn:hover {
+    transform: scale(1.2);
+  }
 </style>
 </head>
 <body>
@@ -371,6 +442,48 @@
     <a href="orientation.html" class="nav-btn">🎓 Orientation & Bac</a>
     <a href="faq.html" class="nav-btn">❓ FAQ DNB</a>
   </nav>
+
+  <!-- SYSTEME DE FILTRE, CHRONO ET FAVORIS -->
+<div class="cyber-tools-wrapper">
+  
+  <!-- 1. BARRE DE RECHERCHE ET FILTRES -->
+  <div class="filter-card">
+    <h3 class="tool-title">🔍 Filtrer les Annales</h3>
+    <div class="filter-grid">
+      <input type="text" id="searchInput" class="cyber-input" placeholder="Rechercher une matière ou un centre...">
+      
+      <select id="filterSubject" class="cyber-select-sm">
+        <option value="">Toutes les matières</option>
+        <option value="Mathématiques">Mathématiques</option>
+        <option value="Français">Français</option>
+        <option value="Histoire-Géographie & EMC">Histoire-Géographie & EMC</option>
+        <option value="Sciences">Sciences</option>
+      </select>
+
+      <select id="filterCenter" class="cyber-select-sm">
+        <option value="">Tous les centres</option>
+        <option value="Métropole">Métropole</option>
+        <!-- Ajoute d'autres centres si nécessaire -->
+      </select>
+    </div>
+  </div>
+
+  <!-- 2. CHRONOMÈTRE D'EXAMEN -->
+  <div class="chrono-card">
+    <h3 class="tool-title">⏱️ Mode Examen Chrono</h3>
+    <div class="chrono-controls">
+      <select id="chronoDuration" class="cyber-select-sm">
+        <option value="7200">Mathématiques / Français (2h 00)</option>
+        <option value="7200">Histoire-Géo & EMC (2h 00)</option>
+        <option value="3600">Sciences (1h 00)</option>
+      </select>
+      <button id="startChronoBtn" class="cyber-btn btn-sujet">Démarrer</button>
+      <button id="stopChronoBtn" class="cyber-btn btn-corrige" style="display:none;">Arrêter</button>
+    </div>
+    <div id="chronoDisplay" class="timer-display">02:00:00</div>
+  </div>
+
+</div>
 
   <!-- SELECTEUR D'ANNÉE -->
   <div class="select-container">
@@ -922,6 +1035,140 @@
       targetEl.classList.add('active');
     }
   });
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+  /* =======================================================
+     1. GESTION DES FAVORIS (BOOKMARK - LOCALSTORAGE)
+     ======================================================= */
+  const FAVORITES_KEY = 'dnb_cyber_favorites';
+  let favorites = JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
+
+  // Add Bookmark buttons to table rows dynamically
+  document.querySelectorAll('tbody tr').forEach((row, index) => {
+    const subjectName = row.querySelector('.subject-name')?.innerText.trim();
+    const yearContainer = row.closest('.year-content');
+    const yearId = yearContainer ? yearContainer.id : 'unknown';
+    const itemId = `${yearId}-${subjectName}`;
+
+    const actionCell = row.querySelector('td:last-child .btn-group');
+    if (actionCell) {
+      const isFav = favorites.includes(itemId);
+      const starBtn = document.createElement('button');
+      starBtn.className = 'bookmark-btn';
+      starBtn.innerHTML = isFav ? '⭐' : '☆';
+      starBtn.title = isFav ? 'Retirer des favoris' : 'Ajouter aux favoris';
+      
+      starBtn.addEventListener('click', () => {
+        if (favorites.includes(itemId)) {
+          favorites = favorites.filter(id => id !== itemId);
+          starBtn.innerHTML = '☆';
+          starBtn.title = 'Ajouter aux favoris';
+        } else {
+          favorites.push(itemId);
+          starBtn.innerHTML = '⭐';
+          starBtn.title = 'Retirer des favoris';
+        }
+        localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+      });
+
+      actionCell.appendChild(starBtn);
+    }
+  });
+
+
+  /* =======================================================
+     2. RECHERCHE ET FILTRES DYNAMIQUES
+     ======================================================= */
+  const searchInput = document.getElementById('searchInput');
+  const filterSubject = document.getElementById('filterSubject');
+  const filterCenter = document.getElementById('filterCenter');
+
+  function filterTables() {
+    const textValue = searchInput.value.toLowerCase();
+    const subjectValue = filterSubject.value.toLowerCase();
+    const centerValue = filterCenter.value.toLowerCase();
+
+    const activeYearContent = document.querySelector('.year-content.active');
+    if (!activeYearContent) return;
+
+    const rows = activeYearContent.querySelectorAll('tbody tr');
+
+    rows.forEach(row => {
+      const subject = row.querySelector('.subject-name')?.innerText.toLowerCase() || '';
+      const center = row.querySelector('.centre-badge')?.innerText.toLowerCase() || '';
+      
+      const matchesSearch = subject.includes(textValue) || center.includes(textValue);
+      const matchesSubject = subjectValue === '' || subject.includes(subjectValue);
+      const matchesCenter = centerValue === '' || center.includes(centerValue);
+
+      if (matchesSearch && matchesSubject && matchesCenter) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+
+  searchInput.addEventListener('keyup', filterTables);
+  filterSubject.addEventListener('change', filterTables);
+  filterCenter.addEventListener('change', filterTables);
+
+  // Re-apply filter when changing year
+  document.getElementById('yearSelect').addEventListener('change', () => {
+    setTimeout(filterTables, 50);
+  });
+
+
+  /* =======================================================
+     3. CHRONOMÈTRE D'EXAMEN (TIMER)
+     ======================================================= */
+  let timerInterval = null;
+  let timeRemaining = 0;
+
+  const chronoDisplay = document.getElementById('chronoDisplay');
+  const startBtn = document.getElementById('startChronoBtn');
+  const stopBtn = document.getElementById('stopChronoBtn');
+  const durationSelect = document.getElementById('chronoDuration');
+
+  function formatTime(seconds) {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  }
+
+  startBtn.addEventListener('click', () => {
+    timeRemaining = parseInt(durationSelect.value, 10);
+    chronoDisplay.innerText = formatTime(timeRemaining);
+    
+    startBtn.style.display = 'none';
+    stopBtn.style.display = 'inline-block';
+    durationSelect.disabled = true;
+
+    timerInterval = setInterval(() => {
+      timeRemaining--;
+      chronoDisplay.innerText = formatTime(timeRemaining);
+
+      if (timeRemaining <= 0) {
+        clearInterval(timerInterval);
+        alert("⏱️ Temps écoulé ! L'épreuve est terminée.");
+        startBtn.style.display = 'inline-block';
+        stopBtn.style.display = 'none';
+        durationSelect.disabled = false;
+      }
+    }, 1000);
+  });
+
+  stopBtn.addEventListener('click', () => {
+    clearInterval(timerInterval);
+    chronoDisplay.innerText = "02:00:00";
+    startBtn.style.display = 'inline-block';
+    stopBtn.style.display = 'none';
+    durationSelect.disabled = false;
+  });
+
+});
 </script>
 </body>
 </html>
