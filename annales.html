@@ -889,7 +889,7 @@
             <td><span class="centre-badge">Métropole</span></td>
             <td>
               <div class="btn-group">
-                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genhgemcme2pdf-80307.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genhgemcme1pdf-80298.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
                 <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
               </div>
             </td>
@@ -899,7 +899,7 @@
             <td><span class="centre-badge">Métropole</span></td>
             <td>
               <div class="btn-group">
-                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genscmeag1pdf-80313.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
+                <a href="https://eduscol.education.gouv.fr/sites/default/files/document/18genscmeag1pdf-80304.pdf" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-sujet">Sujet</a>
                 <a href="#" class="cyber-btn btn-corrige">Corrigé</a>
               </div>
             </td>
@@ -912,33 +912,16 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const select = document.getElementById("yearSelect");
-    const contents = document.querySelectorAll(".year-content");
-
-    function switchYear(targetId) {
-      contents.forEach(content => content.classList.remove("active"));
-      const activeElement = document.getElementById(targetId);
-      if (activeElement) {
-        activeElement.classList.add("active");
-      }
-    }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const paramYear = urlParams.get('annee');
-    
-    if (paramYear && document.getElementById(`year-${paramYear}`)) {
-      select.value = `year-${paramYear}`;
-      switchYear(`year-${paramYear}`);
-    } else {
-      switchYear(select.value);
-    }
-
-    select.addEventListener("change", function () {
-      switchYear(this.value);
+  document.getElementById('yearSelect').addEventListener('change', function() {
+    const selectedYear = this.value;
+    document.querySelectorAll('.year-content').forEach(el => {
+      el.classList.remove('active');
     });
+    const targetEl = document.getElementById(selectedYear);
+    if (targetEl) {
+      targetEl.classList.add('active');
+    }
   });
 </script>
-
 </body>
 </html>
