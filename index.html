@@ -471,6 +471,95 @@
     align-items: center;
     gap: 5px;
   }
+    /* ==========================================
+   QUICK NAV CARD STYLES
+   ========================================== */
+
+.quick-nav-card {
+  background: var(--card-bg, #0d1117);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 20px 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quick-nav-card:hover {
+  border-color: rgba(0, 240, 255, 0.7);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.quick-nav-card .tool-title {
+  color: #ffffff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Controls Layout */
+.quick-nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Custom Styled Select Dropdown */
+.cyber-select-sm {
+  flex: 1;
+  min-width: 200px;
+  background-color: #161b22;
+  color: #e6edf3;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cyber-select-sm:focus {
+  border-color: #00f0ff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+.cyber-select-sm option {
+  background-color: #0d1117;
+  color: #ffffff;
+  padding: 10px;
+}
+
+/* Button Refinement within Quick Nav */
+.quick-nav-controls .btn-sujet {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 10px 20px;
+}
+
+/* Responsive view for mobile screens */
+@media (max-width: 576px) {
+  .quick-nav-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cyber-select-sm, 
+  .quick-nav-controls .btn-sujet {
+    width: 100%;
+  }
+}
   </style>
   <script src="https://js.puter.com/v2/"></script>
 </head>
@@ -730,6 +819,11 @@
   });
 
   updateUI();
+});
+    document.querySelector('.quick-nav-controls .btn-sujet').addEventListener('click', function(e) {
+  const selectedSubject = document.getElementById('quickSubject').value;
+  // URL-ல் பாடத்தின் பெயரை query parameter ஆக அனுப்பும்
+  this.href = `annales.html?subject=${encodeURIComponent(selectedSubject)}`;
 });
   </script>
 </body>
