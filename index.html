@@ -431,6 +431,46 @@
       font-size: 0.75rem; 
       color: var(--neon-cyan); 
     }
+    .progress-card {
+    background: var(--card-bg, #0d1117);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  .progress-bar-container {
+    background: #161b22;
+    border-radius: 10px;
+    height: 12px;
+    overflow: hidden;
+    margin: 15px 0;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00f0ff, #7000ff);
+    transition: width 0.4s ease;
+  }
+  .progress-status {
+    color: var(--neon-cyan, #00f0ff);
+    font-size: 0.9rem;
+    font-weight: bold;
+    font-family: 'Rajdhani', sans-serif;
+  }
+  .subject-checkboxes {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+  }
+  .subject-checkboxes label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
   </style>
   <script src="https://js.puter.com/v2/"></script>
 </head>
@@ -558,6 +598,35 @@
       </div>
     </section>
 
+    <!-- PROGRESS TRACKER WIDGET -->
+<div class="cyber-card progress-card">
+  <h3 class="tool-title">⚡ Objectif Révision Du Jour</h3>
+  <div class="progress-bar-container">
+    <div id="progressBar" class="progress-bar-fill" style="width: 0%;"></div>
+  </div>
+  <p id="progressText" class="progress-status">0 / 4 Matières révisées aujourd'hui</p>
+  <div class="subject-checkboxes">
+    <label><input type="checkbox" class="rev-check" data-index="0"> Mathématiques</label>
+    <label><input type="checkbox" class="rev-check" data-index="1"> Français</label>
+    <label><input type="checkbox" class="rev-check" data-index="2"> Histoire-Géo</label>
+    <label><input type="checkbox" class="rev-check" data-index="3"> Sciences</label>
+  </div>
+</div>
+
+    <!-- QUICK NAV -->
+<div class="cyber-card quick-nav-card">
+  <h3 class="tool-title">⚡ Accès Rapide Aux Annales</h3>
+  <div class="quick-nav-controls">
+    <select id="quickSubject" class="cyber-select-sm">
+      <option value="Mathématiques">Mathématiques</option>
+      <option value="Français">Français</option>
+      <option value="Histoire-Géographie & EMC">Histoire-Géo & EMC</option>
+      <option value="Sciences">Sciences</option>
+    </select>
+    <a href="annales.html" class="cyber-btn btn-sujet">Voir les Sujets</a>
+  </div>
+</div>
+
   </div>
 
   <script>
@@ -634,6 +703,34 @@
     document.getElementById("chat-input").addEventListener("keypress", function(e) {
       if (e.key === "Enter") handleAiRequest();
     });
+    document.addEventListener('DOMContentLoaded', () => {
+  const checkboxes = document.querySelectorAll('.rev-check');
+  const progressBar = document.getElementById('progressBar');
+  const progressText = document.getElementById('progressText');
+
+  let savedProgress = JSON.parse(localStorage.getItem('dnb_daily_progress')) || [false, false, false, false];
+
+  function updateUI() {
+    let completed = 0;
+    checkboxes.forEach((cb, i) => {
+      cb.checked = savedProgress[i];
+      if (savedProgress[i]) completed++;
+    });
+    const percent = (completed / checkboxes.length) * 100;
+    progressBar.style.width = percent + '%';
+    progressText.innerText = `${completed} / ${checkboxes.length} Matières révisées aujourd'hui`;
+  }
+
+  checkboxes.forEach((cb, i) => {
+    cb.addEventListener('change', () => {
+      savedProgress[i] = cb.checked;
+      localStorage.setItem('dnb_daily_progress', JSON.stringify(savedProgress));
+      updateUI();
+    });
+  });
+
+  updateUI();
+});
   </script>
 </body>
 </html>
