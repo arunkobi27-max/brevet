@@ -218,7 +218,7 @@
     color: var(--text-muted);
   }
 
-  .input-card input {
+  .input-card input, .input-card select {
     font-family: 'Orbitron', sans-serif;
     font-size: 1.1rem;
     font-weight: 700;
@@ -230,8 +230,62 @@
     color: #fff;
   }
 
-  .input-card input:focus {
+  .input-card input:focus, .input-card select:focus {
     border-color: var(--neon-cyan);
+  }
+
+  /* --- TARGET CALCULATOR BOX --- */
+  .target-box {
+    background: var(--card-inner);
+    border: 1.5px dashed var(--neon-yellow);
+    border-radius: 12px;
+    padding: 18px;
+    margin-top: 15px;
+    text-align: left;
+  }
+
+  .target-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--neon-yellow);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .target-result {
+    margin-top: 12px;
+    padding: 12px;
+    background: #0b0e14;
+    border-radius: 8px;
+    border-left: 4px solid var(--neon-yellow);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.4;
+  }
+
+  /* --- CYBER PROGRESS BAR --- */
+  .progress-container {
+    width: 100%;
+    margin-top: 15px;
+    background: #0b0e14;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 18px;
+    width: 0%;
+    background: var(--neon-cyan);
+    border-radius: 6px;
+    transition: width 0.4s ease, background-color 0.4s ease;
+    box-shadow: 0 0 12px var(--neon-cyan);
   }
 
   /* BOUTONS D'ACTION */
@@ -381,6 +435,25 @@
       </div>
     </div>
 
+    <!-- 🎯 1. TARGET GOAL CALCULATOR SECTION -->
+    <div class="target-box">
+      <div class="target-title">🎯 OBJECTIF MENTION (Quel score மீதி தேவை?)</div>
+      <div class="grid-inputs">
+        <div class="input-card">
+          <label for="targetMention">Choisis ton Objectif :</label>
+          <select id="targetMention" onchange="calculerDNB()">
+            <option value="10">Admis (10.00 / 20)</option>
+            <option value="12">Mention Assez Bien (12.00 / 20)</option>
+            <option value="14" selected>Mention Bien (14.00 / 20)</option>
+            <option value="16">Mention Très Bien (16.00 / 20)</option>
+          </select>
+        </div>
+      </div>
+      <div class="target-result" id="targetMessage">
+        Moyenne générale-ஐ உள்ளீடு செய்க...
+      </div>
+    </div>
+
     <!-- 2. Épreuves Finales -->
     <div>
       <span class="section-label">Épreuves Finales (60%)</span>
@@ -424,6 +497,12 @@
     <!-- Zone Résultat -->
     <div class="result-box" id="resultBox">
       <p class="score-display" id="totalPoints">0.00 / 20</p>
+      
+      <!-- 📊 2. CYBER PROGRESS BAR -->
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
       <div class="mention-badge" id="mentionText">SAISIS TES NOTES</div>
     </div>
   </div>
@@ -451,6 +530,26 @@ function calculerDNB() {
   var sciences = parseFloat(document.getElementById("sciences").value) || 0;
   var oral = parseFloat(document.getElementById("oral").value) || 0;
 
+  // --- 🎯 LOGIQUE GOAL TARGET CALCULATOR ---
+  var targetGoal = parseFloat(document.getElementById("targetMention").value) || 14;
+  var targetMsgBox = document.getElementById("targetMessage");
+
+  if (moyAnnee > 0) {
+    // Formula: Target = (moyAnnee * 0.40) + (Req_Epreuves * 0.60)
+    var reqEpreuves = (targetGoal - (moyAnnee * 0.40)) / 0.60;
+    
+    if (reqEpreuves <= 0) {
+      targetMsgBox.innerHTML = "🎉 **வாழ்த்துகள்!** உன்னுடைய Controle Continu மட்டுமே இந்த Mention-ஐ அடைய போதுமானது!";
+    } else if (reqEpreuves > 20) {
+      targetMsgBox.innerHTML = "⚠️ **சவால் அதிகம்!** இந்த Mention அடைய Épreuves Écrites-ல் 20/20 க்கும் மேல் தேவைப்படுகிறது.";
+    } else {
+      targetMsgBox.innerHTML = "💡 **இலக்கு:** நீ இந்த Mention எடுக்க, Épreuves Écrites (எழுத்துத் தேர்வு + Oral)-ல் சராசரியாக **" + reqEpreuves.toFixed(2) + " / 20** எடுத்தால் போதும்!";
+    }
+  } else {
+    targetMsgBox.innerHTML = "Moyenne générale-ஐ உள்ளீடு செய்க...";
+  }
+
+  // --- CALCUL SCORE FINAL ---
   var moyenneEpreuvesFinales = (
     (francais * 2) + 
     (maths * 2) + 
@@ -466,6 +565,8 @@ function calculerDNB() {
   document.getElementById("totalPoints").innerText = noteAffichee + " / 20";
 
   var mentionBox = document.getElementById("mentionText");
+  var progressBar = document.getElementById("progressBar");
+  
   var resText = "";
   var resColor = "";
   var textColor = "#0b0e14";
@@ -475,16 +576,16 @@ function calculerDNB() {
     resColor = "#ff0055";
     textColor = "#fff";
   } else if (noteFinaleSur20 < 12) {
-    resText = "🎮 Admis (Sans Mention)";
+    resText = "🟢 Admis (Pas de mention)";
     resColor = "#00ff66";
   } else if (noteFinaleSur20 < 14) {
-    resText = "⭐ Mention Assez Bien";
+    resText = "🔵 Mention Assez Bien";
     resColor = "#00f3ff";
   } else if (noteFinaleSur20 < 16) {
-    resText = "🌟 Mention Bien";
+    resText = "🟣 Mention Bien";
     resColor = "#ffe600";
   } else {
-    resText = "🏆 Mention Très Bien";
+    resText = "⚡ Mention Très Bien";
     resColor = "#b537f2";
     textColor = "#fff";
   }
@@ -493,6 +594,14 @@ function calculerDNB() {
   mentionBox.style.background = resColor;
   mentionBox.style.color = textColor;
   mentionBox.style.borderColor = resColor;
+
+  // --- 📊 LOGIQUE CYBER PROGRESS BAR ---
+  var percentage = (noteFinaleSur20 / 20) * 100;
+  if (percentage > 100) percentage = 100;
+  
+  progressBar.style.width = percentage + "%";
+  progressBar.style.backgroundColor = resColor;
+  progressBar.style.boxShadow = "0 0 12px " + resColor;
 
   return { note: noteAffichee, mention: resText };
 }
@@ -503,6 +612,7 @@ function sauvegarderNotes() {
     inputs.forEach(input => {
       localStorage.setItem('dnb_' + input.id, input.value);
     });
+    localStorage.setItem('dnb_targetMention', document.getElementById("targetMention").value);
     showToast("✅ Notes sauvegardées sur ce navigateur !");
   } catch(e) {
     showToast("⚠️ Les cookies/localStorage sont bloqués.", true);
@@ -520,6 +630,10 @@ function restaurerNotes() {
         hasData = true;
       }
     });
+    const savedTarget = localStorage.getItem('dnb_targetMention');
+    if (savedTarget) {
+      document.getElementById("targetMention").value = savedTarget;
+    }
     if (hasData) {
       calculerDNB();
     }
